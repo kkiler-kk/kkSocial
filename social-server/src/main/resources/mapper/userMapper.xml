@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kk.dao.UserDao">
+
+    <resultMap id="getUserById" type="com.kk.bean.User">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
+    </resultMap>
+    <select id="getUserById" resultMap="getUserById" parameterType="Integer">
+        SELECT `id`, `email`, `password`, `name`, `gender`
+        FROM `tb_user`
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+    <select id="getUserAndFriendsById" parameterType="Integer" resultType="com.kk.bean.User">
+        SELECT f.friend_id AS "id"
+	, (
+		SELECT `name`
+		FROM `tb_user`
+		WHERE id = f.friend_id
+	) AS "name"
+	, (
+		SELECT `email`
+		FROM `tb_user`
+		WHERE id = f.friend_id
+	) AS "email"
+	, (
+		SELECT `gender`
+		FROM `tb_user`
+		WHERE id = f.friend_id
+	) AS "gender"
+FROM `tb_user` u, `tb_friends` f
+WHERE f.user_id = u.id
+	AND u.id = #{id}
+    </select>
+</mapper>
