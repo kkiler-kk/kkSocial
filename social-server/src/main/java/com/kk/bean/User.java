@@ -9,6 +9,17 @@ public class User {
     private String name;//姓名
     private Integer gender;//性别
     private List<User> friendsList;//好友列表
+    private int countFriends;
+
+    public User(Integer id, String email, String password, String name, Integer gender, List<User> friendsList, int countFriends) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.friendsList = friendsList;
+        this.countFriends = countFriends;
+    }
 
     @Override
     public String toString() {
@@ -18,20 +29,21 @@ public class User {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
+                ", countFriends=" + countFriends +
                 '}';
+    }
+
+    public int getCountFriends() {
+        return countFriends;
+    }
+
+    public void setCountFriends(int countFriends) {
+        this.countFriends = countFriends;
     }
 
 
     public User(){
 
-    }
-
-    public User(Integer id, String email, String password, String name, Integer gender) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.gender = gender;
     }
 
     public Integer getId() {

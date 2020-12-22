@@ -42,6 +42,43 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+    @Override
+    public User getUserByEmailAndPassword(String email, String password) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            return userDao.getUserByEmailAndPassword(email,password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int countFriends(Integer id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            return userDao.countFriends(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+        return 0;
+    }
 
     @Override
     public List<User> getUserAndFriendsById(Integer id) {
@@ -61,4 +98,44 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+
+    @Override
+    public void addUser(User user) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            userDao.addUser(user);
+            openSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteUserById(Integer id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            userDao.deleteUserById(id);
+            openSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+    }
+
+
 }

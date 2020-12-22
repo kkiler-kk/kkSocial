@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50e375a9-ef90-4a31-9949-240f50eda60e" name="Default Changelist" comment="" />
+    <list default="true" id="50e375a9-ef90-4a31-9949-240f50eda60e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/config/RestTemplateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/config/WebAppRootContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/websocket/ApplicationWebSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/Friends.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/impl/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/impl/UserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/impl/UserDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/impl/UserDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social.iml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,10 +39,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Tools/Apache/maven-3.6.3" />
+        <option name="mavenHome" value="D:\Tools\Apache\maven-3.6.3" />
         <option name="userSettingsFile" value="D:\Tools\Apache\maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -44,20 +68,23 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/other" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/social-server/src/main/java/com/kk/config" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="show.run.dashboard.notification" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\config" />
       <recent name="E:\Program Files\untitled\JavaProject\social\other" />
       <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\resources" />
       <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Demo">
+  <component name="RunManager" selected="JUnit.Test.test">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -130,9 +157,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Demo" />
         <item itemvalue="JUnit.Test.test" />
         <item itemvalue="JUnit.Test" />
+        <item itemvalue="Spring Boot.Demo" />
         <item itemvalue="JUnit.All in social" />
       </list>
     </recent_temporary>
@@ -145,7 +172,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608540817787</updated>
-      <workItem from="1608540819347" duration="6175000" />
+      <workItem from="1608540819347" duration="15408000" />
+      <workItem from="1608603878670" duration="155000" />
+      <workItem from="1608604068607" duration="4724000" />
     </task>
     <servers />
   </component>
@@ -153,46 +182,50 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="880" y="189" key="#Project_Structure" timestamp="1608546215752">
+    <state x="880" y="189" key="#Project_Structure" timestamp="1608548410486">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="880" y="189" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1608546215752" />
+    <state x="880" y="189" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1608548410486" />
+    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser" timestamp="1608605841174">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1608605841174" />
     <state x="746" y="349" key="FileChooserDialogImpl" timestamp="1608546046068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="746" y="349" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608546046068" />
-    <state width="1876" height="282" key="GridCell.Tab.0.bottom" timestamp="1608547291865">
+    <state width="1876" height="279" key="GridCell.Tab.0.bottom" timestamp="1608606203241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291865" />
-    <state width="1876" height="282" key="GridCell.Tab.0.center" timestamp="1608547291864">
+    <state width="1876" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608606203241" />
+    <state width="1876" height="279" key="GridCell.Tab.0.center" timestamp="1608606203241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291864" />
-    <state width="1876" height="282" key="GridCell.Tab.0.left" timestamp="1608547291864">
+    <state width="1876" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608606203241" />
+    <state width="1876" height="279" key="GridCell.Tab.0.left" timestamp="1608606203241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291864" />
-    <state width="1876" height="282" key="GridCell.Tab.0.right" timestamp="1608547291864">
+    <state width="1876" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608606203241" />
+    <state width="1876" height="279" key="GridCell.Tab.0.right" timestamp="1608606203241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291864" />
-    <state width="1876" height="282" key="GridCell.Tab.1.bottom" timestamp="1608547291866">
+    <state width="1876" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608606203241" />
+    <state width="1523" height="282" key="GridCell.Tab.1.bottom" timestamp="1608548403876">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291866" />
-    <state width="1876" height="282" key="GridCell.Tab.1.center" timestamp="1608547291865">
+    <state width="1523" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608548403876" />
+    <state width="1523" height="282" key="GridCell.Tab.1.center" timestamp="1608548403876">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291865" />
-    <state width="1876" height="282" key="GridCell.Tab.1.left" timestamp="1608547291865">
+    <state width="1523" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608548403876" />
+    <state width="1523" height="282" key="GridCell.Tab.1.left" timestamp="1608548403876">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291865" />
-    <state width="1876" height="282" key="GridCell.Tab.1.right" timestamp="1608547291865">
+    <state width="1523" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608548403876" />
+    <state width="1523" height="282" key="GridCell.Tab.1.right" timestamp="1608548403876">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608547291865" />
+    <state width="1523" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608548403876" />
     <state x="467" y="189" key="SettingsEditor" timestamp="1608546426941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -201,6 +234,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="731" y="347" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608547207904" />
+    <state x="566" y="236" width="596" height="804" key="find.popup" timestamp="1608610764985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="566" y="236" width="596" height="804" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608610764985" />
     <state x="669" y="122" key="new project wizard" timestamp="1608541404760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

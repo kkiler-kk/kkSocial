@@ -8,6 +8,7 @@
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
         <collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
+		<collection property="countFriends" select="countFriends" column="id"></collection>
     </resultMap>
     <select id="getUserById" resultMap="getUserById" parameterType="Integer">
         SELECT `id`, `email`, `password`, `name`, `gender`
@@ -18,6 +19,26 @@
             </if>
         </where>
     </select>
+	<select id="getUserByEmailAndPassword" parameterType="String" resultType="com.kk.bean.User">
+		select `id`,`email`,`name`,`password`,`gender` from `tb_user`
+		<where>
+			<if test="email != null and email != ''">
+				and `email` = #{email}
+			</if>
+			<if test="password != null and email !=''">
+				and `password` = #{password}
+			</if>
+		</where>
+	</select>
+	<select id="countFriends" resultType="Integer" parameterType="Integer">
+		SELECT
+	count( f.friend_id )
+FROM
+	`tb_user` u
+	LEFT JOIN `tb_friends` f ON f.user_id = u.id
+WHERE
+	u.id = #{id}
+	</select>
     <select id="getUserAndFriendsById" parameterType="Integer" resultType="com.kk.bean.User">
         SELECT f.friend_id AS "id"
 	, (
@@ -39,4 +60,18 @@ FROM `tb_user` u, `tb_friends` f
 WHERE f.user_id = u.id
 	AND u.id = #{id}
     </select>
+    <insert id="addUser" parameterType="com.kk.bean.User">
+        INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender` )
+VALUES
+	(
+		#{id},
+		#{email},
+		#{name},
+	    #{password},
+	    #{gender}
+	)
+    </insert>
+	<delete id="deleteUserById" parameterType="Integer">
+		delete from `tb_user` where id = #{id}
+	</delete>
 </mapper>
