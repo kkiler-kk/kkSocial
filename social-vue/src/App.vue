@@ -1,32 +1,61 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+		<Header :links="links"/>
     <router-view/>
   </div>
 </template>
 
+<script>
+import Header from '@/components/Header.vue';
+
+export default {
+	name: 'App',
+	data: function () {
+		return {
+			links: [
+				{
+					text: 'login',
+					iconData: 'person-add',
+					url: '/login',
+					title: 'login'
+				}
+			]
+		} 
+	},
+	components: {
+		Header
+	}
+}
+</script>
+
 <style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+.container {
+	width: 1280px;
+	margin: auto;
+	padding: 0 2rem;
+}
+
 #app {
+	display: flex;
+	flex-direction: column;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #414141;
+	font-size: 1.2rem;
+	height: 100%;
+	background-color: #EEEEEE;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+/* a.router-link-exact-active */
 </style>
