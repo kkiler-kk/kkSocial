@@ -1,4 +1,4 @@
-package net.kk.chat.control;
+package com.kk.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,27 +64,3 @@ public class UploadController {
     }
 
 }
-
-
-//    //获取上传文件名,包含后缀
-//    String originalFilename = file.getOriginalFilename();
-//    //获取后缀
-//    String substring = originalFilename.substring(originalFilename.lastIndexOf("."));
-//        if (substring.equals(".jpg") || substring.equals(".png")) {
-//        //保存的文件名
-//        String dFileName = sendName + ".jpg";
-//        //保存路径
-//        //springboot 默认情况下只能加载 resource文件夹下静态资源文件
-//        String path = "E:/Program Files/untitled/chat/uploadFiles/";
-//        //生成保存文件
-//        File uploadFile = new File(path + dFileName);
-//        //将上传文件保存到路径
-//        try {
-//            file.transferTo(uploadFile);
-//            response.sendRedirect("/");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "上传" + dFileName + "成功";
-//    }
-//        return "上传失败只支持jpg || png格式图片";

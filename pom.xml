@@ -16,7 +16,7 @@
     <groupId>com.kk</groupId>
     <artifactId>social</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SOCIAL</name>
+    <name>social</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -31,6 +31,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>2.4.1</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -38,11 +39,7 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.5.16</version>
-        </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
