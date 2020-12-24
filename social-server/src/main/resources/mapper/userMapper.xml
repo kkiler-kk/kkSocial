@@ -19,7 +19,15 @@
             </if>
         </where>
     </select>
-	<select id="getUserByEmailAndPassword" parameterType="String" resultType="com.kk.bean.User">
+	<resultMap id="getUserByEmailAndPassword" type="com.kk.bean.User">
+		<id property="id" column="id"/>
+		<result property="email" column="email"/>
+		<result property="name" column="name"/>
+		<result property="gender" column="gender"/>
+		<collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
+		<collection property="countFriends" select="countFriends" column="id"></collection>
+	</resultMap>
+	<select id="getUserByEmailAndPassword" parameterType="String" resultMap="getUserByEmailAndPassword">
 		select `id`,`email`,`name`,`password`,`gender` from `tb_user`
 		<where>
 			<if test="email != null and email != ''">
@@ -28,7 +36,9 @@
 			<if test="password != null and email !=''">
 				and `password` = #{password}
 			</if>
+
 		</where>
+
 	</select>
 	<select id="countFriends" resultType="Integer" parameterType="Integer">
 		SELECT

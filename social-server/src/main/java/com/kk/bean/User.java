@@ -9,13 +9,18 @@ public class User {
     private String name;//姓名
     private Integer gender;//性别
     private List<User> friendsList;//好友列表
-    private int countFriends;
+    private int countFriends; //好友总数
+    private String url;  //头像路径
 
     public User( String email, String password, String name, Integer gender) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
+    }
+
+    public int getCountFriends() {
+        return countFriends;
     }
 
     @Override
@@ -26,12 +31,18 @@ public class User {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
+                ", friendsList=" + friendsList +
                 ", countFriends=" + countFriends +
+                ", url='" + url + '\'' +
                 '}';
     }
 
-    public int getCountFriends() {
-        return countFriends;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setCountFriends(int countFriends) {

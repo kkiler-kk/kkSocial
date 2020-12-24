@@ -5,37 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50e375a9-ef90-4a31-9949-240f50eda60e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/type/MessageEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UploadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/util/StrUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_3_1_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_4_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-client/social-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social-client/social-client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-client/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/social-client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-client/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-client/target/classes/com/kk/Demo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-client/target/classes/static/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/social-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/social-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/DemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/impl/UserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/dao/impl/UserDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/websocket/ApplicationWebSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/websocket/ApplicationWebSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/DemoApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/Friends.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/controller/TestController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/dao/impl/UserDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/util/LinkData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/config/DataBaseConfig.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/config/mybatis-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/websocket/ApplicationWebSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/websocket/ApplicationWebSocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/type/MessageEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +36,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,9 +67,10 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MavenTest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -89,20 +80,23 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\controller" />
+      <recent name="E:\Program Files\untitled\JavaProject" />
       <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\config" />
       <recent name="E:\Program Files\untitled\JavaProject\social\other" />
       <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\resources" />
-      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Test.test">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -162,10 +156,20 @@
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="social-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kk.DemoApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.All in social" />
+      <item itemvalue="JUnit.Test" />
+      <item itemvalue="JUnit.Test.test" />
+      <item itemvalue="Spring Boot.DemoApplication" />
+      <item itemvalue="Spring Boot.Demo" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Test.test" />
@@ -190,7 +194,8 @@
       <workItem from="1608647205165" duration="30000" />
       <workItem from="1608719257173" duration="3356000" />
       <workItem from="1608769746174" duration="21000" />
-      <workItem from="1608771109279" duration="3584000" />
+      <workItem from="1608771109279" duration="7164000" />
+      <workItem from="1608798703410" duration="9132000" />
     </task>
     <servers />
   </component>
@@ -202,10 +207,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="880" y="189" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1608772062866" />
-    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser" timestamp="1608773678910">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608805038560">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1608773678910" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608805038560" />
+    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser" timestamp="1608811664984">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1270" y="326" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1608811664984" />
     <state x="556" y="443" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1608720492141">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -214,38 +223,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="746" y="349" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608647232864" />
-    <state width="1876" height="274" key="GridCell.Tab.0.bottom" timestamp="1608774540535">
+    <state width="1368" height="273" key="GridCell.Tab.0.bottom" timestamp="1608811302190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608774540535" />
-    <state width="1876" height="274" key="GridCell.Tab.0.center" timestamp="1608774540534">
+    <state width="1368" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
+    <state width="1368" height="273" key="GridCell.Tab.0.center" timestamp="1608811302189">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608774540534" />
-    <state width="1876" height="274" key="GridCell.Tab.0.left" timestamp="1608774540534">
+    <state width="1368" height="273" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
+    <state width="1368" height="273" key="GridCell.Tab.0.left" timestamp="1608811302189">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608774540534" />
-    <state width="1876" height="274" key="GridCell.Tab.0.right" timestamp="1608774540535">
+    <state width="1368" height="273" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
+    <state width="1368" height="273" key="GridCell.Tab.0.right" timestamp="1608811302189">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608774540535" />
-    <state width="1876" height="274" key="GridCell.Tab.1.bottom" timestamp="1608774302218">
+    <state width="1368" height="273" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
+    <state width="1368" height="273" key="GridCell.Tab.1.bottom" timestamp="1608811302190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608774302218" />
-    <state width="1876" height="274" key="GridCell.Tab.1.center" timestamp="1608774302217">
+    <state width="1368" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
+    <state width="1368" height="273" key="GridCell.Tab.1.center" timestamp="1608811302190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608774302217" />
-    <state width="1876" height="274" key="GridCell.Tab.1.left" timestamp="1608774302216">
+    <state width="1368" height="273" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
+    <state width="1368" height="273" key="GridCell.Tab.1.left" timestamp="1608811302190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608774302216" />
-    <state width="1876" height="274" key="GridCell.Tab.1.right" timestamp="1608774302218">
+    <state width="1368" height="273" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
+    <state width="1368" height="273" key="GridCell.Tab.1.right" timestamp="1608811302190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="274" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608774302218" />
+    <state width="1368" height="273" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
     <state x="467" y="189" key="SettingsEditor" timestamp="1608546426941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
