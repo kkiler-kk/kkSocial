@@ -1,0 +1,6 @@
+server:
+  port: 8080 # 服务器绑定的端口号
+
+spring:
+  application:
+    name: kk # 服务器名

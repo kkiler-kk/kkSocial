@@ -9,6 +9,10 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+/**
+ * @author KK
+ * @create 12/20/2020
+ */
 @ServerEndpoint(value = "/websocket")
 @Component
 public class ApplicationWebSocket {
@@ -26,10 +30,5 @@ public class ApplicationWebSocket {
     @OnClose
     public void onClose() {
 
-    }
-    @OnError
-    public void onError(Throwable throwable) {
-        System.out.println("发生错误");
-        throwable.printStackTrace();
     }
 }

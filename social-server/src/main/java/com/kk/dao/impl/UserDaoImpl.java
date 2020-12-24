@@ -6,6 +6,7 @@ import com.kk.util.LinkData;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDaoImpl implements UserDao {
     private static UserDao userDao;
@@ -108,6 +109,44 @@ public class UserDaoImpl implements UserDao {
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
             userDao.addUser(user);
+            openSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+    }
+
+    @Override
+    public void addFriend(Integer user_id, Integer friend_id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            userDao.addFriend(user_id, friend_id);
+            openSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteFriend(Integer user_id, Integer friend_id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            userDao.deleteFriend(user_id, friend_id);
             openSession.commit();
         } catch (Exception e) {
             e.printStackTrace();

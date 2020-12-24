@@ -11,9 +11,13 @@ public interface UserDao {
 
     void addUser(User user);
 
+    void addFriend(Integer user_id, Integer friend_id);
+
+    void deleteFriend(Integer user_id, Integer friend_id);
     void deleteUserById(Integer id);
 
     User getUserByEmailAndPassword(String email, String password);
 
     int countFriends(Integer id);
+
 }

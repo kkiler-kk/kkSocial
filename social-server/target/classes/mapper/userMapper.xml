@@ -40,7 +40,7 @@ WHERE
 	u.id = #{id}
 	</select>
     <select id="getUserAndFriendsById" parameterType="Integer" resultType="com.kk.bean.User">
-        SELECT f.friend_id AS "id"
+        SELECT DISTINCT f.friend_id AS "id"
 	, (
 		SELECT `name`
 		FROM `tb_user`
@@ -73,5 +73,13 @@ VALUES
     </insert>
 	<delete id="deleteUserById" parameterType="Integer">
 		delete from `tb_user` where id = #{id}
+	</delete>
+	<insert id="addFriend" parameterType="Integer">
+		
+		insert into `tb_friends`(`user_id`,`friend_id`)values(#{user_id},#{friend_id});
+
+	</insert>
+	<delete id="deleteFriend" parameterType="Integer">
+		delete from `tb_friends` where `user_id` = #{user_id} and `friend_id` = #{friend_id}
 	</delete>
 </mapper>

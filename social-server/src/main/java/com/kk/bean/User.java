@@ -11,14 +11,11 @@ public class User {
     private List<User> friendsList;//好友列表
     private int countFriends;
 
-    public User(Integer id, String email, String password, String name, Integer gender, List<User> friendsList, int countFriends) {
-        this.id = id;
+    public User( String email, String password, String name, Integer gender) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
-        this.friendsList = friendsList;
-        this.countFriends = countFriends;
     }
 
     @Override
