@@ -13,7 +13,7 @@
 					:key="'l' + index">
 					<router-link :to="link.url">
 						<i :data-eva="link.iconData" 
-							data-fill="#424242">
+							data-eva-fill="#424242">
 						</i>
 					</router-link>
 				</div>

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import * as eva from 'eva-icons';
 import Header from '@/components/Header.vue';
 
 export default {
@@ -17,7 +18,7 @@ export default {
 			links: [
 				{
 					text: 'sign-up',
-					iconData: 'person-add',
+					iconData: 'person-add-outline',
 					url: '/sign-up',
 					title: 'sign-up'
 				}
@@ -26,6 +27,12 @@ export default {
 	},
 	components: {
 		Header
+	},
+	mounted: function () {
+		eva.replace();
+	},
+	updated: function () {
+		eva.replace();
 	}
 }
 </script>

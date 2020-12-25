@@ -1,41 +1,49 @@
 <template>
-	<div id="login" class="container">
-		<form action="#">
+	<div class="container form-box">
+		<form action="/#/sign-up">
+			<div class="link-box">
+				<router-link to="/sign-up">注册</router-link>
+				<router-link to="/login">登录</router-link>
+			</div>
 			<div class="avatar">
+				<label class="male"></label>
 			</div>
 			
-			<label>
-				<!-- <input type="text"/> -->
+			<label class="label">
+				<div class="icon">
+					<i data-eva="email-outline" data-eva-fill="#2979FF"></i>
+				</div>
+				<input type="email" name="email" placeholder="邮箱" v-model="user.email"/>
 			</label>
+			
+			<label class="label">
+				<div class="icon">
+					<i data-eva="lock-outline" data-eva-fill="#2979FF"></i>
+				</div>
+				<input type="password" name="password" placeholder="密码" v-model="user.password"/>
+			</label>
+			
+			<div class="label">
+				<button type="button" class="submit">登录</button>
+			</div>
 		</form>
 	</div>
 </template>
 
 <script>
-</script>
 
-<style lang="scss">
-#login {
-	display: grid;
-	place-items: center;
-	flex: 1 0 auto;
-	height: 100%;
-	
-	form {
-		padding: 2rem;
-		background-color: #FFFFFF;
-		border-radius: 1rem;
-		
-		.avatar{
-			display: block;
-			width: 8rem;
-			height: 8rem;
-			margin: auto;
-			border-radius: 50%;
-			background-image: url("../assets/svg/male_avatar.svg");
-			background-size: cover;
-			overflow: hidden;
+export default {
+	name: "Login",
+	data: function () {
+		return {
+			user: {
+				email: '',
+				password: ''
+			}
 		}
 	}
 }
+</script>
+
+<style>
 </style>
