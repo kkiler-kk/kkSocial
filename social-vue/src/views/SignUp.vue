@@ -65,7 +65,7 @@
 			</label>
 			
 			<div class="label">
-				<button type="button" class="submit">Sign in</button>
+				<button type="button" class="submit">注册</button>
 			</div>
 		</form>
 	</div>
