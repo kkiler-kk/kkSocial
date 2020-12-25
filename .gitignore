@@ -1,5 +1,5 @@
 .idea
 .vscode
-social.iml
+*.iml
 
 **/target
