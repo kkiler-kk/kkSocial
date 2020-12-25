@@ -5,24 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50e375a9-ef90-4a31-9949-240f50eda60e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UploadController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/util/StrUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_3_1_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_websocket_2_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social-server/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_4_5_16.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-client/social-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social-client/social-client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/social-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/social-server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/bean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/websocket/ApplicationWebSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/websocket/ApplicationWebSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/java/com/kk/util/LinkData.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/java/com/kk/util/LinkData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/main/resources/mapper/userMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/src/test/java/com/kk/test/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/bean/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/websocket/ApplicationWebSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/websocket/ApplicationWebSocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/type/MessageEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/controller/UploadController.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/controller/UploadController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social-server/target/classes/com/kk/util/LinkData.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/com/kk/util/LinkData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/classes/mapper/userMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/social-server/target/test-classes/com/kk/test/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/social.iml" beforeDir="false" afterPath="$PROJECT_DIR$/social.iml" afterDir="false" />
@@ -35,9 +35,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -70,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/social-server/src/main/java/com/kk/controller" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -80,10 +80,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\controller" />
       <recent name="E:\Program Files\untitled\JavaProject" />
-      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\config" />
       <recent name="E:\Program Files\untitled\JavaProject\social\other" />
+      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\controller" />
+      <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\java\com\kk\config" />
       <recent name="E:\Program Files\untitled\JavaProject\social\social-server\src\main\resources" />
     </key>
   </component>
@@ -195,7 +195,9 @@
       <workItem from="1608719257173" duration="3356000" />
       <workItem from="1608769746174" duration="21000" />
       <workItem from="1608771109279" duration="7164000" />
-      <workItem from="1608798703410" duration="9132000" />
+      <workItem from="1608798703410" duration="14391000" />
+      <workItem from="1608879108869" duration="1157000" />
+      <workItem from="1608884248307" duration="318000" />
     </task>
     <servers />
   </component>
@@ -223,42 +225,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="746" y="349" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608647232864" />
-    <state width="1368" height="273" key="GridCell.Tab.0.bottom" timestamp="1608811302190">
+    <state width="1364" height="273" key="GridCell.Tab.0.bottom" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
-    <state width="1368" height="273" key="GridCell.Tab.0.center" timestamp="1608811302189">
+    <state width="1364" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.0.center" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
-    <state width="1368" height="273" key="GridCell.Tab.0.left" timestamp="1608811302189">
+    <state width="1364" height="273" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.0.left" timestamp="1608884059793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
-    <state width="1368" height="273" key="GridCell.Tab.0.right" timestamp="1608811302189">
+    <state width="1364" height="273" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059793" />
+    <state width="1364" height="273" key="GridCell.Tab.0.right" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302189" />
-    <state width="1368" height="273" key="GridCell.Tab.1.bottom" timestamp="1608811302190">
+    <state width="1364" height="273" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.1.bottom" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
-    <state width="1368" height="273" key="GridCell.Tab.1.center" timestamp="1608811302190">
+    <state width="1364" height="273" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.1.center" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
-    <state width="1368" height="273" key="GridCell.Tab.1.left" timestamp="1608811302190">
+    <state width="1364" height="273" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.1.left" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
-    <state width="1368" height="273" key="GridCell.Tab.1.right" timestamp="1608811302190">
+    <state width="1364" height="273" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
+    <state width="1364" height="273" key="GridCell.Tab.1.right" timestamp="1608884059794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1368" height="273" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608811302190" />
+    <state width="1364" height="273" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608884059794" />
     <state x="467" y="189" key="SettingsEditor" timestamp="1608546426941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="467" y="189" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1608546426941" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1608812082617">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608812082617" />
     <state x="731" y="347" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1608547207904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

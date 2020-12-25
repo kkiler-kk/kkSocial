@@ -7,11 +7,12 @@
         <result property="email" column="email"/>
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
+		<result property="url" column="url" />
         <collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
 		<collection property="countFriends" select="countFriends" column="id"></collection>
     </resultMap>
     <select id="getUserById" resultMap="getUserById" parameterType="Integer">
-        SELECT `id`, `email`, `password`, `name`, `gender`
+        SELECT `id`, `email`, `password`, `name`, `gender`,`url`
         FROM `tb_user`
         <where>
             <if test="id != null">
@@ -24,11 +25,12 @@
 		<result property="email" column="email"/>
 		<result property="name" column="name"/>
 		<result property="gender" column="gender"/>
+		<result property="url" column="url" />
 		<collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
 		<collection property="countFriends" select="countFriends" column="id"></collection>
 	</resultMap>
 	<select id="getUserByEmailAndPassword" parameterType="String" resultMap="getUserByEmailAndPassword">
-		select `id`,`email`,`name`,`password`,`gender` from `tb_user`
+		select `id`,`email`,`name`,`password`,`gender`,`url` from `tb_user`
 		<where>
 			<if test="email != null and email != ''">
 				and `email` = #{email}
@@ -65,20 +67,26 @@ WHERE
 		SELECT `gender`
 		FROM `tb_user`
 		WHERE id = f.friend_id
-	) AS "gender"
+	) AS "gender",
+	(
+		SELECT `url`
+		FROM `tb_user`
+		WHERE id = f.friend_id
+	) AS "url"
 FROM `tb_user` u, `tb_friends` f
 WHERE f.user_id = u.id
 	AND u.id = #{id}
     </select>
     <insert id="addUser" parameterType="com.kk.bean.User">
-        INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender` )
+        INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url` )
 VALUES
 	(
 		#{id},
 		#{email},
 		#{name},
 	    #{password},
-	    #{gender}
+	    #{gender},
+	    #{url}
 	)
     </insert>
 	<delete id="deleteUserById" parameterType="Integer">

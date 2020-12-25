@@ -12,11 +12,12 @@ public class User {
     private int countFriends; //好友总数
     private String url;  //头像路径
 
-    public User( String email, String password, String name, Integer gender) {
+    public User( String email, String password, String name, Integer gender,String url) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
+        this.url = url;
     }
 
     public int getCountFriends() {

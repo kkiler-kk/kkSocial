@@ -4,7 +4,6 @@ import com.kk.bean.User;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
 
-import java.util.Objects;
 
 public class UserService {
     private UserService(){
@@ -29,5 +28,8 @@ public class UserService {
     public String register(User user){
         instance.addUser(user);
         return "success";
+    }
+    public boolean existEmail(String email){
+        return instance.getUserByEmailAndPassword(email, null) == null;
     }
 }

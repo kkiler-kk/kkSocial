@@ -14,9 +14,8 @@ public class Test {
     @org.junit.Test
     public void test() {
         UserDao instance = UserDaoImpl.getInstance();
-        User userById = instance.getUserById(1);
-        String s = JSON.toJSONString(userById);
-        System.out.println(s);
+        User userById = instance.getUserByEmailAndPassword("kk@kk.com",null);
+        System.out.println(userById);
 
     }
 }
