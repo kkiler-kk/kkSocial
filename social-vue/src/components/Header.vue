@@ -12,7 +12,9 @@
 					:title="link.title"
 					:key="'l' + index">
 					<router-link :to="link.url">
-						<i :data-eva="link.iconData"></i>
+						<i :data-eva="link.iconData" 
+							data-fill="#424242">
+						</i>
 					</router-link>
 				</div>
 			</div>
@@ -26,6 +28,14 @@ export default {
 	name: 'Header',
 	props: {
 		links: Array
+	},
+	methods: {
+		onLink: function(e) {
+			e.target.setAttribute("data-fill", "#2979FF");
+		},
+		outLink: function(e) {
+			e.target.setAttribute("data-fill", "#424242");
+		}
 	}
 }
 </script>

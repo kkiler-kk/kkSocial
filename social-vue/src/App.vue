@@ -1,7 +1,9 @@
 <template>
   <div id="app">
 		<Header :links="links"/>
-    <router-view/>
+		<div id="page">
+			<router-view/>
+		</div>
   </div>
 </template>
 
@@ -14,10 +16,10 @@ export default {
 		return {
 			links: [
 				{
-					text: 'login',
+					text: 'sign-up',
 					iconData: 'person-add',
-					url: '/login',
-					title: 'login'
+					url: '/sign-up',
+					title: 'sign-up'
 				}
 			]
 		} 
@@ -55,6 +57,15 @@ html, body {
 	font-size: 1.2rem;
 	height: 100%;
 	background-color: #EEEEEE;
+}
+
+#page {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 3.5rem;
+	bottom: 0;
+	overflow: auto;
 }
 
 /* a.router-link-exact-active */
