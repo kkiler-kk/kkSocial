@@ -40,4 +40,8 @@ public class UserController {
     public String existEmail(String email){
         return "{ \"email\" : "+email+",\"flag\":" + userService.existEmail(email) + "}";
     }
+    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
+    public void sendEmail(String email){
+        userService.sendEmail(email);
+    }
 }
