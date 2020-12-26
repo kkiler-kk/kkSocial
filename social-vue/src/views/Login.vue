@@ -54,19 +54,27 @@ export default {
 		verifyForm: function () {
 			let errorList = [];
 			let user = this.user;
-			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			let emailVerify = /^\w+@(\w+\.)+\w+$/;
 			if (user.email === '') errorList.push("请填写邮箱");
 			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
+			if (user.password === '') errorList.push("请填写密码");
 			this.setError(errorList);
 			return errorList.length === 0;
 		},
 		send: function () {
 			if (!this.verifyForm()) return;
 			console.count('send');
+			this.axios.post('/api/user/login.do', this.user)
+				.then(response => {
+					console.log(response.data);
+				})
+				.catch(error => {
+					console.log(error);
+				});
 		}
 	}
 }
 </script>
 
-<style>
+<style lang="scss" src="@/assets/css/form-box.scss">
 </style>
