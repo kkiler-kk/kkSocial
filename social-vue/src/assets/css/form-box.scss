@@ -169,5 +169,15 @@
 		.switch.remale::after {
 			left: 0;
 		}
+		
+		.error-list {
+			margin-top: 1.5rem;
+			background-color: #FFCDD2;
+			border: solid 1px #FF5252;
+			color: #FF5252;
+			padding: 0.5rem 2rem;
+			line-height: 2rem;
+			font-size: 1rem;
+		}
 	}
 }

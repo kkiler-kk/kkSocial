@@ -26,19 +26,22 @@ public class UserController {
         return JSON.toJSONString(user);
     }
     @RequestMapping(value = "/register.do", method = RequestMethod.POST)
-    public String register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file){
+    public String register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, Integer code){
         if(Objects.equals(email, "") || Objects.equals(password, "") || Objects.equals(name, "")){
             throw new NullPointerException("email and password and name is empty");
         }
         String url = LinkData.upload(file, email);
         if(url == "") return "";
         User user = new User(email,password,name,gender,url);
-        userService.register(user);
-        return "";
+        return "{ \"code\": "+userService.register(user,code)+"}";
     }
     @RequestMapping(value = "/existEmail.do", method = RequestMethod.GET)
     @ResponseBody
     public String existEmail(String email){
-        return "{ \"flag\":" + userService.existEmail(email) + "}";
+        return "{ \"email\" : "+email+",\"flag\":" + userService.existEmail(email) + "}";
+    }
+    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
+    public void sendEmail(String email){
+        userService.sendEmail(email);
     }
 }

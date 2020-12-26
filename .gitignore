@@ -1,3 +1,8 @@
 .idea
 *.iml
+<<<<<<< HEAD
 **/target
+social.iml
+=======
+**/target
+>>>>>>> de53dcdafe495b0bf1260ed46a90227b8e44dda5

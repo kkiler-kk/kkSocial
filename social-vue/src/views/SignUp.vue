@@ -46,8 +46,8 @@
 				<div class="icon">
 					<i data-eva="code-outline" data-eva-fill="#2979FF"></i>
 				</div>
-				<input type="email" placeholder="验证码" v-model="user.code"/>
-				<button type="button">点击发送</button>
+				<input type="email" placeholder="验证码" v-model="verify.code"/>
+				<button type="button" @click="getVerifyCode">点击发送</button>
 			</label>
 			
 			<label class="label">
@@ -61,11 +61,15 @@
 				<div class="icon">
 					<i data-eva="lock-outline" data-eva-fill="#2979FF"></i>
 				</div>
-				<input type="password" placeholder="确认密码" v-model="user.repassword"/>
+				<input type="password" placeholder="确认密码" v-model="verify.password"/>
 			</label>
 			
+			<ul class="error-list" v-show="errorList.length > 0">
+				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
+			</ul>
+			
 			<div class="label">
-				<button type="button" class="submit">注册</button>
+				<button type="button" class="submit" @click="send">注册</button>
 			</div>
 		</form>
 	</div>
@@ -81,10 +85,42 @@ export default {
 				name: '',
 				gender: true,
 				email: '',
+				password: ''
+			},
+			verify: {
 				code: '',
-				password: '',
-				repassword: ''
-			}
+				verifyCode: '',
+				password: ''
+			},
+			errorList: []
+		}
+	},
+	methods: {
+		setError: function (errorList) {
+			this.errorList = errorList;
+		},
+		getVerifyCode: function () {
+			this.verify.verifyCode = '1234';
+			alert('验证码: 1234');
+		},
+		verifyForm: function () {
+			let errorList = [];
+			let user = this.user;
+			let verify = this.verify;
+			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			if (user.name === '') errorList.push("请填写用户名");
+			if (user.email === '') errorList.push("请填写邮箱");
+			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
+			if (verify.code === '') errorList.push("请填写验证码");
+			if (verify.code !== verify.verifyCode) errorList.push("验证码错误");
+			if (user.password === '') errorList.push("请填写密码");
+			if (user.password !== verify.password) errorList.push("前后密码不一致");
+			this.setError(errorList);
+			return errorList.length === 0;
+		},
+		send: function () {
+			if (!this.verifyForm()) return;
+			console.count('send');
 		}
 	}
 }

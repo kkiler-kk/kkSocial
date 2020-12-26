@@ -23,8 +23,12 @@
 				<input type="password" name="password" placeholder="密码" v-model="user.password"/>
 			</label>
 			
+			<ul class="error-list" v-show="errorList.length > 0">
+				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
+			</ul>
+			
 			<div class="label">
-				<button type="button" class="submit">登录</button>
+				<button type="button" class="submit" @click="send">登录</button>
 			</div>
 		</form>
 	</div>
@@ -39,7 +43,26 @@ export default {
 			user: {
 				email: '',
 				password: ''
-			}
+			},
+			errorList: []
+		}
+	},
+	methods: {
+		setError: function (errorList) {
+			this.errorList = errorList;
+		},
+		verifyForm: function () {
+			let errorList = [];
+			let user = this.user;
+			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			if (user.email === '') errorList.push("请填写邮箱");
+			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
+			this.setError(errorList);
+			return errorList.length === 0;
+		},
+		send: function () {
+			if (!this.verifyForm()) return;
+			console.count('send');
 		}
 	}
 }
