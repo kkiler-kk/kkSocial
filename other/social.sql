@@ -11,11 +11,24 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 24/12/2020 20:26:36
+ Date: 26/12/2020 16:52:37
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_comments
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_comments`;
+CREATE TABLE `tb_comments`  (
+  `commnet_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `new_id` int(8) NOT NULL COMMENT '动态表ID',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '评论的内容',
+  `content_id` int(8) NOT NULL COMMENT '用户表ID',
+  `create_data` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`commnet_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_friends
@@ -29,14 +42,33 @@ CREATE TABLE `tb_friends`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '好友设计表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_friends
+-- Table structure for tb_message
 -- ----------------------------
-INSERT INTO `tb_friends` VALUES (1, 1, 2);
-INSERT INTO `tb_friends` VALUES (2, 2, 1);
-INSERT INTO `tb_friends` VALUES (3, 1, 3);
-INSERT INTO `tb_friends` VALUES (4, 3, 1);
-INSERT INTO `tb_friends` VALUES (5, 2, 3);
-INSERT INTO `tb_friends` VALUES (6, 3, 2);
+DROP TABLE IF EXISTS `tb_message`;
+CREATE TABLE `tb_message`  (
+  `message_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键自增',
+  `user_id` int(8) NOT NULL COMMENT '用户表id',
+  `friend_id` int(8) NOT NULL COMMENT '好友表ID',
+  `content` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '留言内容',
+  `type` int(2) NOT NULL COMMENT '消息类别',
+  PRIMARY KEY (`message_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '消息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tb_news
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_news`;
+CREATE TABLE `tb_news`  (
+  `new_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键自增',
+  `user_id` int(8) NOT NULL COMMENT '发布者ID',
+  `create_data` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '发布时间',
+  `content_text` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '发布内容',
+  `picture` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '图片的URL',
+  `comment_num` int(8) NOT NULL COMMENT '评论的人数',
+  `share_num` int(8) NULL DEFAULT NULL COMMENT '分享的人数',
+  `type` int(2) NOT NULL COMMENT '动态类型',
+  PRIMARY KEY (`new_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_user
@@ -53,12 +85,5 @@ CREATE TABLE `tb_user`  (
   UNIQUE INDEX `email`(`email`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_user
--- ----------------------------
-INSERT INTO `tb_user` VALUES (1, 'admin@admin.com', '123456', 'admin', 0, '/upload/admin@admin.com.jpg');
-INSERT INTO `tb_user` VALUES (2, 'kk@kk.com', '123456', 'KK', 1, '/upload/kk@kk.com');
-INSERT INTO `tb_user` VALUES (3, 'thy@thy.com', '123456', 'THY', 1, '/upload/thy@thy.com');
 
 SET FOREIGN_KEY_CHECKS = 1;
