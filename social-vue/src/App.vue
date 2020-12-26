@@ -1,11 +1,14 @@
 <template>
   <div id="app">
 		<Header :links="links"/>
-    <router-view/>
+		<div id="page">
+			<router-view/>
+		</div>
   </div>
 </template>
 
 <script>
+import * as eva from 'eva-icons';
 import Header from '@/components/Header.vue';
 
 export default {
@@ -14,16 +17,22 @@ export default {
 		return {
 			links: [
 				{
-					text: 'login',
-					iconData: 'person-add',
-					url: '/login',
-					title: 'login'
+					text: 'sign-up',
+					iconData: 'person-add-outline',
+					url: '/sign-up',
+					title: 'sign-up'
 				}
 			]
 		} 
 	},
 	components: {
 		Header
+	},
+	mounted: function () {
+		eva.replace();
+	},
+	updated: function () {
+		eva.replace();
 	}
 }
 </script>
@@ -55,6 +64,15 @@ html, body {
 	font-size: 1.2rem;
 	height: 100%;
 	background-color: #EEEEEE;
+}
+
+#page {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 3.5rem;
+	bottom: 0;
+	overflow: auto;
 }
 
 /* a.router-link-exact-active */

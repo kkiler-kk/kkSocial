@@ -1,61 +1,72 @@
 <template>
-	<div id="login" class="container">
-		<form action="#">
+	<div class="container form-box">
+		<form action="/#/sign-up">
+			<div class="link-box">
+				<router-link to="/sign-up">注册</router-link>
+				<router-link to="/login">登录</router-link>
+			</div>
 			<div class="avatar">
-				<label for="img-up-load">
-					<div class="message">点击上传头像</div>
-				</label>
-				<input id="img-up-load" type="file" v-show="false"/>
+				<label class="male"></label>
 			</div>
 			
-			<label>
-				<!-- <input type="text"/> -->
+			<label class="label">
+				<div class="icon">
+					<i data-eva="email-outline" data-eva-fill="#2979FF"></i>
+				</div>
+				<input type="email" name="email" placeholder="邮箱" v-model="user.email"/>
 			</label>
+			
+			<label class="label">
+				<div class="icon">
+					<i data-eva="lock-outline" data-eva-fill="#2979FF"></i>
+				</div>
+				<input type="password" name="password" placeholder="密码" v-model="user.password"/>
+			</label>
+			
+			<ul class="error-list" v-show="errorList.length > 0">
+				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
+			</ul>
+			
+			<div class="label">
+				<button type="button" class="submit" @click="send">登录</button>
+			</div>
 		</form>
 	</div>
 </template>
 
 <script>
-</script>
 
-<style lang="scss">
-#login {
-	display: grid;
-	place-items: center;
-	flex: 1 0 auto;
-	
-	form {
-		padding: 2rem;
-		background-color: #FFFFFF;
-		border-radius: 1rem;
-		
-		.avatar label{
-			display: block;
-			width: 8rem;
-			height: 8rem;
-			margin: auto;
-			border-radius: 50%;
-			display: grid;
-			place-items: center;
-			background-image: url(../assets/svg/undraw_male_avatar_323b.svg);
-			background-size: cover;
-			overflow: hidden;
-			
-			.message {
-				width: 100%;
-				height: 100%;
-				line-height: 8rem;
-				color: #FFFFFF;
-				text-align: center;
-				background-color: #41414161;
-				opacity: 0;
-				transition: 0.2s;
-			}
-			
-			&:hover .message {
-				opacity: 1;
-			}
+export default {
+	name: "Login",
+	data: function () {
+		return {
+			user: {
+				email: '',
+				password: ''
+			},
+			errorList: []
+		}
+	},
+	methods: {
+		setError: function (errorList) {
+			this.errorList = errorList;
+		},
+		verifyForm: function () {
+			let errorList = [];
+			let user = this.user;
+			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			if (user.email === '') errorList.push("请填写邮箱");
+			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
+			this.setError(errorList);
+			return errorList.length === 0;
+		},
+		send: function () {
+			if (!this.verifyForm()) return;
+			console.count('send');
 		}
 	}
 }
+</script>
+
+<style>
 </style>
