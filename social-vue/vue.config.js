@@ -1,3 +1,3 @@
 module.exports = {
-  outputDir: '..\\social-client\\src\\main\\resources\\static'
+  outputDir: '../social-server/src/main/resources/static'
 }

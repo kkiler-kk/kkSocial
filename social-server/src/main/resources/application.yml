@@ -15,3 +15,8 @@ spring:
             file-size-threshold: 2KB
             max-file-size: 5MB
             max-request-size: 10MB
+    mail:
+        host: smtp.163.com
+        username: kk996icu@163.com
+        password: NMZJBZWJLYPRPQYT
+        default-encoding: UTF-8
