@@ -64,13 +64,21 @@ export default {
 		send: function () {
 			if (!this.verifyForm()) return;
 			console.count('send');
-			this.axios.post('/api/user/login.do', this.user)
-				.then(response => {
-					console.log(response.data);
-				})
-				.catch(error => {
-					console.log(error);
-				});
+			let formData = new FormData();
+			for (let key in this.user) {
+				formData.append(key, this.user[key]);
+			}
+			this.axios.post('/api/user/login.do', formData, {
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+				},
+			})
+			.then(response => {
+				console.log(response.data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 		}
 	}
 }
