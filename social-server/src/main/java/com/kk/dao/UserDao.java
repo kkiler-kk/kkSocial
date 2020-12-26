@@ -9,12 +9,12 @@ public interface UserDao {
 
     List<User> getUserAndFriendsById(Integer id);
 
-    void addUser(User user);
+    int addUser(User user);
 
-    void addFriend(Integer user_id, Integer friend_id);
+    int addFriend(Integer user_id, Integer friend_id);
 
-    void deleteFriend(Integer user_id, Integer friend_id);
-    void deleteUserById(Integer id);
+    int deleteFriend(Integer user_id, Integer friend_id);
+    int deleteUserById(Integer id);
 
     User getUserByEmailAndPassword(String email, String password);
 

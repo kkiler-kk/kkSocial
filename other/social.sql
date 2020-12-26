@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 26/12/2020 16:52:37
+ Date: 26/12/2020 19:08:06
 */
 
 SET NAMES utf8mb4;
@@ -67,6 +67,7 @@ CREATE TABLE `tb_news`  (
   `comment_num` int(8) NOT NULL COMMENT '评论的人数',
   `share_num` int(8) NULL DEFAULT NULL COMMENT '分享的人数',
   `type` int(2) NOT NULL COMMENT '动态类型',
+  `like` int(8) NULL DEFAULT NULL,
   PRIMARY KEY (`new_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
 

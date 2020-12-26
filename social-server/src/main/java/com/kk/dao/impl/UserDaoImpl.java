@@ -2,11 +2,11 @@ package com.kk.dao.impl;
 
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
+import com.kk.util.ErrorCode;
 import com.kk.util.LinkData;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDaoImpl implements UserDao {
     private static UserDao userDao;
@@ -78,7 +78,7 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
-        return 0;
+        return ErrorCode.QUERY_FAIL;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUser(User user) {
+    public int addUser(User user) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
         try {
@@ -117,18 +117,19 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
+        return ErrorCode.INSERT_FAIL;
     }
 
     @Override
-    public void addFriend(Integer user_id, Integer friend_id) {
+    public int addFriend(Integer user_id, Integer friend_id) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
         try {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-            userDao.addFriend(user_id, friend_id);
             openSession.commit();
+            return userDao.addFriend(user_id, friend_id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -136,18 +137,20 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
+        return ErrorCode.INSERT_FAIL;
     }
 
     @Override
-    public void deleteFriend(Integer user_id, Integer friend_id) {
+    public int deleteFriend(Integer user_id, Integer friend_id) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
         try {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-            userDao.deleteFriend(user_id, friend_id);
+
             openSession.commit();
+            return userDao.deleteFriend(user_id, friend_id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -155,18 +158,19 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
+        return ErrorCode.DELETE_FAIL;
     }
 
     @Override
-    public void deleteUserById(Integer id) {
+    public int deleteUserById(Integer id) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
         try {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-            userDao.deleteUserById(id);
             openSession.commit();
+            return userDao.deleteUserById(id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -174,7 +178,7 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
+        return ErrorCode.DELETE_FAIL;
     }
-
 
 }
