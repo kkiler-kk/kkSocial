@@ -1,6 +1,6 @@
 <template>
 	<div class="container form-box">
-		<form action="/#/sign-up">
+		<form id="sign-up">
 			<div class="link-box">
 				<router-link to="/sign-up">注册</router-link>
 				<router-link to="/login">登录</router-link>
@@ -46,8 +46,8 @@
 				<div class="icon">
 					<i data-eva="code-outline" data-eva-fill="#2979FF"></i>
 				</div>
-				<input type="email" placeholder="验证码" v-model="verify.code"/>
-				<button type="button" @click="getVerifyCode">点击发送</button>
+				<input type="text" name="code" placeholder="验证码" v-model="user.code"/>
+				<button type="button" @click="getVerifyCode($event)">点击发送</button>
 			</label>
 			
 			<label class="label">
@@ -81,15 +81,15 @@ export default {
 	name: "SignUp",
 	data: function () {
 		return {
+			form: null,
 			user: {
 				name: '',
 				gender: true,
+				code: '',
 				email: '',
 				password: ''
 			},
 			verify: {
-				code: '',
-				verifyCode: '',
 				password: ''
 			},
 			errorList: []
@@ -99,20 +99,44 @@ export default {
 		setError: function (errorList) {
 			this.errorList = errorList;
 		},
-		getVerifyCode: function () {
-			this.verify.verifyCode = '1234';
-			alert('验证码: 1234');
+		getVerifyCode: function (e) {
+			let button = e.target;
+			
+			let errorList = [];
+			let email = this.user.email;
+			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			if (email === '') errorList.push("请填写邮箱");
+			else if (!emailVerify.test(email)) errorList.push("请填写正确的邮箱格式");
+			this.setError(errorList);
+			if (errorList.length > 0) return;
+			
+			this.axios.get('/api/user/sendEmail.do', {
+				params: {
+					email
+				}
+			})
+			.then(response => {
+				button.innerText = '已发送';
+				console.log(response);
+			})
+			.catch(error => {
+				button.innerText = '发送失败';
+				console.log(error);
+			});
+			
+			button.innerText = '发送中';
 		},
 		verifyForm: function () {
 			let errorList = [];
 			let user = this.user;
 			let verify = this.verify;
 			let emailVerify = /^\w+@(\w+.)+\w+$/;
+			let codeVerify = /^\d+$/;
 			if (user.name === '') errorList.push("请填写用户名");
 			if (user.email === '') errorList.push("请填写邮箱");
 			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
-			if (verify.code === '') errorList.push("请填写验证码");
-			if (verify.code !== verify.verifyCode) errorList.push("验证码错误");
+			if (user.code === '') errorList.push("请填写验证码");
+			else if (!codeVerify.test(user.code)) errorList.push("验证码格式错误");
 			if (user.password === '') errorList.push("请填写密码");
 			if (user.password !== verify.password) errorList.push("前后密码不一致");
 			this.setError(errorList);
@@ -121,7 +145,26 @@ export default {
 		send: function () {
 			if (!this.verifyForm()) return;
 			console.count('send');
+			
+			let formData = new FormData(this.form);
+			// let setError = this.setError;
+			console.log(...formData);
+			this.axios.post('/api/user/register.do', formData, {
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+				},
+			})
+			.then(response => {
+				let data = response.data;
+				console.log(data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 		}
+	},
+	mounted: function () {
+		this.form = document.getElementById('sign-up');
 	}
 }
 </script>
