@@ -1,6 +1,6 @@
 <template>
 	<div class="container form-box">
-		<form action="/#/sign-up">
+		<form id="login">
 			<div class="link-box">
 				<router-link to="/sign-up">注册</router-link>
 				<router-link to="/login">登录</router-link>
@@ -40,6 +40,7 @@ export default {
 	name: "Login",
 	data: function () {
 		return {
+			form: null,
 			user: {
 				email: '',
 				password: ''
@@ -64,10 +65,7 @@ export default {
 		send: function () {
 			if (!this.verifyForm()) return;
 			console.count('send');
-			let formData = new FormData();
-			for (let key in this.user) {
-				formData.append(key, this.user[key]);
-			}
+			let formData = new FormData(this.form);
 			this.axios.post('/api/user/login.do', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -80,6 +78,9 @@ export default {
 				console.log(error);
 			});
 		}
+	},
+	mounted: function () {
+		this.form = document.getElementById('login');
 	}
 }
 </script>
