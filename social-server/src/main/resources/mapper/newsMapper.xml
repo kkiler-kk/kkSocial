@@ -21,7 +21,12 @@
         ORDER BY
 	    `like` DESC
     </select>
-
+    <select id="getNewsById" resultMap="getNewsById" parameterType="Integer">
+        select
+        <include refid="news_table"></include>
+        from `tb_news`
+        where id = #{id}
+    </select>
     <sql id="news_table">
     new_id as 'new_id',
     user_id as 'user_id',

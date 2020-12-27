@@ -4,37 +4,37 @@ package com.kk.bean;
  * 评论类
  */
 public class Comments {
-    private Integer id;
+    private Integer comment_id;
     private News news; //动态表ID
     private String content; //评论内容
     private User user; //用户id;
-    private String create_data; //创建时间
-
+    private String create_date; //创建时间
+    public Comments(){}
     public Comments(Integer id, News new_id, String content, User user, String create_data) {
-        this.id = id;
+        this.comment_id = id;
         this.news = new_id;
         this.content = content;
         this.user = user;
-        this.create_data = create_data;
+        this.create_date = create_data;
     }
 
     @Override
     public String toString() {
         return "Comments{" +
-                "id=" + id +
+                "comment_id=" + comment_id +
                 ", new=" + news +
                 ", content='" + content + '\'' +
                 ", user='" + user + '\'' +
-                ", create_data='" + create_data + '\'' +
+                ", create_date='" + create_date + '\'' +
                 '}';
     }
 
     public Integer getId() {
-        return id;
+        return comment_id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.comment_id = id;
     }
 
     public News getNew_id() {
@@ -44,6 +44,8 @@ public class Comments {
     public void setNew_id(News new_id) {
         this.news = new_id;
     }
+
+
 
     public String getContent() {
         return content;
@@ -62,10 +64,10 @@ public class Comments {
     }
 
     public String getCreate_data() {
-        return create_data;
+        return create_date;
     }
 
     public void setCreate_data(String create_data) {
-        this.create_data = create_data;
+        this.create_date = create_data;
     }
 }

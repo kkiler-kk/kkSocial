@@ -7,22 +7,19 @@ import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.ErrorCode;
 import com.kk.util.LinkData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
 public class UserService {
     private final static Map<String, Integer> emailCode = new HashMap<>();
-    private final IMailServiceImpl mailService;
+    private final IMailService mailService;
 
     private UserService(){
         instance = UserDaoImpl.getInstance();
-        mailService = new IMailServiceImpl();
+        mailService = new IMailService();
     }
     private final UserDao instance;
     private static UserService service = null;

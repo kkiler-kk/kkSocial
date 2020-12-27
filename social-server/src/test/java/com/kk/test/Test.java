@@ -1,33 +1,25 @@
 package com.kk.test;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.kk.bean.News;
-import com.kk.bean.User;
-import com.kk.dao.NewsDao;
-import com.kk.dao.UserDao;
-import com.kk.dao.impl.NewsDaoImpl;
-import com.kk.dao.impl.UserDaoImpl;
+import com.kk.service.IMailService;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @SpringBootTest
 public class Test {
-    @org.junit.Test
-    public void test() {
-        PageHelper.startPage(0,0);
-        NewsDao newsDao = new NewsDaoImpl();
-        List<News> selectRandom = newsDao.getSelectRandom();
-        PageInfo<News> pageInfo = new PageInfo<>(selectRandom);
 
-    }
+    /**
+     * 测试发送文本邮件
+     */
     @org.junit.Test
-    public void testUser(){
-        UserDao instance = UserDaoImpl.getInstance();
-        User userId = instance.getUserById(1);
-        System.out.println(userId);
-        System.out.println(userId.getFriendsList());
+    public void sendmail() {
+        IMailService mailService = new IMailService();
+        mailService.sendSimpleMail("3471435758@qq.com","主题：你好普通邮件","内容：第一封邮件");
     }
 
+    @org.junit.Test
+    public void sendmailHtml(){
+        IMailService mailService = new IMailService();
+        mailService.sendHtmlMail("smfx1314@163.com","主题：你好html邮件","<h1>内容：第一封html邮件</h1>");
+    }
 }

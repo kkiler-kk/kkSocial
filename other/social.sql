@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 26/12/2020 19:08:06
+ Date: 27/12/2020 18:10:51
 */
 
 SET NAMES utf8mb4;
@@ -22,13 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_comments`;
 CREATE TABLE `tb_comments`  (
-  `commnet_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `comment_id` int(11) NOT NULL,
   `new_id` int(8) NOT NULL COMMENT '动态表ID',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '评论的内容',
   `content_id` int(8) NOT NULL COMMENT '用户表ID',
-  `create_data` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  PRIMARY KEY (`commnet_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `create_date` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`comment_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_friends
@@ -52,7 +52,7 @@ CREATE TABLE `tb_message`  (
   `content` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '留言内容',
   `type` int(2) NOT NULL COMMENT '消息类别',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '消息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '消息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for tb_news
@@ -61,15 +61,15 @@ DROP TABLE IF EXISTS `tb_news`;
 CREATE TABLE `tb_news`  (
   `new_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键自增',
   `user_id` int(8) NOT NULL COMMENT '发布者ID',
-  `create_data` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '发布时间',
-  `content_text` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '发布内容',
-  `picture` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '图片的URL',
-  `comment_num` int(8) NOT NULL COMMENT '评论的人数',
-  `share_num` int(8) NULL DEFAULT NULL COMMENT '分享的人数',
+  `create_date` datetime(0) NULL DEFAULT NULL,
+  `content_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `picture` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `comment_num` int(8) NULL DEFAULT 0,
+  `share_num` int(8) NULL DEFAULT 0,
   `type` int(2) NOT NULL COMMENT '动态类型',
-  `like` int(8) NULL DEFAULT NULL,
+  `like` int(8) NULL DEFAULT 0,
   PRIMARY KEY (`new_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_user

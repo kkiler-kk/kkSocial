@@ -46,6 +46,7 @@ public class UserController {
         if(StrUtil.isEmpty(email)) return new Dto(ErrorCode.ILLEGAL_PARAMETER, "邮箱为NUll");
         return userService.existEmail(email);
     }
+
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
     public void sendEmail(String email){
         if(StrUtil.isEmpty(email)) return;

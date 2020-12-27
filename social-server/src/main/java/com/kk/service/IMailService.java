@@ -4,24 +4,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
-public class IMailServiceImpl {
+public class IMailService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    /**
-     * Spring Boot 提供了一个发送邮件的简单抽象，使用的是下面这个接口，这里直接注入即可使用
-     */
     @Autowired
     private JavaMailSender mailSender;
 
@@ -31,10 +29,13 @@ public class IMailServiceImpl {
     @Value("${spring.mail.username}")
     private String from;
 
-    public IMailServiceImpl() {
+    public IMailService() {
+        from = "kk996icu@163.com";
     }
 
+
     public void sendSimpleMail(String to, String subject, String content) {
+        System.out.println(mailSender);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -42,8 +43,9 @@ public class IMailServiceImpl {
         message.setText(content);
         try {
             mailSender.send(message);
+            logger.info("邮件已经发送。");
         } catch (Exception e) {
-            System.out.println("发送普通邮件时发生异常!" + e);
+            logger.error("发送邮件时发生异常！", e);
         }
     }
 
