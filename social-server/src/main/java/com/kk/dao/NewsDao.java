@@ -1,2 +1,9 @@
-package com.kk.dao;public class NewsDao {
+package com.kk.dao;
+
+import com.kk.bean.News;
+
+import java.util.List;
+
+public interface NewsDao {
+    List<News> getSelectRandom();
 }

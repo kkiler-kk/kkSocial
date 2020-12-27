@@ -36,7 +36,7 @@ public class UserController {
             return new Dto(ErrorCode.ILLEGAL_PARAMETER ,"参数为空");
         }
         String url = LinkData.upload(file, email);
-        if(url == "") return new Dto<>(ErrorCode.INSERT_FAIL, "code is error");
+        if(url == "") return new Dto<>(ErrorCode.INSERT_FAIL, "上传头像失败");
         User user = new User(email,password,name,gender,url);
         return userService.register(user, code);
     }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserDao {
     User getUserById(Integer id);
-
+    User getUserId(Integer id);
     List<User> getUserAndFriendsById(Integer id);
 
     int addUser(User user);
