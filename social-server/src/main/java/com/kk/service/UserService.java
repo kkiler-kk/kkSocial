@@ -47,23 +47,23 @@ public class UserService {
     public Dto register(User user, Integer code){
         Dto dto = null;
         if (emailCode.get(user.getEmail()) != code) {
-            return new Dto<>(ErrorCode.INSERT_FAIL, "code is error");
+            return new Dto<>(ErrorCode.INSERT_FAIL, "验证码错误");
         }
         int line = instance.addUser(user);
-        if(line > 0){
-            return new Dto(ErrorCode.INSERT_FAIL, "insert failed");
+        if(line < 0){
+            return new Dto(ErrorCode.ILLEGAL_PARAMETER, "参数为空");
         }
-        dto = new Dto(ErrorCode.SUCCESS, "SUCCESS");
+        dto = new Dto(ErrorCode.SUCCESS, "添加成功");
         return dto;
     }
     public Dto existEmail(String email){
         Dto dto = null;
         if(email == null){
-            dto = new Dto(ErrorCode.QUERY_FAIL, "email is null");
+            dto = new Dto(ErrorCode.QUERY_FAIL, "Email为空");
             return dto;
         }
         boolean status = instance.getUserByEmailAndPassword(email, null) == null;
-        dto = new Dto(ErrorCode.SUCCESS, "SUCCESS");
+        dto = new Dto(ErrorCode.SUCCESS, "查询成功!true可以false代表已又");
         dto.setStatus(status);
         return dto;
     }

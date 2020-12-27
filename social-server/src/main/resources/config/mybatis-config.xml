@@ -10,6 +10,11 @@
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
+<!--    <plugins>-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+<!--            <property name="helperDialect" value="mysql"/>-->
+<!--        </plugin>-->
+<!--    </plugins>-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -21,7 +26,9 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <mapper resource="mapper/userMapper.xml"></mapper>
+        <mapper resource="mapper/newsMapper.xml"></mapper>
     </mappers>
 </configuration>

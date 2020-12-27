@@ -1,19 +1,17 @@
 package com.kk.bean;
 
-import java.util.List;
 
 public class News {
     private Integer new_id;  //主键
 
     private User user; //用户
-    private String create_data; //发布时间
+    private String create_date; //发布时间
     private String content_text; //发布内容
     private String picture; //图片
-    private int comment_num; //评论人数
-    private int share_num; //分享人数
-    private int type;  //动态类型
-    private int like; //点赞总数
-    private List<Comments> commentsList; //评论总人数
+    private Integer comment_num; //评论人数
+    private Integer share_num; //分享人数
+    private Integer type;  //动态类型
+    private Integer like; //点赞总数
 
     public User getUser() {
         return user;
@@ -22,19 +20,12 @@ public class News {
     public void setUser(User user) {
         this.user = user;
     }
+    public News(){}
 
-    public List<Comments> getCommentsList() {
-        return commentsList;
-    }
-
-    public void setCommentsList(List<Comments> commentsList) {
-        this.commentsList = commentsList;
-    }
-
-    public News(Integer new_id, User user, String create_data, String content_text, String picture, int comment_num, int share_num, int type, int like) {
+    public News(Integer new_id, User user, String create_date, String content_text, String picture, Integer comment_num, Integer share_num, Integer type, Integer like) {
         this.new_id = new_id;
         this.user = user;
-        this.create_data = create_data;
+        this.create_date = create_date;
         this.content_text = content_text;
         this.picture = picture;
         this.comment_num = comment_num;
@@ -48,7 +39,7 @@ public class News {
         return "News{" +
                 "new_id=" + new_id +
                 ", user=" + user +
-                ", create_data='" + create_data + '\'' +
+                ", create_data='" + create_date + '\'' +
                 ", content_text='" + content_text + '\'' +
                 ", picture='" + picture + '\'' +
                 ", comment_num=" + comment_num +
@@ -75,11 +66,11 @@ public class News {
     }
 
     public String getCreate_data() {
-        return create_data;
+        return create_date;
     }
 
-    public void setCreate_data(String create_data) {
-        this.create_data = create_data;
+    public void setCreate_data(String create_date) {
+        this.create_date = create_date;
     }
 
     public String getContent_text() {

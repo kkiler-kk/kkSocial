@@ -43,6 +43,26 @@ public class UserDaoImpl implements UserDao {
         }
         return null;
     }
+
+    @Override
+    public User getUserId(Integer id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            return userDao.getUserId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+        return null;
+    }
+
     @Override
     public User getUserByEmailAndPassword(String email, String password) {
         SqlSessionFactory sqlSessionFactory;
