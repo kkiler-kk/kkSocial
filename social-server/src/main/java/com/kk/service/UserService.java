@@ -5,21 +5,24 @@ import com.kk.bean.Dto;
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
+import com.kk.util.CodeUtil;
 import com.kk.util.ErrorCode;
-import com.kk.util.LinkData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 @Service
 public class UserService {
-    private final static Map<String, Integer> emailCode = new HashMap<>();
-    private final IMailService mailService;
+    private final static Map<String, String> emailCode = new HashMap<>();
+    @Autowired
+    private IMailService mailService;
 
     private UserService(){
         instance = UserDaoImpl.getInstance();
-        mailService = new IMailService();
     }
     private final UserDao instance;
     private static UserService service = null;
@@ -41,7 +44,7 @@ public class UserService {
         Dto<String> success = new Dto<>(JSON.toJSONString(result));
         return success;
     }
-    public Dto register(User user, Integer code){
+    public Dto register(User user, String code){
         Dto dto = null;
         if (emailCode.get(user.getEmail()) != code) {
             return new Dto<>(ErrorCode.INSERT_FAIL, "验证码错误");
@@ -65,7 +68,7 @@ public class UserService {
         return dto;
     }
     public void sendEmail(String email){
-        int random = LinkData.random();
+        String random = CodeUtil.generateVerCode();
         emailCode.put(email, random);
         mailService.sendSimpleMail(email,"kkSocial--验证码","验证码:" + random);
     }

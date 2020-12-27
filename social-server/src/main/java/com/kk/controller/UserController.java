@@ -6,18 +6,18 @@ import com.kk.service.UserService;
 import com.kk.util.ErrorCode;
 import com.kk.util.LinkData;
 import com.kk.util.StrUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/user")
+@Component
 public class UserController {
-    public UserController(){
-        userService = UserService.getInstance();
-    }
+
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -31,7 +31,7 @@ public class UserController {
         return result;
     }
     @RequestMapping(value = "/register.do", method = RequestMethod.POST)
-    public Dto register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, Integer code){
+    public Dto register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, String code){
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
             return new Dto(ErrorCode.ILLEGAL_PARAMETER ,"参数为空");
         }
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
-    public void sendEmail(String email){
+    public void sendEmail(@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return;
         userService.sendEmail(email);
     }

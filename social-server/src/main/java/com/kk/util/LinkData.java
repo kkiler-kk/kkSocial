@@ -10,15 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.Random;
 
 public class LinkData {
     public static SqlSessionFactory getSessionFactory() throws IOException {
         InputStream input = Resources.getResourceAsStream("config/mybatis-config.xml");
         return new SqlSessionFactoryBuilder().build(input);
-    }
-    public static int random(){
-        return new Random().nextInt(1000000);
     }
     public static String upload(MultipartFile file, String email){
         if (Objects.equals("", email) && file.isEmpty()) {

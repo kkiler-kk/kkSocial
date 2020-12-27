@@ -1,25 +1,28 @@
 package com.kk.test;
 
+import com.kk.DemoApplication;
 import com.kk.service.IMailService;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@Component
 @SpringBootTest
-public class Test {
+@ContextConfiguration(classes = DemoApplication.class)
 
-    /**
-     * 测试发送文本邮件
-     */
-    @org.junit.Test
-    public void sendmail() {
-        IMailService mailService = new IMailService();
-        mailService.sendSimpleMail("3471435758@qq.com","主题：你好普通邮件","内容：第一封邮件");
+public class RandomTest {
+    @Autowired
+    IMailService service;
+    @Test
+    public void hello(){
+        System.out.println("Hello World");
     }
-
-    @org.junit.Test
-    public void sendmailHtml(){
-        IMailService mailService = new IMailService();
-        mailService.sendHtmlMail("smfx1314@163.com","主题：你好html邮件","<h1>内容：第一封html邮件</h1>");
+    @Test
+    public void senEmail(){
+        service.sendSimpleMail("toholyforyou@outlook.com","Test","Test");
     }
 }

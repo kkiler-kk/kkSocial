@@ -22,17 +22,15 @@ public class ApplicationWebSocket {
     private static final CopyOnWriteArraySet<ApplicationWebSocket> webSocket = new CopyOnWriteArraySet<>();
     private static final List<Message> messageList = new ArrayList<>();
     private Session session;
-//    @OnOpen
-//    public void onOpen(Session session) {
-//        this.session = session;
-//        webSocket.add(this);
-//    }
-//    @OnMessage
-//    public void onMessage(String text) {
-//
-//    }
-//    @OnClose
-//    public void onClose() {
-//
-//    }
+    @OnOpen
+    public void onOpen(Session session) {
+    }
+    @OnMessage
+    public void onMessage(String text) {
+
+    }
+    @OnClose
+    public void onClose() {
+
+    }
 }

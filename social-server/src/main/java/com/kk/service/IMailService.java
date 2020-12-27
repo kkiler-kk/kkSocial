@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,21 +16,17 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 @Service
+@Component
 public class IMailService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private JavaMailSender mailSender;
+    public JavaMailSender mailSender;
 
     /**
      * 配置文件中我的网易邮箱
      */
     @Value("${spring.mail.username}")
     private String from;
-
-    public IMailService() {
-        from = "kk996icu@163.com";
-    }
-
 
     public void sendSimpleMail(String to, String subject, String content) {
         System.out.println(mailSender);
