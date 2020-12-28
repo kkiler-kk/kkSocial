@@ -27,8 +27,8 @@ public class UserController {
             return new Dto<String>(ErrorCode.ILLEGAL_PARAMETER, "邮箱或者密码为空");
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
-        Dto<String> result = userService.login(email, password);
-        return result;
+        String login = userService.login(email, password);
+        return new Dto<>(login);
     }
     @RequestMapping(value = "/register.do", method = RequestMethod.POST)
     public Dto register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, String code){
@@ -38,18 +38,29 @@ public class UserController {
         String url = LinkData.upload(file, email);
         if(url == "") return new Dto<>(ErrorCode.INSERT_FAIL, "上传头像失败");
         User user = new User(email,password,name,gender,url);
-        return userService.register(user, code);
+        boolean register = userService.register(user, code);
+        return register ? new Dto("注册成功") : new Dto(ErrorCode.INSERT_FAIL, "注册失败");
     }
     @RequestMapping(value = "/existEmail.do", method = RequestMethod.GET)
-    @ResponseBody
     public Dto existEmail(String email){
         if(StrUtil.isEmpty(email)) return new Dto(ErrorCode.ILLEGAL_PARAMETER, "邮箱为NUll");
-        return userService.existEmail(email);
+        return userService.existEmail(email) ? new Dto("邮箱可用") : new Dto(ErrorCode.QUERY_FAIL, "邮箱已经存在");
     }
 
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
     public void sendEmail(@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return;
         userService.sendEmail(email);
+    }
+    @RequestMapping(value = "/updatePwd.do", method = RequestMethod.POST)
+    public Dto<String> updatePwd(String email, String password){
+        if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
+            return new Dto(ErrorCode.UPDATE_FAIL, "参数为空");
+        }
+        int i = userService.updatePwd(email, password);
+        if(i < 0){
+            return new Dto(ErrorCode.UPDATE_FAIL, "修改密码失败");
+        }
+        return new Dto<>("修改成功");
     }
 }

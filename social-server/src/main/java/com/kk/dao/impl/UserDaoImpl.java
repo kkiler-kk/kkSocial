@@ -24,7 +24,24 @@ public class UserDaoImpl implements UserDao {
         }
         return userDao;
     }
-
+    @Override
+    public List<User> getUserAndFriendsById(Integer id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            UserDao userDao = openSession.getMapper(UserDao.class);
+            return userDao.getUserAndFriendsById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+        return null;
+    }
     @Override
     public User getUserById(Integer id) {
         SqlSessionFactory sqlSessionFactory;
@@ -102,14 +119,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getUserAndFriendsById(Integer id) {
+    public int updatePwd(String email, String password) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
         try {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserAndFriendsById(id);
+            int i = userDao.updatePwd(email, password);
+            openSession.commit();
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -117,8 +136,10 @@ public class UserDaoImpl implements UserDao {
                 openSession.close();
             }
         }
-        return null;
+        return ErrorCode.INSERT_FAIL;
     }
+
+
 
     @Override
     public int addUser(User user) {
@@ -128,8 +149,9 @@ public class UserDaoImpl implements UserDao {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-            userDao.addUser(user);
+            int i = userDao.addUser(user);
             openSession.commit();
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -148,8 +170,9 @@ public class UserDaoImpl implements UserDao {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
+            int i = userDao.addFriend(user_id, friend_id);
             openSession.commit();
-            return userDao.addFriend(user_id, friend_id);
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -168,9 +191,9 @@ public class UserDaoImpl implements UserDao {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
-
+            int i = userDao.deleteFriend(user_id, friend_id);
             openSession.commit();
-            return userDao.deleteFriend(user_id, friend_id);
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -189,8 +212,9 @@ public class UserDaoImpl implements UserDao {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
             UserDao userDao = openSession.getMapper(UserDao.class);
+            int i = userDao.deleteUserById(id);
             openSession.commit();
-            return userDao.deleteUserById(id);
+            return i;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

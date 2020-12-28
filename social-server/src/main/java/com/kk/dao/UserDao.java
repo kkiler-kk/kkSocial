@@ -20,4 +20,6 @@ public interface UserDao {
 
     int countFriends(Integer id);
 
+    int updatePwd(String email, String password);
+
 }

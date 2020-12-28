@@ -102,4 +102,7 @@ VALUES
 	<delete id="deleteFriend" parameterType="Integer">
 		delete from `tb_friends` where `user_id` = #{user_id} and `friend_id` = #{friend_id}
 	</delete>
+	<update id="updatePwd" parameterType="String">
+		update `tb_user` set `password` = #{password} where `email` = #{email}
+	</update>
 </mapper>

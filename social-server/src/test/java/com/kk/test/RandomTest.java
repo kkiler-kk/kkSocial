@@ -1,6 +1,9 @@
 package com.kk.test;
 
 import com.kk.DemoApplication;
+import com.kk.bean.User;
+import com.kk.dao.UserDao;
+import com.kk.dao.impl.UserDaoImpl;
 import com.kk.service.IMailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,5 +27,12 @@ public class RandomTest {
     @Test
     public void senEmail(){
         service.sendSimpleMail("toholyforyou@outlook.com","Test","Test");
+    }
+
+    @Test
+    public void testUser(){
+        UserDao instance = UserDaoImpl.getInstance();
+        int i = instance.updatePwd("kk@kk.com", "123456");
+        System.out.println(i);
     }
 }
