@@ -1,9 +1,9 @@
 <template>
 	<div id="header">
 		<div class="container">
-			<div class="title">
-				TITLE
-			</div>
+			<router-link class="title" to="/">
+				SOCIAL
+			</router-link>
 			
 			<div class="menu">
 				<div 
@@ -53,6 +53,12 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+	
+	a {
+		color: #414141;
+		text-decoration: none;
+		font-weight: bolder;
 	}
 	
 	.menu {

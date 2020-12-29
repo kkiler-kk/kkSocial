@@ -93,7 +93,8 @@ export default {
 			verify: {
 				password: ''
 			},
-			errorList: []
+			errorList: [],
+			timer: null
 		}
 	},
 	methods: {
@@ -120,7 +121,6 @@ export default {
 			if (email === '') errorList.push("请填写邮箱");
 			else if (!emailVerify.test(email)) errorList.push("请填写正确的邮箱格式");
 			else {
-				// /existEmail.do
 				this.axios.get('/api/user/existEmail.do', {
 					params: {
 						email
@@ -133,45 +133,43 @@ export default {
 						return;
 					}
 					
-					this.axios.get('/api/user/sendEmail.do', {
-						params: {
-							email
-						}
-					})
-					.then(response => {
-					button.innerText = '已发送';
-					console.log(response);
-					})
-					.catch(error => {
-					button.innerText = '发送失败';
-					console.log(error);
-					});
-					
-					button.innerText = '发送中';
+					if (!this.timer) {
+						this.axios.get('/api/user/sendEmail.do', {
+							params: {
+								email
+							}
+						})
+						.then(() => {
+							let i = 1;
+							this.timer = window.setInterval(() => {
+								button.innerText = `已发送 (${60 - i}s)`;
+								if (++i == 60) {
+									window.clearInterval(this.timer);
+								}
+							}, 1000);
+							window.setTimeout(() => {
+								window.clearInterval(this.timer);
+								this.timer = null;
+								button.innerText = '再次发送';
+							}, 60 * 1000);
+							this.setError(errorList);
+						})
+						.catch(error => {
+							button.innerText = '再次发送';
+							errorList.push('验证码发送失败');
+							console.log(error);
+						});
+						
+						button.innerText = '发送中';
+					}
 				})
 				.catch(error => {
 					console.log(error);
-					errorList.push("邮箱验证失败");
+					errorList.push("发送失败, 请重试");
 					this.setError(errorList);
 				});
 			}
 			if (errorList.length > 0) this.setError(errorList);
-			
-			this.axios.get('/api/user/sendEmail.do', {
-				params: {
-					email
-				}
-			})
-			.then(response => {
-				button.innerText = '已发送';
-				console.log(response);
-			})
-			.catch(error => {
-				button.innerText = '发送失败';
-				console.log(error);
-			});
-			
-			button.innerText = '发送中';
 		},
 		verifyForm: function () {
 			let errorList = [];

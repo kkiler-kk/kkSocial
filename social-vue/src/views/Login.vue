@@ -6,14 +6,14 @@
 				<router-link to="/login">登录</router-link>
 			</div>
 			<div class="avatar">
-				<label class="male"></label>
+				<label class="male" id="avatar"></label>
 			</div>
 			
 			<label class="label">
 				<div class="icon">
 					<i data-eva="email-outline" data-eva-fill="#2979FF"></i>
 				</div>
-				<input type="email" name="email" placeholder="邮箱" v-model="user.email"/>
+				<input type="email" name="email" placeholder="邮箱" v-model="user.email" @blur="getAvatar"/>
 			</label>
 			
 			<label class="label">
@@ -51,6 +51,28 @@ export default {
 	methods: {
 		setError: function (errorList) {
 			this.errorList = errorList;
+		},
+		getAvatar: function () {
+			let email = this.user.email;
+			let emailVerify = /^\w+@(\w+\.)+\w+$/;
+			if (email === '' || !emailVerify.test(email)) return;
+			
+			this.axios.get('/api/user/existEmail.do', {
+				params: {
+					email
+				}
+			})
+			.then(response => {
+				if (!response.data.status) {
+					let img = new Image;
+					img.onload = () => {
+						document.getElementById('avatar').innerHTML = '';
+						document.getElementById('avatar').appendChild(img);
+					}
+					img.src = `http://localhost:8800/upload/${email}.jpg`;
+				}
+			})
+			
 		},
 		verifyForm: function () {
 			let errorList = [];
