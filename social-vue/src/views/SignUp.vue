@@ -6,7 +6,7 @@
 				<router-link to="/login">登录</router-link>
 			</div>
 			<div class="avatar">
-				<label for="img-up-load" :class="[(user.gender ? 'male' : 'female')]">
+				<label for="img-up-load" :class="[(user.gender ? 'male' : 'female')]" id="avatar">
 					<div class="message">点击上传头像</div>
 				</label>
 				<input 
@@ -14,6 +14,7 @@
 					type="file" 
 					name="file"
 					accept="image/*"
+					@change="showAvatar"
 					v-show="false"/>
 			</div>
 			
@@ -99,6 +100,17 @@ export default {
 		setError: function (errorList) {
 			this.errorList = errorList;
 		},
+		showAvatar: function () {
+			let file = new FormData(this.form).get("file");
+			let img = new Image();
+			img.onload = () => {
+				document.getElementById('avatar').innerHTML = "";
+				document.getElementById('avatar').appendChild(img);
+			}
+			let reader = new FileReader();
+			reader.onload = e => img.src = e.target.result;
+			reader.readAsDataURL(file);
+		},
 		getVerifyCode: function (e) {
 			let button = e.target;
 			
@@ -107,8 +119,43 @@ export default {
 			let emailVerify = /^\w+@(\w+.)+\w+$/;
 			if (email === '') errorList.push("请填写邮箱");
 			else if (!emailVerify.test(email)) errorList.push("请填写正确的邮箱格式");
-			this.setError(errorList);
-			if (errorList.length > 0) return;
+			else {
+				// /existEmail.do
+				this.axios.get('/api/user/existEmail.do', {
+					params: {
+						email
+					}
+				})
+				.then(response => {
+					if (!response.data.status) {
+						errorList.push("邮箱已经存在");
+						this.setError(errorList);
+						return;
+					}
+					
+					this.axios.get('/api/user/sendEmail.do', {
+						params: {
+							email
+						}
+					})
+					.then(response => {
+					button.innerText = '已发送';
+					console.log(response);
+					})
+					.catch(error => {
+					button.innerText = '发送失败';
+					console.log(error);
+					});
+					
+					button.innerText = '发送中';
+				})
+				.catch(error => {
+					console.log(error);
+					errorList.push("邮箱验证失败");
+					this.setError(errorList);
+				});
+			}
+			if (errorList.length > 0) this.setError(errorList);
 			
 			this.axios.get('/api/user/sendEmail.do', {
 				params: {
