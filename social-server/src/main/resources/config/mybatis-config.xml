@@ -30,5 +30,6 @@
     <mappers>
         <mapper resource="mapper/userMapper.xml"></mapper>
         <mapper resource="mapper/newsMapper.xml"></mapper>
+        <mapper resource="mapper/commentMapper.xml"></mapper>
     </mappers>
 </configuration>

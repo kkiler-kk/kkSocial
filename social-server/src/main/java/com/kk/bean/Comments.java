@@ -29,23 +29,21 @@ public class Comments {
                 '}';
     }
 
-    public Integer getId() {
+    public Integer getComment_id() {
         return comment_id;
     }
 
-    public void setId(Integer id) {
-        this.comment_id = id;
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
     }
 
-    public News getNew_id() {
+    public News getNews() {
         return news;
     }
 
-    public void setNew_id(News new_id) {
-        this.news = new_id;
+    public void setNews(News news) {
+        this.news = news;
     }
-
-
 
     public String getContent() {
         return content;
@@ -55,19 +53,19 @@ public class Comments {
         this.content = content;
     }
 
-    public User getUser_id() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getCreate_data() {
+    public String getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_data(String create_data) {
-        this.create_date = create_data;
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
     }
 }

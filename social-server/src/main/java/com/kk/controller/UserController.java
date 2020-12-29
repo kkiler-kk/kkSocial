@@ -35,8 +35,10 @@ public class UserController {
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
             return new Dto(ErrorCode.ILLEGAL_NULL ,"参数为空");
         }
-        String url = LinkData.upload(file, email);
-        if(StrUtil.isEmpty(url)) return new Dto<>(ErrorCode.INSERT_FAIL, "上传头像失败");
+        String url = "";
+        if(file != null ) {
+            url = LinkData.upload(file, email);
+        }
         User user = new User(email,password,name,gender,url);
         int register = userService.register(user, code);
         if(register  == -1) return new Dto(ErrorCode.INSERT_FAIL, "验证码已经过期!!!!");
