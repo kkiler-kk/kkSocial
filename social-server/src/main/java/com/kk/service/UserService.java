@@ -6,10 +6,12 @@ import com.kk.bean.User;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.CodeUtil;
+import com.kk.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +37,8 @@ public class UserService {
         if(result == null){
             return null;
         }
-        return JSON.toJSONString(result);
+        String token = TokenUtils.token(email, password);
+        return token;
     }
     public int register(User user, String code){
         Date data = new Date();
@@ -47,6 +50,7 @@ public class UserService {
             return -2;
         }
         int i = instance.addUser(user);
+        emailCode.remove(user.getEmail());
         return i;
     }
     public boolean existEmail(String email){
@@ -62,5 +66,11 @@ public class UserService {
     }
     public int updatePwd(String email, String password){
         return instance.updatePwd(email, password);
+    }
+    public User getUserId(Integer id){
+        return instance.getUserId(id);
+    }
+    public boolean existToken(String token){
+        return TokenUtils.verify(token);
     }
 }

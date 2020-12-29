@@ -7,7 +7,6 @@ public class Dto<Item> {
     private Item data;
     private Integer errorCode;
     private String message;
-
     public Dto(){}
 
     public Dto(Item data){

@@ -25,7 +25,6 @@ public class LinkData {
             String realPath = path.replace('/', '\\').substring(1, path.length());
             //用于查看路径是否正确
             System.out.println(realPath);
-
             email = email + ".jpg";
             //限制文件上传的类型
             String contentType = file.getContentType();

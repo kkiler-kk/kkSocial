@@ -9,6 +9,7 @@ import com.kk.dao.UserDao;
 import com.kk.dao.impl.CommentsDaoImpl;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
+import com.kk.util.TokenUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,5 +37,11 @@ public class RandomTest {
         CommentsDao commentsDao = new CommentsDaoImpl();
         List<Comments> byIdComment = commentsDao.getByIdComment(1);
         System.out.println(byIdComment.size());
+    }
+    @Test
+    public void testToken(){
+        String token = TokenUtils.token("kk@kk.com", "123456");
+        boolean verify = TokenUtils.verify(token);
+        System.out.println(verify);
     }
 }

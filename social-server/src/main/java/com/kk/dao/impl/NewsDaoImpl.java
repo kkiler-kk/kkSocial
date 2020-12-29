@@ -30,6 +30,11 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
+    public List<News> getNewsAndUserById(Integer id) {
+        return null;
+    }
+
+    @Override
     public News getNewsById(Integer id) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;
