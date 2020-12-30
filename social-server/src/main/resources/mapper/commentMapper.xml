@@ -10,14 +10,17 @@
     </resultMap>
     <select id="getByIdComment" resultMap="getByIdComment" parameterType="Integer">
         SELECT
-	`comment_id` as 'comment_id',
-	`new_id` as 'new_id',
-	`content` as 'content',
-	content_id as 'content_id',
-	DATE_FORMAT( `create_date`, '%Y-%m-%d %H:%i:%s' ) as 'create_date'
+	    <include refid="comment_table"></include>
 FROM
 	`tb_comments`
 WHERE
 	`new_id` = #{id}
     </select>
+    <sql id="comment_table">
+        `comment_id` as 'comment_id',
+	`new_id` as 'new_id',
+	`content` as 'content',
+	content_id as 'content_id',
+	DATE_FORMAT( `create_date`, '%Y-%m-%d %H:%i:%s' ) as 'create_date'
+    </sql>
 </mapper>

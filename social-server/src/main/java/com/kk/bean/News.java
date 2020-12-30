@@ -1,12 +1,15 @@
 package com.kk.bean;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class News {
     private Integer new_id;  //主键
 
     private User user; //用户
     private String create_date; //发布时间
     private String content_text; //发布内容
+    @JsonInclude(JsonInclude.Include.NON_NULL) //为null时不返回
     private String picture; //图片
     private Integer comment_num; //评论人数
     private Integer share_num; //分享人数

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kk.dao.NewsDao">
-    <resultMap id="getSelectRandom" type="com.kk.bean.News">
+    <resultMap id="getUserAndNews" type="com.kk.bean.News">
         <id property="new_id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
         <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -12,7 +12,7 @@
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
     </resultMap>
-    <select id="getSelectRandom" resultMap="getSelectRandom">
+    <select id="getSelectRandom" resultMap="getUserAndNews">
        SELECT
        <include refid="news_table"></include>
         FROM
@@ -20,32 +20,10 @@
         ORDER BY
 	    `like` DESC
     </select>
-    <resultMap id="getNewsById" type="com.kk.bean.News">
-        <id property="new_id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
-        <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="content_text" column="content_text" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="comment_num" column="comment_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
-    </resultMap>
-    <resultMap id="getNewsAndUserById" type="com.kk.bean.News">
-        <id property="new_id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
-        <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="content_text" column="content_text" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="comment_num" column="comment_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
-    </resultMap>
-    <select id="getNewsAndUserById" resultMap="getNewsAndUserById">
-        select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id})
+    <select id="getNewsAndUserById" resultMap="getUserAndNews">
+        select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id}) order by create_date
     </select>
-    <select id="getNewsById" resultMap="getNewsById" parameterType="Integer">
+    <select id="getNewsById" resultMap="getUserAndNews" parameterType="Integer">
         select
         <include refid="news_table"></include>
         from `tb_news`
@@ -54,7 +32,7 @@
     <sql id="news_table">
     new_id as 'new_id',
     user_id as 'user_id',
-    DATE_FORMAT(create_date,'%Y-%m-%d %H:%i:%s') as 'create_date',
+    create_date as 'create_date',
     content_text as 'content_text',
     picture as 'picture',
     comment_num as 'comment_num',

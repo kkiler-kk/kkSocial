@@ -1,7 +1,9 @@
 package com.kk.test;
 
-import com.kk.DemoApplication;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kk.bean.Comments;
+import com.kk.bean.Dto;
 import com.kk.bean.News;
 import com.kk.bean.User;
 import com.kk.dao.CommentsDao;
@@ -13,13 +15,10 @@ import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.TokenUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
 @SpringBootTest
-@ContextConfiguration(classes = DemoApplication.class)
-
 public class RandomTest {
     @Test
     public void testUser(){
@@ -30,9 +29,12 @@ public class RandomTest {
     }
     @Test
     public void testNews(){
-        NewsDao newsDao = new NewsDaoImpl();
-        List<News> newsAndUserById = newsDao.getNewsAndUserById(2);
-        System.out.println(newsAndUserById);
+        NewsDao newsDao = NewsDaoImpl.getInstance();
+        PageHelper.startPage(0, 4);
+        List<News> selectRandom = newsDao.getSelectRandom();
+        PageInfo<News> pageInfo = new PageInfo<>(selectRandom);
+        System.out.println(pageInfo.getPageNum());
+        System.out.println(pageInfo.getPageSize());
     }
     @Test
     public void testComment(){
@@ -45,5 +47,6 @@ public class RandomTest {
         String token = TokenUtils.token("kk@kk.com", "123456");
         boolean verify = TokenUtils.verify(token);
         System.out.println(verify);
+        System.out.println(token);
     }
 }

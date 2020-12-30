@@ -1,3 +1,8 @@
+pagehelper:
+    helper-dialect: mysql
+    params: count=countSql
+    reasonable: true
+    support-methods-arguments: true
 file:
     staticAccessPath: /upload/**
 server:
@@ -18,5 +23,7 @@ spring:
     mail:
         host: smtp.163.com
         username: kk996icu@163.com
-        password: QPOMJPQSTBSXKODQ
+        password: ZRWXCQXHKPPWJAGB
         default-encoding: UTF-8
+
+

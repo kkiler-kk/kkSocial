@@ -33,8 +33,8 @@ public class UserController {
             return new Dto<String>(ILLEGAL_NULL, "邮箱或者密码为空");
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
-        String login = userService.login(email, password);
-        return new Dto<>(login);
+        String token = userService.login(email, password);
+        return new Dto<>(token);
     }
     @RequestMapping(value = "/register.do", method = RequestMethod.POST)
     public Dto<String> register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, String code){
@@ -77,21 +77,6 @@ public class UserController {
     }
     @RequestMapping(value = "/existUser.do")
     public Dto<List<News>> existUser(String token){
-        Dto<List<News>> result = null;
-        List<News> list = null;
-        if (StrUtil.isEmpty(token)){
-            list = newsService.getSelectRandom();
-            result = new Dto<>(ILLEGAL_NULL, "token为空");
-            result.setData(list);
-            return result;
-        }
-        boolean verify = userService.existToken(token);
-        if (verify){
-            //暂时未作处理 此处应该返回好友动态
-        }
-        result = new Dto<>(TOKEN_PAST, "token已过期,请先登录!");
-        list = newsService.getSelectRandom();
-        result.setData(list);
-        return result;
+        return null;
     }
 }

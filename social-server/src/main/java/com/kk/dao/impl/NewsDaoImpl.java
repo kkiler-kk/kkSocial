@@ -2,6 +2,7 @@ package com.kk.dao.impl;
 
 import com.kk.bean.News;
 import com.kk.dao.NewsDao;
+import com.kk.dao.UserDao;
 import com.kk.util.LinkData;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,7 +10,21 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import java.util.List;
 
 public class NewsDaoImpl implements NewsDao {
+    private static NewsDao newsDao;
 
+    private NewsDaoImpl() {
+    }
+
+    public static NewsDao getInstance() {
+        if (newsDao == null) {
+            synchronized (NewsDaoImpl.class) {
+                if (newsDao == null) {
+                    newsDao = new NewsDaoImpl();
+                }
+            }
+        }
+        return newsDao;
+    }
     @Override
     public List<News> getSelectRandom() {
         SqlSessionFactory sqlSessionFactory;
