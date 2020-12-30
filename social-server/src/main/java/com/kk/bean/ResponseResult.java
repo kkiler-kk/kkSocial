@@ -2,19 +2,19 @@ package com.kk.bean;
 
 import com.kk.util.ErrorCode;
 
-public class Dto<Item> {
+public class ResponseResult<Item> {
     private boolean status;
     private Item data;
     private Integer errorCode;
     private String message;
-    public Dto(){}
+    public ResponseResult(){}
 
-    public Dto(Item data){
+    public ResponseResult(Item data){
         this.status = true;
         this.data = data;
         this.errorCode = ErrorCode.SUCCESS;
     }
-    public Dto(Integer errorCode, String message){
+    public ResponseResult(Integer errorCode, String message){
         this.errorCode = errorCode;
         this.message = message;
         this.status = false;
