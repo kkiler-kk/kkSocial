@@ -54,30 +54,7 @@ WHERE
 	u.id = #{id}
 	</select>
     <select id="getUserAndFriendsById" parameterType="Integer" resultType="com.kk.bean.User">
-        SELECT DISTINCT f.friend_id AS "id"
-	, (
-		SELECT `name`
-		FROM `tb_user`
-		WHERE id = f.friend_id
-	) AS "name"
-	, (
-		SELECT `email`
-		FROM `tb_user`
-		WHERE id = f.friend_id
-	) AS "email"
-	, (
-		SELECT `gender`
-		FROM `tb_user`
-		WHERE id = f.friend_id
-	) AS "gender",
-	(
-		SELECT `url`
-		FROM `tb_user`
-		WHERE id = f.friend_id
-	) AS "url"
-FROM `tb_user` u, `tb_friends` f
-WHERE f.user_id = u.id
-	AND u.id = #{id}
+        SELECT * FROM `tb_user` WHERE id IN( SELECT f.friend_id FROM `tb_user` u LEFT JOIN `tb_friends` f ON f.user_id = u.id WHERE u.id = #{id})
     </select>
     <insert id="addUser" parameterType="com.kk.bean.User">
         INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url` )

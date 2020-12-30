@@ -3,6 +3,7 @@ package com.kk.test;
 import com.kk.DemoApplication;
 import com.kk.bean.Comments;
 import com.kk.bean.News;
+import com.kk.bean.User;
 import com.kk.dao.CommentsDao;
 import com.kk.dao.NewsDao;
 import com.kk.dao.UserDao;
@@ -23,14 +24,15 @@ public class RandomTest {
     @Test
     public void testUser(){
         UserDao instance = UserDaoImpl.getInstance();
-        int i = instance.updatePwd("kk@kk.com", "123456");
-        System.out.println(i);
+        User userById = instance.getUserById(1);
+        System.out.println(userById);
+        userById.getFriendsList().forEach(System.out::println);
     }
     @Test
     public void testNews(){
         NewsDao newsDao = new NewsDaoImpl();
-        News newsById = newsDao.getNewsById(1);
-        System.out.println(newsById);
+        List<News> newsAndUserById = newsDao.getNewsAndUserById(2);
+        System.out.println(newsAndUserById);
     }
     @Test
     public void testComment(){
