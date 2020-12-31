@@ -70,6 +70,14 @@ public class UserController {
         return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
     }
 
+    @RequestMapping(value = "/existName/{name}",method = RequestMethod.GET)
+    public ResponseResult<String> existName(@PathVariable String name){
+        if(StrUtil.isEmpty(name)){
+            return new ResponseResult<>(ILLEGAL_NULL, "name为null");
+        }
+        User userByName = userService.getUserByName(name);
+        return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ILLEGAL_PARAMETER, "name已存在!");
+    }
     @RequestMapping(value = "/sendEmail/", method = RequestMethod.GET)
     public ResponseResult sendEmail(@RequestParam(value = "email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "参数为空");
