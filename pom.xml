@@ -5,7 +5,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>social-server</module>
-        <module>social-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,20 +23,14 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!-- JavaEE依赖       -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-
-
-
-
+        <!--     Spring Boot依赖   -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -49,6 +42,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--   单元测试     -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

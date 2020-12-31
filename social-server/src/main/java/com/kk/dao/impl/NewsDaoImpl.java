@@ -2,7 +2,6 @@ package com.kk.dao.impl;
 
 import com.kk.bean.News;
 import com.kk.dao.NewsDao;
-import com.kk.dao.UserDao;
 import com.kk.util.LinkData;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

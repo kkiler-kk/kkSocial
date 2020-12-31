@@ -1,19 +1,19 @@
 package com.kk.controller;
 
 import static com.kk.util.ErrorCode.*;
-import com.kk.bean.Dto;
+import com.kk.bean.ResponseResult;
 import com.kk.bean.News;
 import com.kk.bean.User;
 import com.kk.service.NewsService;
 import com.kk.service.UserService;
 import com.kk.util.LinkData;
 import com.kk.util.StrUtil;
-import com.kk.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 
@@ -21,62 +21,64 @@ import java.util.List;
 @RequestMapping(value = "/user")
 @Component
 public class UserController {
-
+//    @PathVariable：自动将rest请求匹配到同名参数上
+//
+//    @ModelAttribute：自动将请求的form表单参数 组装成对象
+//
+//    @RequestBody:自动将请求的json参数 组装成对象
     @Autowired
     private UserService userService;
     @Autowired
     private NewsService newsService;
 
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
-    public Dto<String> login(@RequestParam(value = "email")String email,@RequestParam(value = "password") String password){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseResult<String> login(@ModelAttribute User user){
+        String email = user.getEmail(), password = user.getPassword();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
-            return new Dto<String>(ILLEGAL_NULL, "邮箱或者密码为空");
+            return new ResponseResult<String>(ILLEGAL_NULL, "邮箱或者密码为空");
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
         String token = userService.login(email, password);
-        return new Dto<>(token);
+        return new ResponseResult<>(token);
     }
-    @RequestMapping(value = "/register.do", method = RequestMethod.POST)
-    public Dto<String> register(String email, String password, String name, Integer gender, @RequestParam("file") MultipartFile file, String code){
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseResult<String> register(@RequestBody User user, @RequestParam("file") MultipartFile file, String code){
+        String email = user.getEmail(), password = user.getPassword(), name = user.getName();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
-            return new Dto(ILLEGAL_NULL ,"参数为空");
+            return new ResponseResult(ILLEGAL_NULL ,"参数为空");
         }
         String url = "";
         if(file != null ) {
             url = LinkData.upload(file, email);
         }
-        User user = new User(email,password,name,gender,url);
+        user.setUrl(url);
         int register = userService.register(user, code);
-        if(register  == -1) return new Dto(INSERT_FAIL, "验证码已经过期!!!!");
-        if(register  == -2) return new Dto(INSERT_FAIL, "验证码错误!!!!");
-        String token = TokenUtils.token(email, password);
-        return register  > 0? new Dto(token) : new Dto(INSERT_FAIL, "注册失败");
+        if(register  == -1) return new ResponseResult(INSERT_FAIL, "验证码已经过期!!!!");
+        if(register  == -2) return new ResponseResult(INSERT_FAIL, "验证码错误!!!!");
+        return register  > 0? new ResponseResult("OK") : new ResponseResult(INSERT_FAIL, "注册失败");
     }
-    @RequestMapping(value = "/existEmail.do", method = RequestMethod.GET)
-    public Dto existEmail(String email){
-        if(StrUtil.isEmpty(email)) return new Dto(ILLEGAL_NULL, "邮箱为NUll");
-        return userService.existEmail(email) ? new Dto("邮箱可用") : new Dto(QUERY_FAIL, "邮箱已经存在");
+    @RequestMapping(value = "/existEmail/{email}", method = RequestMethod.GET)
+    public ResponseResult existEmail(@PathVariable String email){
+        if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "邮箱为NUll");
+        return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
     }
 
-    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
-    public Dto sendEmail(@RequestParam("email") String email){
-        if(StrUtil.isEmpty(email)) return new Dto(ILLEGAL_NULL, "参数为空");
+    @RequestMapping(value = "/sendEmail/{email}", method = RequestMethod.GET)
+    public ResponseResult sendEmail(@PathVariable String email){
+        if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "参数为空");
         userService.sendEmail(email);
-        return new Dto("发送成功");
+        return new ResponseResult("发送成功");
     }
-    @RequestMapping(value = "/updatePwd.do", method = RequestMethod.POST)
-    public Dto<String> updatePwd(String email, String password){
+    @RequestMapping(value = "/updatePwd/{email}/{password}", method = RequestMethod.POST)
+    public ResponseResult<String> updatePwd(@PathVariable String email,@PathVariable String password){
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
-            return new Dto(UPDATE_FAIL, "参数为空");
+            return new ResponseResult(UPDATE_FAIL, "参数为空");
         }
         int i = userService.updatePwd(email, password);
         if(i < 0){
-            return new Dto(UPDATE_FAIL, "修改密码失败");
+            return new ResponseResult(UPDATE_FAIL, "修改密码失败");
         }
-        return new Dto<>("修改成功");
-    }
-    @RequestMapping(value = "/existUser.do")
-    public Dto<List<News>> existUser(String token){
-        return null;
+        return new ResponseResult<>("修改成功");
     }
 }

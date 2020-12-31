@@ -1,2 +1,15 @@
-package com.kk.config;public class WebConfig {
+package com.kk.config;
+
+import com.kk.util.JwtInterceptor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        //添加拦截器
+        String[] strings = {"/user/login","/user/sendEmail/*","/user/register/*","/user/existEmail/*","/upload/*","/hello","/*"};
+        registry.addInterceptor(new JwtInterceptor()).excludePathPatterns(strings);//放某些路由不需要验证
+    }
 }

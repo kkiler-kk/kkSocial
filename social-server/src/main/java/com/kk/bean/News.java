@@ -2,9 +2,9 @@ package com.kk.bean;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.kk.bean.parent.Parent;
 
-public class News {
-    private Integer new_id;  //主键
+public class News extends Parent {
 
     private User user; //用户
     private String create_date; //发布时间
@@ -26,7 +26,7 @@ public class News {
     public News(){}
 
     public News(Integer new_id, User user, String create_date, String content_text, String picture, Integer comment_num, Integer share_num, Integer type, Integer like) {
-        this.new_id = new_id;
+        super(new_id);
         this.user = user;
         this.create_date = create_date;
         this.content_text = content_text;
@@ -40,9 +40,8 @@ public class News {
     @Override
     public String toString() {
         return "News{" +
-                "new_id=" + new_id +
-                ", user=" + user +
-                ", create_data='" + create_date + '\'' +
+                "new_id=" + super.getId() +
+                ", create_date='" + create_date + '\'' +
                 ", content_text='" + content_text + '\'' +
                 ", picture='" + picture + '\'' +
                 ", comment_num=" + comment_num +
@@ -51,28 +50,11 @@ public class News {
                 ", like=" + like +
                 '}';
     }
-
-    public Integer getNew_id() {
-        return new_id;
-    }
-
-    public void setNew_id(Integer new_id) {
-        this.new_id = new_id;
-    }
-
-    public User getUser_id() {
-        return user;
-    }
-
-    public void setUser_id(User user_id) {
-        this.user = user;
-    }
-
-    public String getCreate_data() {
+    public String getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_data(String create_date) {
+    public void setCreate_date(String create_date) {
         this.create_date = create_date;
     }
 
@@ -92,36 +74,35 @@ public class News {
         this.picture = picture;
     }
 
-    public int getComment_num() {
+    public Integer getComment_num() {
         return comment_num;
     }
 
-    public void setComment_num(int comment_num) {
+    public void setComment_num(Integer comment_num) {
         this.comment_num = comment_num;
     }
 
-    public int getShare_num() {
+    public Integer getShare_num() {
         return share_num;
     }
 
-    public void setShare_num(int share_num) {
+    public void setShare_num(Integer share_num) {
         this.share_num = share_num;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getLike() {
+    public Integer getLike() {
         return like;
     }
 
-    public void setLike(int like) {
+    public void setLike(Integer like) {
         this.like = like;
     }
-
 }

@@ -13,6 +13,7 @@ public class ResponseResult<Item> {
         this.status = true;
         this.data = data;
         this.errorCode = ErrorCode.SUCCESS;
+        this.message = "OK";
     }
     public ResponseResult(Integer errorCode, String message){
         this.errorCode = errorCode;

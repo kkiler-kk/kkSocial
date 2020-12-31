@@ -7,7 +7,7 @@ public class Message {
     private String url; //发送者头像
     private String receiveName; //接收者
     private String text; //发送内容
-
+    public Message(){}
     public Message(String sendName, String createDate, String type, String url, String receiveName, String text) {
         this.sendName = sendName;
         this.createDate = createDate;

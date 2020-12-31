@@ -1,9 +1,10 @@
 package com.kk.bean;
 
+import com.kk.bean.parent.Parent;
+
 import java.util.List;
 
-public class User {
-    private Integer id;//id
+public class User extends Parent {
     private String email;//邮箱
     private String password;//密码
     private String name;//姓名
@@ -11,56 +12,15 @@ public class User {
     private List<User> friendsList;//好友列表
     private int countFriends; //好友总数
     private String url;  //头像路径
+    public User(){
 
+    }
     public User( String email, String password, String name, Integer gender,String url) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
         this.url = url;
-    }
-
-    public int getCountFriends() {
-        return countFriends;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", friendsList=" + friendsList +
-                ", countFriends=" + countFriends +
-                ", url='" + url + '\'' +
-                '}';
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setCountFriends(int countFriends) {
-        this.countFriends = countFriends;
-    }
-
-
-    public User(){
-
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -103,5 +63,32 @@ public class User {
         this.friendsList = friendsList;
     }
 
+    public int getCountFriends() {
+        return countFriends;
+    }
 
+    public void setCountFriends(int countFriends) {
+        this.countFriends = countFriends;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + super.getId() +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", countFriends=" + countFriends +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

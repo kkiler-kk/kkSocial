@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 29/12/2020 16:46:05
+ Date: 31/12/2020 10:12:09
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `tb_comment_write`  (
   `content_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '发布内容',
   `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '发布时间',
   PRIMARY KEY (`write_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论回复表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论回复表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_comments
@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `tb_news`;
 CREATE TABLE `tb_news`  (
   `new_id` int(8) NOT NULL AUTO_INCREMENT COMMENT '主键自增',
   `user_id` int(8) NOT NULL COMMENT '发布者ID',
-  `create_date` datetime(0) NULL DEFAULT NULL,
+  `create_date` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `content_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `picture` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `comment_num` int(8) NULL DEFAULT 0,

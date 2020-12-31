@@ -1,7 +1,5 @@
 package com.kk.service;
 
-import com.alibaba.fastjson.JSON;
-import com.kk.bean.Dto;
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +34,7 @@ public class UserService {
         if(result == null){
             return null;
         }
-        String token = TokenUtils.token(email, password);
+        String token = TokenUtils.token(result.getId().toString());
         return token;
     }
     public int register(User user, String code){
@@ -66,11 +63,5 @@ public class UserService {
     }
     public int updatePwd(String email, String password){
         return instance.updatePwd(email, password);
-    }
-    public User getUserId(Integer id){
-        return instance.getUserId(id);
-    }
-    public boolean existToken(String token){
-        return TokenUtils.verify(token);
     }
 }

@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface UserDao {
     User getUserById(Integer id);
+
     User getUserId(Integer id);
+
     List<User> getUserAndFriendsById(Integer id);
 
     int addUser(User user);
@@ -14,6 +16,7 @@ public interface UserDao {
     int addFriend(Integer user_id, Integer friend_id);
 
     int deleteFriend(Integer user_id, Integer friend_id);
+
     int deleteUserById(Integer id);
 
     User getUserByEmailAndPassword(String email, String password);

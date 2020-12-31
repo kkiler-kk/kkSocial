@@ -1,33 +1,25 @@
 package com.kk.bean;
 
-public class Friends {
-    private Integer id;
+import com.kk.bean.parent.Parent;
+
+public class Friends extends Parent {
     private Integer user_id;
     private Integer friend_id;
 
     @Override
     public String toString() {
         return "Friends{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", user_id=" + user_id +
                 ", friend_id=" + friend_id +
                 '}';
     }
-
+    public Friends(){}
     public Friends(Integer id, Integer user_id, Integer friend_id) {
-        this.id = id;
+        super(id);
         this.user_id = user_id;
         this.friend_id = friend_id;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Integer getUser_id() {
         return user_id;
     }

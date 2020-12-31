@@ -1,17 +1,18 @@
 package com.kk.bean;
 
+import com.kk.bean.parent.Parent;
+
 /**
  * 评论类
  */
-public class Comments {
-    private Integer comment_id;
+public class Comments extends Parent {
     private News news; //动态表ID
     private String content; //评论内容
     private User user; //用户id;
     private String create_date; //创建时间
     public Comments(){}
     public Comments(Integer id, News new_id, String content, User user, String create_data) {
-        this.comment_id = id;
+        super(id);
         this.news = new_id;
         this.content = content;
         this.user = user;
@@ -21,7 +22,7 @@ public class Comments {
     @Override
     public String toString() {
         return "Comments{" +
-                "comment_id=" + comment_id +
+                "comment_id=" + super.getId() +
                 ", new=" + news +
                 ", content='" + content + '\'' +
                 ", user='" + user + '\'' +
@@ -29,13 +30,7 @@ public class Comments {
                 '}';
     }
 
-    public Integer getComment_id() {
-        return comment_id;
-    }
 
-    public void setComment_id(Integer comment_id) {
-        this.comment_id = comment_id;
-    }
 
     public News getNews() {
         return news;
