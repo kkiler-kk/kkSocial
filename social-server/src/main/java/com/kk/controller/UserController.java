@@ -1,8 +1,9 @@
 package com.kk.controller;
 
 import static com.kk.util.ErrorCode.*;
+
+import com.alibaba.fastjson.JSON;
 import com.kk.bean.ResponseResult;
-import com.kk.bean.News;
 import com.kk.bean.User;
 import com.kk.service.NewsService;
 import com.kk.service.UserService;
@@ -12,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.websocket.server.PathParam;
-import java.util.List;
 
 
 @RestController
@@ -30,7 +28,6 @@ public class UserController {
     private UserService userService;
     @Autowired
     private NewsService newsService;
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseResult<String> login(@ModelAttribute User user){
         String email = user.getEmail(), password = user.getPassword();
@@ -39,6 +36,7 @@ public class UserController {
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
         String token = userService.login(email, password);
+        if(token == null) return new ResponseResult<>(ILLEGAL_PARAMETER, "请输入正确的用户名和密码");
         return new ResponseResult<>(token);
     }
 
@@ -70,8 +68,9 @@ public class UserController {
         userService.sendEmail(email);
         return new ResponseResult("发送成功");
     }
-    @RequestMapping(value = "/updatePwd/{email}/{password}", method = RequestMethod.POST)
-    public ResponseResult<String> updatePwd(@PathVariable String email,@PathVariable String password){
+    @RequestMapping(value = "/updatePwd/", method = RequestMethod.POST)
+    public ResponseResult<String> updatePwd(@RequestBody User user){
+        String email = user.getEmail(), password = user.getPassword();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
             return new ResponseResult(UPDATE_FAIL, "参数为空");
         }
