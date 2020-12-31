@@ -10,28 +10,37 @@ public class Comments extends Parent {
     private String content; //评论内容
     private User user; //用户id;
     private String create_date; //创建时间
+    private int like;
+
+
+
     public Comments(){}
-    public Comments(Integer id, News new_id, String content, User user, String create_data) {
+    public Comments(Integer id, News new_id, String content, User user, String create_date) {
         super(id);
         this.news = new_id;
         this.content = content;
         this.user = user;
-        this.create_date = create_data;
+        this.create_date = create_date;
     }
 
     @Override
     public String toString() {
         return "Comments{" +
-                "comment_id=" + super.getId() +
-                ", new=" + news +
+                "news=" + news +
                 ", content='" + content + '\'' +
-                ", user='" + user + '\'' +
+                ", user=" + user +
                 ", create_date='" + create_date + '\'' +
+                ", like=" + like +
                 '}';
     }
 
+    public int getLike() {
+        return like;
+    }
 
-
+    public void setLike(int like) {
+        this.like = like;
+    }
     public News getNews() {
         return news;
     }

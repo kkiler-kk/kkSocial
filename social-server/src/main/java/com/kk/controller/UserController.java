@@ -62,8 +62,8 @@ public class UserController {
         return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
     }
 
-    @RequestMapping(value = "/sendEmail/{email}", method = RequestMethod.GET)
-    public ResponseResult sendEmail(@PathVariable String email){
+    @RequestMapping(value = "/sendEmail/", method = RequestMethod.GET)
+    public ResponseResult sendEmail(@RequestParam(value = "email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "参数为空");
         userService.sendEmail(email);
         return new ResponseResult("发送成功");

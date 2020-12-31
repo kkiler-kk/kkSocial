@@ -25,16 +25,14 @@ public class NewsController {
     private NewsService newsService;
     @GetMapping(value = "/get-top")
     @JsonIgnoreProperties
-    public ResponseResult<String> getTop(){
+    public ResponseResult<List<News>> getTop(){
         List<News> selectRandom = newsService.getSelectRandom();
-        String s = JSON.toJSONString(selectRandom);
-        return new ResponseResult<>(s);
+        return new ResponseResult<>(selectRandom);
     }
     @GetMapping(value = "get-user")
-    public ResponseResult<String> getList(HttpServletRequest request){
+    public ResponseResult<List<News>> getList(HttpServletRequest request){
         Integer userId = Integer.parseInt(request.getAttribute("userId").toString());
         List<News> friends = newsService.getFriends(userId);
-        String s = JSON.toJSONString(friends);
-        return new ResponseResult<>(s);
+        return new ResponseResult<>(friends);
     }
 }

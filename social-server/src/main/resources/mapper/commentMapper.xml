@@ -5,6 +5,7 @@
         <id property="id" column="comment_id"/>
         <result property="content" column="content"/>
         <result property="create_date" column="create_date" />
+        <result property="like" column="like"/>
         <collection property="user" column="content_id" select="com.kk.dao.UserDao.getUserId"></collection>
         <collection property="news" column="new_id" select="com.kk.dao.NewsDao.getNewsById"></collection>
     </resultMap>
@@ -21,6 +22,7 @@ WHERE
 	`new_id` as 'new_id',
 	`content` as 'content',
 	content_id as 'content_id',
-	DATE_FORMAT( `create_date`, '%Y-%m-%d %H:%i:%s' ) as 'create_date'
+	`create_date` as 'create_date',
+	`like` as 'like'
     </sql>
 </mapper>

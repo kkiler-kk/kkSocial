@@ -18,7 +18,7 @@
         FROM
 	    `tb_news`
         ORDER BY
-	    `like` DESC
+	    `like` desc
     </select>
     <select id="getNewsAndUserById" resultMap="getUserAndNews">
         select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id}) order by create_date

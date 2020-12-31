@@ -21,7 +21,7 @@
         </where>
     </select>
 	<select id="getUserId" resultType="com.kk.bean.User" parameterType="Integer">
-		select `id`, `email`, `password`, `name`, `gender`, `url`
+		select `id`, `name`, `url`
 		from `tb_user` where id = #{id}
 	</select>
 	<resultMap id="getUserByEmailAndPassword" type="com.kk.bean.User">

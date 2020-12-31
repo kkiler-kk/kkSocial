@@ -28,7 +28,9 @@ public class RandomTest {
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
         List<News> selectRandom = newsDao.getSelectRandom();
-        System.out.println(selectRandom.size());
+        for (News news : selectRandom) {
+            System.out.println(news);
+        }
     }
     @Test
     public void testComment(){
@@ -38,7 +40,7 @@ public class RandomTest {
     }
     @Test
     public void testToken(){
-        String token = TokenUtils.token("1");
+        String token = TokenUtils.token("2");
         System.out.println(token);
         Claim verify = TokenUtils.verify(token);
         System.out.println(verify.asString());
