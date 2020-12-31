@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="container">
-		<h1>THE HOME</h1>
+		<p>{{this.$store.state.token ? this.$store.state.token : 'THE HOME'}}</p>
   </div>
 </template>
 

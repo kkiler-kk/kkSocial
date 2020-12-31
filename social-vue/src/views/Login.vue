@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import Verifys from '@/utils/form-verify';
 
 export default {
 	name: "Login",
@@ -54,33 +55,34 @@ export default {
 		},
 		getAvatar: function () {
 			let email = this.user.email;
-			let emailVerify = /^\w+@(\w+\.)+\w+$/;
-			if (email === '' || !emailVerify.test(email)) return;
+			let errorList = [];
+			if (Verifys.isEmpty(email)) errorList.push("请填写邮箱");
+			else if (!Verifys.emailVerify(email)) errorList.push("请填写正确的邮箱格式");
 			
-			this.axios.get('/api/user/existEmail.do', {
-				params: {
-					email
-				}
-			})
-			.then(response => {
-				if (!response.data.status) {
-					let img = new Image;
-					img.onload = () => {
-						document.getElementById('avatar').innerHTML = '';
-						document.getElementById('avatar').appendChild(img);
+			if (errorList.length === 0)
+				this.axios.get('/api/user/existEmail', {
+					params: {
+						email
 					}
-					img.src = `http://localhost:8800/upload/${email}.jpg`;
-				}
-			})
-			
+				})
+				.then(response => {
+					if (!response.data.status) {
+						let img = new Image;
+						img.onload = () => {
+							document.getElementById('avatar').innerHTML = '';
+							document.getElementById('avatar').appendChild(img);
+						}
+						img.src = `http://localhost:8800/upload/${email}.jpg`;
+					}
+				});
+			else this.setError(errorList);
 		},
 		verifyForm: function () {
 			let errorList = [];
 			let user = this.user;
-			let emailVerify = /^\w+@(\w+\.)+\w+$/;
-			if (user.email === '') errorList.push("请填写邮箱");
-			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
-			if (user.password === '') errorList.push("请填写密码");
+			if (Verifys.isEmpty(user.email)) errorList.push("请填写邮箱");
+			else if (!Verifys.emailVerify(user.email)) errorList.push("请填写正确的邮箱格式");
+			if (Verifys.isEmpty(user.password)) errorList.push("请填写密码");
 			this.setError(errorList);
 			return errorList.length === 0;
 		},
@@ -88,13 +90,17 @@ export default {
 			if (!this.verifyForm()) return;
 			console.count('send');
 			let formData = new FormData(this.form);
-			this.axios.post('/api/user/login.do', formData, {
+			this.axios.post('/api/user/login', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
 			})
 			.then(response => {
-				console.log(response.data);
+				if (response.data.status) {
+					this.$router.push('/');
+					console.log(response.data);
+					this.$store.commit('setToken', response.data.data);
+				}
 			})
 			.catch(error => {
 				console.log(error);
