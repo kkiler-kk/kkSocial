@@ -5,6 +5,9 @@ import com.kk.bean.User;
 import java.util.List;
 
 public interface UserDao {
+
+    User getUserByName(String name);
+
     User getUserById(Integer id);
 
     User getUserId(Integer id);
@@ -24,5 +27,4 @@ public interface UserDao {
     int countFriends(Integer id);
 
     int updatePwd(String email, String password);
-
 }

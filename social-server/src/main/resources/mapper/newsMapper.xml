@@ -12,6 +12,16 @@
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
     </resultMap>
+    <resultMap id="getNewsAndOwn" type="com.kk.bean.News">
+        <id property="id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
+        <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="content_text" column="content_text" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="comment_num" column="comment_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    </resultMap>
     <select id="getSelectRandom" resultMap="getUserAndNews">
        SELECT
        <include refid="news_table"></include>
@@ -28,6 +38,9 @@
         <include refid="news_table"></include>
         from `tb_news`
         where new_id = #{id}
+    </select>
+    <select id="getNewsAndOwn" resultMap="getNewsAndOwn" parameterType="Integer">
+        select <include refid="news_table"></include> from `tb_news` where user_id = #{id} order by create_date desc
     </select>
     <sql id="news_table">
     new_id as 'new_id',

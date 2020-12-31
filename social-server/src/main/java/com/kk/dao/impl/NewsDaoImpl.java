@@ -63,6 +63,25 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
+    public List<News> getNewsAndOwn(Integer id) {
+        SqlSessionFactory sqlSessionFactory;
+        SqlSession openSession = null;
+        try {
+            sqlSessionFactory = LinkData.getSessionFactory();
+            openSession = sqlSessionFactory.openSession();
+            NewsDao newsDao = openSession.getMapper(NewsDao.class);
+            return newsDao.getNewsAndOwn(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (openSession != null) {
+                openSession.close();
+            }
+        }
+        return null;
+    }
+
+    @Override
     public News getNewsById(Integer id) {
         SqlSessionFactory sqlSessionFactory;
         SqlSession openSession = null;

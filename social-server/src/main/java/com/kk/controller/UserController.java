@@ -28,6 +28,14 @@ public class UserController {
     private UserService userService;
     @Autowired
     private NewsService newsService;
+    @RequestMapping(value = "/{name}",method = RequestMethod.GET)
+    public ResponseResult<User> getUserByName(@PathVariable String name){
+        if(StrUtil.isEmpty(name)){
+            return new ResponseResult<>(ILLEGAL_NULL, "name为null");
+        }
+        User userByName = userService.getUserByName(name);
+        return new ResponseResult<>(userByName);
+    }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseResult<String> login(@ModelAttribute User user){
         String email = user.getEmail(), password = user.getPassword();
@@ -56,8 +64,8 @@ public class UserController {
         if(register  == -2) return new ResponseResult(INSERT_FAIL, "验证码错误!!!!");
         return register  > 0? new ResponseResult("OK") : new ResponseResult(INSERT_FAIL, "注册失败");
     }
-    @RequestMapping(value = "/existEmail/{email}", method = RequestMethod.GET)
-    public ResponseResult existEmail(@PathVariable String email){
+    @RequestMapping(value = "/existEmail", method = RequestMethod.GET)
+    public ResponseResult existEmail(@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "邮箱为NUll");
         return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
     }

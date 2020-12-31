@@ -12,6 +12,7 @@ public class User extends Parent {
     private List<User> friendsList;//好友列表
     private int countFriends; //好友总数
     private String url;  //头像路径
+    private List<News> newsList;
     public User(){
 
     }
@@ -21,6 +22,14 @@ public class User extends Parent {
         this.name = name;
         this.gender = gender;
         this.url = url;
+    }
+
+    public List<News> getNewsList() {
+        return newsList;
+    }
+
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
     }
 
     public String getEmail() {

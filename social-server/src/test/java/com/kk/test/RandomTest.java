@@ -19,18 +19,16 @@ import java.util.List;
 public class RandomTest {
     @Test
     public void testUser(){
-        UserDao instance = UserDaoImpl.getInstance();
-        User userById = instance.getUserById(1);
-        System.out.println(userById);
-        userById.getFriendsList().forEach(System.out::println);
+        UserDao userDao = UserDaoImpl.getInstance();
+        User kk = userDao.getUserByName("KK");
+        System.out.println(kk);
+        kk.getNewsList().forEach(System.out::println);
     }
     @Test
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
-        List<News> selectRandom = newsDao.getSelectRandom();
-        for (News news : selectRandom) {
-            System.out.println(news);
-        }
+        List<News> newsAndUserById = newsDao.getNewsAndOwn(2);
+        newsAndUserById.forEach(System.out::println);
     }
     @Test
     public void testComment(){

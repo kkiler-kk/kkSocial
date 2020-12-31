@@ -50,6 +50,9 @@ public class UserService {
         emailCode.remove(user.getEmail());
         return i;
     }
+    public User getUserByName(String name){
+        return instance.getUserByName(name);
+    }
     public boolean existEmail(String email){
         return instance.getUserByEmailAndPassword(email, null) == null;
     }

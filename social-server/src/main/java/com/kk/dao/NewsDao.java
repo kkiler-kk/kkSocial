@@ -11,6 +11,8 @@ public interface NewsDao {
 
     List<News> getNewsAndUserById(Integer id);
 
+    List<News> getNewsAndOwn(Integer id);
+
     News getNewsById(Integer id);
 
 }
