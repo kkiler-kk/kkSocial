@@ -8,13 +8,16 @@ import com.kk.dao.impl.NewsDaoImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","fieldHandler","parent"})
 @RestController
 public class TestController {
     @GetMapping("/hello")
-    public String hello(){
-        return "Hello World";
+    public List<News> hello(){
+        NewsDao newsDao = NewsDaoImpl.getInstance();
+        List<News> newsAndUserById = newsDao.getNewsAndUserById(1);
+        newsAndUserById.forEach(System.out::println);
+        return newsAndUserById;
     }
 }
