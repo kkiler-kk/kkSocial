@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import Verifys from '@/utils/form-verify';
 
 export default {
 	name: "SignUp",
@@ -113,55 +114,56 @@ export default {
 			reader.readAsDataURL(file);
 		},
 		getVerifyCode: function (e) {
+			if (this.timer) return;
+			
 			let button = e.target;
 			
 			let errorList = [];
 			let email = this.user.email;
-			let emailVerify = /^\w+@(\w+.)+\w+$/;
-			if (email === '') errorList.push("请填写邮箱");
-			else if (!emailVerify.test(email)) errorList.push("请填写正确的邮箱格式");
+			if (Verifys.isEmpty(email)) errorList.push("请填写邮箱");
+			else if (!Verifys.emailVerify(email)) errorList.push("请填写正确的邮箱格式");
 			else {
-				this.axios.get('/api/user/existEmail.do', {
+				this.axios.get('/api/user/existEmail', {
 					params: {
 						email
 					}
 				})
 				.then(response => {
+					// console.log(response);
 					if (!response.data.status) {
 						errorList.push("邮箱已经存在");
 						this.setError(errorList);
 						return;
 					}
 					
-					if (!this.timer) {
-						this.axios.get('/api/user/sendEmail.do', {
-							params: {
-								email
-							}
-						})
-						.then(() => {
-							let i = 1;
-							this.timer = window.setInterval(() => {
-								button.innerText = `已发送 (${60 - i}s)`;
-								if (++i == 60) {
-									window.clearInterval(this.timer);
-								}
-							}, 1000);
-							window.setTimeout(() => {
+					this.axios.get('/api/user/sendEmail', {
+						params: {
+							email
+						}
+					})
+					.then(response => {
+						console.log(response);
+						let i = 1;
+						this.timer = window.setInterval(() => {
+							button.innerText = `已发送 (${60 - i}s)`;
+							if (++i == 60) {
 								window.clearInterval(this.timer);
-								this.timer = null;
-								button.innerText = '再次发送';
-							}, 60 * 1000);
-							this.setError(errorList);
-						})
-						.catch(error => {
+							}
+						}, 1000);
+						window.setTimeout(() => {
+							window.clearInterval(this.timer);
+							this.timer = null;
 							button.innerText = '再次发送';
-							errorList.push('验证码发送失败');
-							console.log(error);
-						});
-						
-						button.innerText = '发送中';
-					}
+						}, 60 * 1000);
+						this.setError(errorList);
+					})
+					.catch(error => {
+						button.innerText = '再次发送';
+						errorList.push('验证码发送失败');
+						console.log(error);
+					});
+					
+					button.innerText = '发送中';
 				})
 				.catch(error => {
 					console.log(error);
@@ -175,15 +177,13 @@ export default {
 			let errorList = [];
 			let user = this.user;
 			let verify = this.verify;
-			let emailVerify = /^\w+@(\w+.)+\w+$/;
-			let codeVerify = /^\d+$/;
-			if (user.name === '') errorList.push("请填写用户名");
-			if (user.email === '') errorList.push("请填写邮箱");
-			else if (!emailVerify.test(user.email)) errorList.push("请填写正确的邮箱格式");
-			if (user.code === '') errorList.push("请填写验证码");
-			else if (!codeVerify.test(user.code)) errorList.push("验证码格式错误");
-			if (user.password === '') errorList.push("请填写密码");
-			if (user.password !== verify.password) errorList.push("前后密码不一致");
+			if (Verifys.isEmpty(user.name)) errorList.push("请填写用户名");
+			if (Verifys.isEmpty(user.email)) errorList.push("请填写邮箱");
+			else if (!Verifys.emailVerify(user.email)) errorList.push("请填写正确的邮箱格式");
+			if (Verifys.isEmpty(user.code)) errorList.push("请填写验证码");
+			else if (!Verifys.test(/^\d+/, user.code)) errorList.push("验证码格式错误");
+			if (Verifys.isEmpty(user.password)) errorList.push("请填写密码");
+			if (!Verifys.equals(user.password, verify.password)) errorList.push("前后密码不一致");
 			this.setError(errorList);
 			return errorList.length === 0;
 		},
@@ -194,14 +194,15 @@ export default {
 			let formData = new FormData(this.form);
 			// let setError = this.setError;
 			console.log(...formData);
-			this.axios.post('/api/user/register.do', formData, {
+			this.axios.post('/api/user/register', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
 			})
 			.then(response => {
-				let data = response.data;
-				console.log(data);
+				if (response.data.status) {
+					this.$router.push('/login');
+				}
 			})
 			.catch(error => {
 				console.log(error);
