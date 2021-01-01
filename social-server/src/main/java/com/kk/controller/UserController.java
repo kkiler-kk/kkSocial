@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseResult<String> register(@RequestBody User user, @RequestParam("file") MultipartFile file, String code){
+    public ResponseResult<String> register(@ModelAttribute User user, @RequestParam("file") MultipartFile file, String code){
         String email = user.getEmail(), password = user.getPassword(), name = user.getName();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
             return new ResponseResult(ILLEGAL_NULL ,"参数为空");
@@ -78,7 +78,7 @@ public class UserController {
         User userByName = userService.getUserByName(name);
         return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ILLEGAL_PARAMETER, "name已存在!");
     }
-    @RequestMapping(value = "/sendEmail/", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public ResponseResult sendEmail(@RequestParam(value = "email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "参数为空");
         userService.sendEmail(email);
