@@ -10,7 +10,7 @@ public class User extends Parent {
     private String name;//姓名
     private Integer gender;//性别
     private List<User> friendsList;//好友列表
-    private int countFriends; //好友总数
+    private Integer countFriends; //好友总数
     private String url;  //头像路径
     private List<News> newsList;
     public User(){
@@ -72,11 +72,11 @@ public class User extends Parent {
         this.friendsList = friendsList;
     }
 
-    public int getCountFriends() {
+    public Integer getCountFriends() {
         return countFriends;
     }
 
-    public void setCountFriends(int countFriends) {
+    public void setCountFriends(Integer countFriends) {
         this.countFriends = countFriends;
     }
 
