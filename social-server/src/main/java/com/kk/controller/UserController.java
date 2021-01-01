@@ -34,6 +34,7 @@ public class UserController {
             return new ResponseResult<>(ILLEGAL_NULL, "name为null");
         }
         User userByName = userService.getUserByName(name);
+        if(userByName == null) return new ResponseResult<>(NOT_FOUND, "找不到用户");
         return new ResponseResult<>(userByName);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
