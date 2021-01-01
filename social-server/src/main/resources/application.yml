@@ -19,7 +19,7 @@ spring:
     mail:
         host: smtp.163.com
         username: kk996icu@163.com
-        password: ZRWXCQXHKPPWJAGB
+        password: CSZDRUGOLEKYCOLC
         default-encoding: UTF-8
 #pagehelper:
 #    helper-dialect: mysql

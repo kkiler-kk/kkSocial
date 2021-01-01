@@ -10,13 +10,24 @@ import com.kk.dao.UserDao;
 import com.kk.dao.impl.CommentsDaoImpl;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
+import com.kk.service.IMailService;
 import com.kk.util.TokenUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.List;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class RandomTest {
+    @Autowired
+    IMailService iMailService;
+    @Test
+    public void testImail(){
+        iMailService.sendSimpleMail("3258261356@qq.com","kk","test");
+    }
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
