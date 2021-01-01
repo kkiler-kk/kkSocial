@@ -10,6 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentsDaoImpl implements CommentsDao {
+    private static CommentsDao commentsDao;
+
+    private CommentsDaoImpl() {
+    }
+
+    public static CommentsDao getInstance() {
+        if (commentsDao == null) {
+            synchronized (NewsDaoImpl.class) {
+                if (commentsDao == null) {
+                    commentsDao = new CommentsDaoImpl();
+                }
+            }
+        }
+        return commentsDao;
+    }
     @Override
     public List<Comments> getByIdComment(Integer id) {
         SqlSessionFactory sqlSessionFactory;

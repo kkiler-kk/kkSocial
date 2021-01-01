@@ -1,9 +1,9 @@
 package com.kk.test;
 
 import com.auth0.jwt.interfaces.Claim;
-import com.kk.bean.Comments;
-import com.kk.bean.News;
-import com.kk.bean.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.kk.bean.*;
 import com.kk.dao.CommentsDao;
 import com.kk.dao.NewsDao;
 import com.kk.dao.UserDao;
@@ -11,6 +11,7 @@ import com.kk.dao.impl.CommentsDaoImpl;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.service.IMailService;
+import com.kk.util.PageUtils;
 import com.kk.util.TokenUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,13 +39,17 @@ public class RandomTest {
     @Test
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
-        List<News> newsAndUserById = newsDao.getNewsAndOwn(2);
-        newsAndUserById.forEach(System.out::println);
+        List<News> selectRandom = newsDao.getSelectRandom();
+        PageRequest request = new PageRequest();
+        request.setPageNum(0);
+        request.setPageSize(5);
+        PageResult pageResult = PageUtils.getPageResult(request, new PageInfo<News>(selectRandom));
+        pageResult.getContent().forEach(System.out::println);
     }
     @Test
     public void testComment(){
-        CommentsDao commentsDao = new CommentsDaoImpl();
-        List<Comments> byIdComment = commentsDao.getByIdComment(1);
+        CommentsDao commentsDao = CommentsDaoImpl.getInstance();
+        List<Comments> byIdComment = commentsDao.getByIdComment(3);
         byIdComment.forEach(System.out::println);
     }
     @Test

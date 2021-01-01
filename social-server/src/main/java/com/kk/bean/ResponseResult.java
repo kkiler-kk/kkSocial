@@ -22,7 +22,7 @@ public class ResponseResult<Item> {
     }
     @Override
     public String toString() {
-        return "Dto{" +
+        return "ResponseResult{" +
                 "status=" + status +
                 ", data=" + data +
                 ", errorCode=" + errorCode +

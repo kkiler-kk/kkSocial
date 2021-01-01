@@ -17,5 +17,4 @@ public final class ErrorCode {
     //成功
     public static final Integer SUCCESS = 200;
 
-
 }

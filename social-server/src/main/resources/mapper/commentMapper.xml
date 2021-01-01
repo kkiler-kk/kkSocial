@@ -7,7 +7,7 @@
         <result property="create_date" column="create_date" />
         <result property="like" column="like"/>
         <collection property="user" column="content_id" select="com.kk.dao.UserDao.getUserId"></collection>
-        <collection property="news" column="new_id" select="com.kk.dao.NewsDao.getNewsById"></collection>
+<!--        <collection property="news" column="new_id" select="com.kk.dao.NewsDao.getNewsById"></collection>-->
     </resultMap>
     <select id="getByIdComment" resultMap="getByIdComment" parameterType="Integer">
         SELECT
@@ -15,7 +15,7 @@
 FROM
 	`tb_comments`
 WHERE
-	`new_id` = #{id}
+	`new_id` = #{id} order by `like` desc
     </select>
     <sql id="comment_table">
         `comment_id` as 'comment_id',

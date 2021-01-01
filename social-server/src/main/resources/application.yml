@@ -10,6 +10,7 @@ spring:
                 content:
                     enabled: true
                     paths: //**,/upload/**
+        add-mappings: true
     servlet:
         multipart:
             enabled: true
@@ -21,8 +22,8 @@ spring:
         username: kk996icu@163.com
         password: CSZDRUGOLEKYCOLC
         default-encoding: UTF-8
-#pagehelper:
-#    helper-dialect: mysql
-#    params: count=countSql
-#    reasonable: true
-#    support-methods-arguments: true
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
