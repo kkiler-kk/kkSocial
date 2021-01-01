@@ -31,38 +31,41 @@
 			
 			<label class="label">
 				<div class="icon">
-					<i data-eva="person-outline" data-eva-fill="#2979FF"></i>
+					<eva-icon name="person-outline" fill="#2979FF"></eva-icon>
 				</div>
-				<input type="text" name="name" placeholder="用户名" v-model="user.name"/>
+				<input type="text" name="name" placeholder="用户名" v-model="user.name" @blur="verifyName()"/>
 			</label>
 			
 			<label class="label">
 				<div class="icon">
-					<i data-eva="email-outline" data-eva-fill="#2979FF"></i>
+					<eva-icon name="email-outline" fill="#2979FF"></eva-icon>
 				</div>
-				<input type="email" name="email" placeholder="邮箱" v-model="user.email"/>
+				<input type="email" name="email" placeholder="邮箱" v-model="user.email" @blur="verifyEmail()"/>
 			</label>
 			
 			<label class="label">
 				<div class="icon">
-					<i data-eva="code-outline" data-eva-fill="#2979FF"></i>
+					<eva-icon name="code-outline" fill="#2979FF"></eva-icon>
 				</div>
-				<input type="text" name="code" placeholder="验证码" v-model="user.code"/>
-				<button type="button" @click="getVerifyCode($event)">点击发送</button>
+				<input type="text" name="code" placeholder="验证码" v-model="user.code" @blur="verifyCode()"/>
+				<button type="button" @click="verifyEmail(getVerifyCode)">
+					<eva-icon v-show="verify.isLoad" class="load" name="loader-outline" fill="#2979FF"></eva-icon>
+					{{verify.buttonText}}
+				</button>
 			</label>
 			
 			<label class="label">
 				<div class="icon">
-					<i data-eva="lock-outline" data-eva-fill="#2979FF"></i>
+					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
-				<input type="password" name="password" placeholder="密码" v-model="user.password"/>
+				<input type="password" name="password" placeholder="密码" v-model="user.password" @blur="verifyPassword()"/>
 			</label>
 			
 			<label class="label">
 				<div class="icon">
-					<i data-eva="lock-outline" data-eva-fill="#2979FF"></i>
+					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
-				<input type="password" placeholder="确认密码" v-model="verify.password"/>
+				<input type="password" placeholder="确认密码" v-model="verify.password" @blur="verifyPassword()"/>
 			</label>
 			
 			<ul class="error-list" v-show="errorList.length > 0">
@@ -70,7 +73,9 @@
 			</ul>
 			
 			<div class="label">
-				<button type="button" class="submit" @click="send">注册</button>
+				<button type="button" class="submit" @click="send">
+					注册
+				</button>
 			</div>
 		</form>
 	</div>
@@ -92,15 +97,39 @@ export default {
 				password: ''
 			},
 			verify: {
+				buttonText: '点击发送',
+				isLoad: false,
 				password: ''
 			},
-			errorList: [],
-			timer: null
+			errorState: {
+				name: 'true',
+				email: 'true',
+				code: 'true',
+				password: 'true'
+			},
+			timer: null,
+			submitIsLoad: false
 		}
 	},
 	methods: {
-		setError: function (errorList) {
-			this.errorList = errorList;
+		setErrorState: function (key, value) {
+			this.errorState[key] = value;
+		},
+		setTimer: function () {
+			let verify = this.verify;
+			let i = 1;
+			this.timer = window.setInterval(() => {
+				verify.isLoad = false;
+				verify.buttonText = `已发送 (${60 - i}s)`;
+				if (++i == 60) {
+					window.clearInterval(this.timer);
+				}
+			}, 1000);
+			window.setTimeout(() => {
+				window.clearInterval(this.timer);
+				this.timer = null;
+				verify.buttonText = '再次发送';
+			}, 60 * 1000);
 		},
 		showAvatar: function () {
 			let file = new FormData(this.form).get("file");
@@ -113,100 +142,216 @@ export default {
 			reader.onload = e => img.src = e.target.result;
 			reader.readAsDataURL(file);
 		},
-		getVerifyCode: function (e) {
-			if (this.timer) return;
-			
-			let button = e.target;
-			
-			let errorList = [];
-			let email = this.user.email;
-			if (Verifys.isEmpty(email)) errorList.push("请填写邮箱");
-			else if (!Verifys.emailVerify(email)) errorList.push("请填写正确的邮箱格式");
+		verifyName: async function () {
+			let name = this.user.name;
+			let setErrorState = this.setErrorState;
+			setErrorState('name', 'true');
+			if (Verifys.isEmpty(name)) setErrorState('name', 'null');
 			else {
-				this.axios.get('/api/user/existEmail', {
+				await this.axios.get('/api/user/existName/' + name)
+				.then(response => {
+					if (!response.data) {
+						setErrorState('name', 'error');
+						return;
+					}
+					if (!response.data.status) {
+						setErrorState('name', 'exist');
+						return;
+					}
+				})
+				.catch(error => {
+					setErrorState('name', 'error');
+					console.log(error);
+				});
+			}
+		},
+		verifyEmail: async function (callback) {
+			let email = this.user.email;
+			let setErrorState = this.setErrorState;
+			setErrorState('email', 'true');
+			if (Verifys.isEmpty(email)) setErrorState('email', 'null');
+			else if (!Verifys.verifyEmail(email)) setErrorState('email', 'false');
+			else {
+				await this.axios.get('/api/user/existEmail', {
 					params: {
 						email
 					}
 				})
 				.then(response => {
-					// console.log(response);
+					if (!response.data) {
+						setErrorState('email', 'error');
+						return;
+					}
 					if (!response.data.status) {
-						errorList.push("邮箱已经存在");
-						this.setError(errorList);
+						setErrorState('email', 'exist');
 						return;
 					}
 					
-					this.axios.get('/api/user/sendEmail', {
-						params: {
-							email
-						}
-					})
-					.then(response => {
-						console.log(response);
-						let i = 1;
-						this.timer = window.setInterval(() => {
-							button.innerText = `已发送 (${60 - i}s)`;
-							if (++i == 60) {
-								window.clearInterval(this.timer);
-							}
-						}, 1000);
-						window.setTimeout(() => {
-							window.clearInterval(this.timer);
-							this.timer = null;
-							button.innerText = '再次发送';
-						}, 60 * 1000);
-						this.setError(errorList);
-					})
-					.catch(error => {
-						button.innerText = '再次发送';
-						errorList.push('验证码发送失败');
-						console.log(error);
-					});
-					
-					button.innerText = '发送中';
+					if (callback) callback();
 				})
 				.catch(error => {
+					setErrorState('email', 'error');
 					console.log(error);
-					errorList.push("发送失败, 请重试");
-					this.setError(errorList);
 				});
 			}
-			if (errorList.length > 0) this.setError(errorList);
 		},
-		verifyForm: function () {
-			let errorList = [];
-			let user = this.user;
+		getVerifyCode: async function () {
+			if (this.timer || this.errorState.email !== 'true') return;
+			
+			let email = this.user.email;
+			let setErrorState = this.setErrorState;
+			let setTimer = this.setTimer;
 			let verify = this.verify;
-			if (Verifys.isEmpty(user.name)) errorList.push("请填写用户名");
-			if (Verifys.isEmpty(user.email)) errorList.push("请填写邮箱");
-			else if (!Verifys.emailVerify(user.email)) errorList.push("请填写正确的邮箱格式");
-			if (Verifys.isEmpty(user.code)) errorList.push("请填写验证码");
-			else if (!Verifys.test(/^\d+/, user.code)) errorList.push("验证码格式错误");
-			if (Verifys.isEmpty(user.password)) errorList.push("请填写密码");
-			if (!Verifys.equals(user.password, verify.password)) errorList.push("前后密码不一致");
-			this.setError(errorList);
-			return errorList.length === 0;
+			
+			verify.buttonText = '';
+			verify.isLoad = true;
+			
+			await this.axios.get('/api/user/sendEmail', {
+				params: {
+					email
+				}
+			})
+			.then(response => { 
+				if (!response.data || !response.data.status) {
+					setErrorState('code', 'error');
+					return;
+				}
+				setTimer(); 
+			})
+			.catch(error => {
+				console.log(error);
+				setErrorState('code', 'error');
+				verify.buttonText = '再次发送';
+			});
 		},
-		send: function () {
-			if (!this.verifyForm()) return;
+		verifyCode: function () {
+			let code = this.user.code;
+			let setErrorState = this.setErrorState;
+			setErrorState('code', 'true');
+			if (Verifys.isEmpty(code)) setErrorState('code', 'null');
+			else if (!Verifys.test(/^\d+/, code)) setErrorState('code', 'false');
+			else if (!Verifys.lengthIn(code, 6, 7)) setErrorState('code', 'length');
+		},
+		verifyPassword: function () {
+			let password = this.user.password;
+			let setErrorState = this.setErrorState;
+			setErrorState('password', 'true');
+			if (Verifys.isEmpty(password)) setErrorState('password', 'null');
+			else if (!Verifys.equals(password, this.verify.password)) setErrorState('password', 'exist');
+			// else if (!Verifys.lengthIn(password, 6, 18)) setErrorState('password', 'length');
+		},
+		verifyForm: async function () {
+			await this.verifyName();
+			await this.verifyEmail();
+			this.verifyCode();
+			this.verifyPassword();
+			for (let key in this.errorState) {
+				if (this.errorState[key] !== 'true') return false;
+			}
+			return true;
+		},
+		send: async function () {
+			if (! await this.verifyForm()) return;
 			console.count('send');
+			let setErrorState = this.setErrorState;
+			setErrorState('password', 'true');
+			setErrorState('code', 'true');
 			
 			let formData = new FormData(this.form);
-			// let setError = this.setError;
-			console.log(...formData);
-			this.axios.post('/api/user/register', formData, {
+			// console.log(...formData);
+			await this.axios.post('/api/user/register', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
 			})
 			.then(response => {
-				if (response.data.status) {
-					this.$router.push('/login');
+				if (!response.data) {
+					setErrorState('password', 'error');
 				}
+				if (!response.data.status) {
+					setErrorState('code', 'exist');
+					return;
+				}
+			
+				this.$store.commit('setUser', {
+					email: this.user.email,
+					password: this.user.password
+				});
+				this.$router.push('/login');
 			})
 			.catch(error => {
 				console.log(error);
+				setErrorState('password', 'error');
 			});
+		}
+	},
+	computed: {
+		errorList: function () {
+			let errorState = this.errorState;
+			let errorList = [];
+			switch (errorState.name) {
+				case 'null' :
+					errorList.push('请填写用户名');
+					break;
+				case 'length' :
+					errorList.push('用户名长度不合法');
+					break;
+				case 'exist' :
+					errorList.push('用户名已存在');
+					break;
+				case 'error' :
+					errorList.push('用户名验证失败');
+					break;
+			}
+			switch (errorState.email) {
+				case 'null' :
+					errorList.push('请填写邮箱');
+					break;
+				case 'false' :
+					errorList.push('邮箱格式错误');
+					break;
+				case 'exist' :
+					errorList.push('邮箱已存在');
+					break;
+				case 'error' :
+					errorList.push('邮箱验证失败');
+					break;
+			}
+			switch (errorState.code) {
+				case 'null' :
+					errorList.push('请填写验证码');
+					break;
+				case 'false' :
+					errorList.push('验证码格式错误');
+					break;
+				case 'length' :
+					errorList.push('请填写 6 位数验证码');
+					break;
+				case 'exist' :
+					errorList.push('验证码错误');
+					break;
+				case 'error' :
+					errorList.push('验证码发送失败');
+					break;
+			}
+			switch (errorState.password) {
+				case 'null' :
+					errorList.push('请填写密码');
+					break;
+				case 'false' :
+					errorList.push('密码格式错误');
+					break;
+				case 'length' :
+					errorList.push('请填写 6 - 18 位密码');
+					break;
+				case 'exist' :
+					errorList.push('前后密码不一致');
+					break;
+				case 'error' :
+					errorList.push('注册失败');
+					break;
+			}
+			return errorList;
 		}
 	},
 	mounted: function () {

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import * as eva from 'eva-icons';
 import Header from '@/components/Header.vue';
+// import { EvaIcon } from 'vue-eva-icons';
 
 export default {
 	name: 'App',
@@ -26,13 +26,8 @@ export default {
 		} 
 	},
 	components: {
-		Header
-	},
-	mounted: function () {
-		eva.replace();
-	},
-	updated: function () {
-		eva.replace();
+		Header,
+		// [EvaIcon.name]: EvaIcon
 	}
 }
 </script>
@@ -73,6 +68,15 @@ html, body {
 	top: 3.5rem;
 	bottom: 0;
 	overflow: auto;
+}
+
+.load {
+	animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
 }
 
 /* a.router-link-exact-active */

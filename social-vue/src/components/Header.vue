@@ -12,9 +12,8 @@
 					:title="link.title"
 					:key="'l' + index">
 					<router-link :to="link.url">
-						<i :data-eva="link.iconData" 
-							data-eva-fill="#424242">
-						</i>
+						<eva-icon :name="link.iconData" fill="#424242" animation="pulse">
+						</eva-icon>
 					</router-link>
 				</div>
 			</div>
