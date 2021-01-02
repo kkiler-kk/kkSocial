@@ -17,9 +17,9 @@ public final class ErrorCode {
     //token过期了
     public static final Integer TOKEN_PAST = -301;
     //验证码过期了
-    public static final Integer CODE_PAST = -304;
+    public static final Integer CODE_PAST = -302;
     //请求次数过多
-    public static final  Integer TOO_MANY = -305;
+    public static final  Integer TOO_MANY = -303;
 
     //404找不到
     public static final Integer NOT_FOUND = -404;
