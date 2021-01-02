@@ -15,7 +15,7 @@ public class News extends Parent {
     private Integer share_num; //分享人数
     private Integer type;  //动态类型
     private Integer like; //点赞总数
-
+    private String tag;
     public User getUser() {
         return user;
     }
@@ -40,7 +40,6 @@ public class News extends Parent {
     @Override
     public String toString() {
         return "News{" +
-                "new_id=" + super.getId() +
                 ", create_date='" + create_date + '\'' +
                 ", content_text='" + content_text + '\'' +
                 ", picture='" + picture + '\'' +
@@ -48,8 +47,18 @@ public class News extends Parent {
                 ", share_num=" + share_num +
                 ", type=" + type +
                 ", like=" + like +
+                ", tag='" + tag + '\'' +
                 '}';
     }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public String getCreate_date() {
         return create_date;
     }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class JwtInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception{
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         String authHeader = request.getHeader("Authorization");
         if(StrUtil.isEmpty(authHeader)){
             return false;

@@ -24,7 +24,7 @@ public class NewsDaoImpl implements NewsDao {
     }
     @Override
     public List<News> getSelectRandom() {
-        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        NewsDao aClass = createClass(NewsDao.class);
         List<News> list = aClass.getSelectRandom();
         closeSession();
         return list;
@@ -32,7 +32,7 @@ public class NewsDaoImpl implements NewsDao {
 
     @Override
     public List<News> getNewsAndUserById(Integer id) {
-        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        NewsDao aClass = createClass(NewsDao.class);
         List<News> list = aClass.getNewsAndUserById(id);
         closeSession();
         return list;
@@ -40,7 +40,7 @@ public class NewsDaoImpl implements NewsDao {
 
     @Override
     public List<News> getNewsAndOwn(Integer id) {
-        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        NewsDao aClass = createClass(NewsDao.class);
         List<News> list = aClass.getNewsAndOwn(id);
         closeSession();
         return list;
@@ -48,7 +48,7 @@ public class NewsDaoImpl implements NewsDao {
 
     @Override
     public News getNewsById(Integer id) {
-        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        NewsDao aClass = createClass(NewsDao.class);
         News news = aClass.getNewsById(id);
         closeSession();
         return news;

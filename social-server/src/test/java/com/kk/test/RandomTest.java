@@ -46,11 +46,7 @@ public class RandomTest {
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
         List<News> selectRandom = newsDao.getSelectRandom();
-        PageRequest request = new PageRequest();
-        request.setPageNum(0);
-        request.setPageSize(5);
-        PageResult pageResult = PageUtils.getPageResult(new PageInfo<News>(selectRandom));
-        pageResult.getContent().forEach(System.out::println);
+        selectRandom.forEach(System.out::println);
     }
     @Test
     public void testComment(){

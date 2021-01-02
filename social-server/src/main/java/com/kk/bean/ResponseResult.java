@@ -15,6 +15,10 @@ public class ResponseResult<Item> {
         this.errorCode = ErrorCode.SUCCESS;
         this.message = "OK";
     }
+    public ResponseResult(Integer errorCode){
+        this.status = false;
+        this.message = ErrorCode.ERROR_MAP.get(errorCode);
+    }
     public ResponseResult(Integer errorCode, String message){
         this.errorCode = errorCode;
         this.message = message;

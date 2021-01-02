@@ -10,6 +10,7 @@
         <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
     </resultMap>
     <resultMap id="getNewsAndOwn" type="com.kk.bean.News">
@@ -21,6 +22,7 @@
         <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <select id="getSelectRandom" resultMap="getUserAndNews">
        SELECT
@@ -50,6 +52,7 @@
     picture as 'picture',
     comment_num as 'comment_num',
     share_num as 'share_num',
-    `type` as 'type',`like` as 'like'
+    `type` as 'type',`like` as 'like',
+    `tag` as 'tag'
     </sql>
 </mapper>

@@ -36,21 +36,21 @@ public class UserController {
     @RequestMapping(value = "/{name}",method = RequestMethod.GET)
     public ResponseResult<User> getUserByName(@ApiParam("查询的用户名") @PathVariable String name){
         if(StrUtil.isEmpty(name)){
-            return new ResponseResult<>(ILLEGAL_NULL, "name为null");
+            return new ResponseResult<>(ILLEGAL_NULL);
         }
         User userByName = userService.getUserByName(name);
-        if(userByName == null) return new ResponseResult<>(NOT_FOUND, "找不到用户");
+        if(userByName == null) return new ResponseResult<>(NOT_FOUND);
         return new ResponseResult<>(userByName);
     }
     @ApiOperation("用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseResult<String> login(@ApiParam("邮箱")@RequestParam("email") String email, @ApiParam("密码")@RequestParam("password") String password){
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
-            return new ResponseResult<String>(ILLEGAL_NULL, "邮箱或者密码为空");
+            return new ResponseResult<String>(ILLEGAL_NULL);
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
         String token = userService.login(email, password);
-        if(token == null) return new ResponseResult<>(ILLEGAL_PARAMETER, "请输入正确的用户名和密码");
+        if(token == null) return new ResponseResult<>(ILLEGAL_PARAMETER);
         return new ResponseResult<>(token);
     }
     @ApiOperation("注册")
@@ -58,7 +58,7 @@ public class UserController {
     public ResponseResult<String> register(@ModelAttribute User user, @RequestParam("file") MultipartFile file, String code){
         String email = user.getEmail(), password = user.getPassword(), name = user.getName();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
-            return new ResponseResult(ILLEGAL_NULL ,"参数为空");
+            return new ResponseResult(ILLEGAL_NULL);
         }
         String url = "";
         if(file != null ) {
@@ -66,33 +66,30 @@ public class UserController {
         }
         user.setUrl(url);
         int register = userService.register(user, code);
-        if (register == TOO_MANY) return new ResponseResult<>(TOO_MANY, "请求次数过多!!!");
-        if(register  == CODE_PAST) return new ResponseResult(CODE_PAST, "验证码已经过期!!!!");
-        if(register  == CODE_INCORRECT) return new ResponseResult(CODE_INCORRECT, "验证码错误!!!!");
-        return register > 0? new ResponseResult("OK") : new ResponseResult(INSERT_FAIL, "注册失败");
+        return register > 0? new ResponseResult("OK") : new ResponseResult(register);
     }
 
     @ApiOperation("验证邮箱是否存在")
     @RequestMapping(value = "/existEmail", method = RequestMethod.GET)
     public ResponseResult existEmail(@ApiParam("需要验证的邮箱")@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "邮箱为NUll");
-        return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
+        return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(EXIST_CODE);
     }
 
     @ApiOperation("验证Name是否存在")
     @RequestMapping(value = "/existName/{name}",method = RequestMethod.GET)
     public ResponseResult<String> existName(@ApiParam("需要验证的name")@PathVariable String name){
         if(StrUtil.isEmpty(name)){
-            return new ResponseResult<>(ILLEGAL_NULL, "name为null");
+            return new ResponseResult<>(ILLEGAL_NULL);
         }
         User userByName = userService.existName(name);
-        return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ILLEGAL_PARAMETER, "name已存在!");
+        return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(EXIST_CODE);
     }
 
     @ApiOperation("发送邮件")
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public ResponseResult sendEmail(@RequestParam(value = "email") String email){
-        if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "参数为空");
+        if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL);
         userService.sendEmail(email);
         return new ResponseResult("发送成功");
     }
@@ -102,7 +99,7 @@ public class UserController {
     public ResponseResult<String> updatePwd(@RequestBody User user){
         String email = user.getEmail(), password = user.getPassword();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
-            return new ResponseResult(UPDATE_FAIL, "参数为空");
+            return new ResponseResult(ILLEGAL_NULL);
         }
         int i = userService.updatePwd(email, password);
         if(i < 0){
