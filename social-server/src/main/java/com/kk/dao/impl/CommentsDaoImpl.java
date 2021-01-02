@@ -28,20 +28,4 @@ public class CommentsDaoImpl implements CommentsDao {
         closeSession();
         return byIdComment;
     }
-//
-//    SqlSessionFactory sqlSessionFactory;
-//    SqlSession openSession = null;
-//        try {
-//        sqlSessionFactory = LinkData.getSessionFactory();
-//        openSession = sqlSessionFactory.openSession();
-//        CommentsDao commentsDao = openSession.getMapper(CommentsDao.class);
-//        return commentsDao.getByIdComment(id);
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    } finally {
-//        if (openSession != null) {
-//            openSession.close();
-//        }
-//    }
-//        return new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package com.kk.controller;
 
 import com.kk.util.LinkData;
+import com.kk.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class UploadController {
     @PostMapping("/upload")
     @ResponseBody
     public String upload(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletResponse response) throws IOException {
-        String upload = LinkData.upload(file, email);
+        String upload = ToolUtil.upload(file, email);
         response.sendRedirect("/");
         return upload;
     }

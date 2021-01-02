@@ -5,9 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kk.bean.*;
 import com.kk.dao.CommentsDao;
+import com.kk.dao.MessageDao;
 import com.kk.dao.NewsDao;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.CommentsDaoImpl;
+import com.kk.dao.impl.MsgDaoImpl;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.service.IMailService;
@@ -62,10 +64,10 @@ public class RandomTest {
         System.out.println(verify.asString());
     }
     @Test
-    public void testTest(){
-        UserDao aClass = LinkData.createClass(UserDao.class);
-        System.out.println(aClass.getUserByName("KK"));
-        LinkData.closeSession();
+    public void testMessage(){
+        MessageDao instance = MsgDaoImpl.getInstance();
+        int i = instance.deleteById(2);
+        System.out.println(i);
     }
 }
 

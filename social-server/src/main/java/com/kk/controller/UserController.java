@@ -11,6 +11,7 @@ import com.kk.service.UserService;
 import com.kk.util.LinkData;
 import com.kk.util.RedisUtil;
 import com.kk.util.StrUtil;
+import com.kk.util.ToolUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -62,7 +63,7 @@ public class UserController {
         }
         String url = "";
         if(file != null ) {
-            url = LinkData.upload(file, email);
+            url = ToolUtil.upload(file, email);
         }
         user.setUrl(url);
         int register = userService.register(user, code);
@@ -70,14 +71,14 @@ public class UserController {
     }
 
     @ApiOperation("验证邮箱是否存在")
-    @RequestMapping(value = "/existEmail", method = RequestMethod.GET)
+    @RequestMapping(value = "/exist-email", method = RequestMethod.GET)
     public ResponseResult existEmail(@ApiParam("需要验证的邮箱")@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "邮箱为NUll");
         return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(EXIST_CODE);
     }
 
     @ApiOperation("验证Name是否存在")
-    @RequestMapping(value = "/existName/{name}",method = RequestMethod.GET)
+    @RequestMapping(value = "/exist-name/{name}",method = RequestMethod.GET)
     public ResponseResult<String> existName(@ApiParam("需要验证的name")@PathVariable String name){
         if(StrUtil.isEmpty(name)){
             return new ResponseResult<>(ILLEGAL_NULL);
@@ -87,7 +88,7 @@ public class UserController {
     }
 
     @ApiOperation("发送邮件")
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
+    @RequestMapping(value = "/send-email", method = RequestMethod.GET)
     public ResponseResult sendEmail(@RequestParam(value = "email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL);
         userService.sendEmail(email);
@@ -95,7 +96,7 @@ public class UserController {
     }
 
     @ApiOperation("修改密码")
-    @RequestMapping(value = "/updatePwd/", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-pwd/", method = RequestMethod.POST)
     public ResponseResult<String> updatePwd(@RequestBody User user){
         String email = user.getEmail(), password = user.getPassword();
         if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
