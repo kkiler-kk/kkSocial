@@ -9,6 +9,7 @@ import com.kk.bean.User;
 import com.kk.service.NewsService;
 import com.kk.service.UserService;
 import com.kk.util.LinkData;
+import com.kk.util.RedisUtil;
 import com.kk.util.StrUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +31,6 @@ public class UserController {
 //    @RequestBody:自动将请求的json参数 组装成对象
     @Autowired
     private UserService userService;
-    @Autowired
-    private NewsService newsService;
 
     @ApiOperation("根据Name查询用户基本信息并返回动态")
     @RequestMapping(value = "/{name}",method = RequestMethod.GET)
@@ -67,16 +66,19 @@ public class UserController {
         }
         user.setUrl(url);
         int register = userService.register(user, code);
-        if(register  == -1) return new ResponseResult(INSERT_FAIL, "验证码已经过期!!!!");
-        if(register  == -2) return new ResponseResult(INSERT_FAIL, "验证码错误!!!!");
-        return register  > 0? new ResponseResult("OK") : new ResponseResult(INSERT_FAIL, "注册失败");
+        if (register == TOO_MANY) return new ResponseResult<>(TOO_MANY, "请求次数过多!!!");
+        if(register  == CODE_PAST) return new ResponseResult(CODE_PAST, "验证码已经过期!!!!");
+        if(register  == CODE_INCORRECT) return new ResponseResult(CODE_INCORRECT, "验证码错误!!!!");
+        return register > 0? new ResponseResult("OK") : new ResponseResult(INSERT_FAIL, "注册失败");
     }
+
     @ApiOperation("验证邮箱是否存在")
     @RequestMapping(value = "/existEmail", method = RequestMethod.GET)
     public ResponseResult existEmail(@ApiParam("需要验证的邮箱")@RequestParam("email") String email){
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL, "邮箱为NUll");
         return userService.existEmail(email) ? new ResponseResult("邮箱可用") : new ResponseResult(QUERY_FAIL, "邮箱已经存在");
     }
+
     @ApiOperation("验证Name是否存在")
     @RequestMapping(value = "/existName/{name}",method = RequestMethod.GET)
     public ResponseResult<String> existName(@ApiParam("需要验证的name")@PathVariable String name){
@@ -86,6 +88,7 @@ public class UserController {
         User userByName = userService.existName(name);
         return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ILLEGAL_PARAMETER, "name已存在!");
     }
+
     @ApiOperation("发送邮件")
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public ResponseResult sendEmail(@RequestParam(value = "email") String email){
@@ -93,6 +96,7 @@ public class UserController {
         userService.sendEmail(email);
         return new ResponseResult("发送成功");
     }
+
     @ApiOperation("修改密码")
     @RequestMapping(value = "/updatePwd/", method = RequestMethod.POST)
     public ResponseResult<String> updatePwd(@RequestBody User user){

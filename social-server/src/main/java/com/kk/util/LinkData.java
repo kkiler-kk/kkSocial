@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class LinkData {
     private static SqlSession openSession;
+    private static SqlSessionFactory sqlSessionFactory;
     public static SqlSessionFactory getSessionFactory() throws IOException {
         InputStream input = Resources.getResourceAsStream("config/mybatis-config.xml");
         return new SqlSessionFactoryBuilder().build(input);
@@ -48,7 +49,7 @@ public class LinkData {
     }
 
     public static <T> T createClass(Class<T> clazz){
-        SqlSessionFactory sqlSessionFactory;
+
         try {
             sqlSessionFactory = LinkData.getSessionFactory();
             openSession = sqlSessionFactory.openSession();
