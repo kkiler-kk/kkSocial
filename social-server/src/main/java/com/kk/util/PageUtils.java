@@ -10,8 +10,7 @@ public class PageUtils {
     /**
      * 将分页信息封装到统一的接口
      */
-    public static PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
-        PageHelper.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());
+    public static PageResult getPageResult(PageInfo<?> pageInfo) {
         PageResult pageResult = new PageResult();
         pageResult.setPageNum(pageInfo.getPageNum());
         pageResult.setPageSize(pageInfo.getPageSize());

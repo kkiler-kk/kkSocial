@@ -3,6 +3,7 @@ package com.kk.controller;
 import static com.kk.util.ErrorCode.*;
 
 import com.alibaba.fastjson.JSON;
+import com.kk.bean.PageResult;
 import com.kk.bean.ResponseResult;
 import com.kk.bean.User;
 import com.kk.service.NewsService;
@@ -82,7 +83,7 @@ public class UserController {
         if(StrUtil.isEmpty(name)){
             return new ResponseResult<>(ILLEGAL_NULL, "name为null");
         }
-        User userByName = userService.getUserByName(name);
+        User userByName = userService.existName(name);
         return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ILLEGAL_PARAMETER, "name已存在!");
     }
     @ApiOperation("发送邮件")

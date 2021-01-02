@@ -1,9 +1,15 @@
 package com.kk.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.kk.bean.News;
+import com.kk.bean.PageResult;
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.CodeUtil;
+import com.kk.util.PageUtils;
+import com.kk.util.StrUtil;
 import com.kk.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,12 +31,12 @@ public class UserService {
     private IMailService mailService;
 
     private UserService(){
-        instance = UserDaoImpl.getInstance();
+        userDao = UserDaoImpl.getInstance();
     }
-    private final UserDao instance;
+    private final UserDao userDao;
 
     public String login(String email, String password){
-        User result = instance.getUserByEmailAndPassword(email, password);
+        User result = userDao.getUserByEmailAndPassword(email, password);
         if(result == null){
             return null;
         }
@@ -46,15 +52,21 @@ public class UserService {
         if (!emailCode.get(user.getEmail()).equals(code)) {
             return -2;
         }
-        int i = instance.addUser(user);
+        int i = userDao.addUser(user);
         emailCode.remove(user.getEmail());
         return i;
     }
     public User getUserByName(String name){
-        return instance.getUserByName(name);
+        return userDao.getUserByName(name);
     }
+    public User existName(String name){
+        if(StrUtil.isEmpty(name)) return null;
+        User userByName = userDao.getUserByName(name);
+        return userByName;
+    }
+
     public boolean existEmail(String email){
-        return instance.getUserByEmailAndPassword(email, null) == null;
+        return userDao.getUserByEmailAndPassword(email, null) == null;
     }
     public void sendEmail(String email){
         String random = CodeUtil.generateVerCode();
@@ -65,6 +77,6 @@ public class UserService {
                 "如非本人操作请忽略(这是一封自动发送邮件, 请不要回复)");
     }
     public int updatePwd(String email, String password){
-        return instance.updatePwd(email, password);
+        return userDao.updatePwd(email, password);
     }
 }

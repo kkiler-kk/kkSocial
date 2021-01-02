@@ -4,9 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kk.bean.News;
 import com.kk.bean.PageRequest;
+import com.kk.bean.PageResult;
 import com.kk.dao.NewsDao;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
+import com.kk.util.PageUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +20,10 @@ public class NewsService {
     private NewsService(){
         newsDao = NewsDaoImpl.getInstance();
     }
-    public PageInfo<News> getSelectRandom(int pageNum, int pageSize){
+    public PageResult getSelectRandom(int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         List<News> list = newsDao.getSelectRandom();
-        return new PageInfo<News>(list);
+        return PageUtils.getPageResult(new PageInfo<>(list));
     }
 
     /**
@@ -29,8 +31,9 @@ public class NewsService {
      * @param id 用户ID
      * @return
      */
-    public List<News> getFriends(Integer id){
+    public PageResult getFriends(Integer id, Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
         List<News> newsAndUserById = newsDao.getNewsAndUserById(id);
-        return newsAndUserById;
+        return PageUtils.getPageResult(new PageInfo<>(newsAndUserById));
     }
 }

@@ -2,9 +2,7 @@ package com.kk.dao.impl;
 
 import com.kk.bean.News;
 import com.kk.dao.NewsDao;
-import com.kk.util.LinkData;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import static com.kk.util.LinkData.*;
 
 import java.util.List;
 
@@ -26,77 +24,33 @@ public class NewsDaoImpl implements NewsDao {
     }
     @Override
     public List<News> getSelectRandom() {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            NewsDao newsDao = openSession.getMapper(NewsDao.class);
-            return newsDao.getSelectRandom();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        List<News> list = aClass.getSelectRandom();
+        closeSession();
+        return list;
     }
 
     @Override
     public List<News> getNewsAndUserById(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            NewsDao newsDao = openSession.getMapper(NewsDao.class);
-            return newsDao.getNewsAndUserById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        List<News> list = aClass.getNewsAndUserById(id);
+        closeSession();
+        return list;
     }
 
     @Override
     public List<News> getNewsAndOwn(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            NewsDao newsDao = openSession.getMapper(NewsDao.class);
-            return newsDao.getNewsAndOwn(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        List<News> list = aClass.getNewsAndOwn(id);
+        closeSession();
+        return list;
     }
 
     @Override
     public News getNewsById(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            NewsDao newsDao = openSession.getMapper(NewsDao.class);
-            return newsDao.getNewsById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        NewsDaoImpl aClass = createClass(NewsDaoImpl.class);
+        News news = aClass.getNewsById(id);
+        closeSession();
+        return news;
     }
 }

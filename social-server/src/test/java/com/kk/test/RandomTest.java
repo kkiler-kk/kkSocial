@@ -11,14 +11,18 @@ import com.kk.dao.impl.CommentsDaoImpl;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.dao.impl.UserDaoImpl;
 import com.kk.service.IMailService;
+import com.kk.util.LinkData;
 import com.kk.util.PageUtils;
 import com.kk.util.TokenUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -32,9 +36,11 @@ public class RandomTest {
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
+        PageHelper.startPage(0,1);
         User kk = userDao.getUserByName("KK");
+        PageInfo<News> pageInfo = new PageInfo<>(kk.getNewsList());
         System.out.println(kk);
-        kk.getNewsList().forEach(System.out::println);
+        pageInfo.getList().forEach(System.out::println);
     }
     @Test
     public void testNews(){
@@ -43,7 +49,7 @@ public class RandomTest {
         PageRequest request = new PageRequest();
         request.setPageNum(0);
         request.setPageSize(5);
-        PageResult pageResult = PageUtils.getPageResult(request, new PageInfo<News>(selectRandom));
+        PageResult pageResult = PageUtils.getPageResult(new PageInfo<News>(selectRandom));
         pageResult.getContent().forEach(System.out::println);
     }
     @Test
@@ -59,4 +65,25 @@ public class RandomTest {
         Claim verify = TokenUtils.verify(token);
         System.out.println(verify.asString());
     }
+    @Test
+    public void testTest(){
+        UserDao aClass = LinkData.createClass(UserDao.class);
+        System.out.println(aClass.getUserByName("KK"));
+        LinkData.closeSession();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 package com.kk.controller;
 
-import com.kk.bean.Comments;
+import com.kk.bean.PageResult;
 import com.kk.bean.ResponseResult;
 import com.kk.service.CommentService;
 import io.swagger.annotations.Api;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Api("评论Controller")
 @RestController
 @RequestMapping(value = "comment")
@@ -22,8 +20,8 @@ public class CommentsController {
     private CommentService commentService;
     @ApiOperation("根据动态id传输评论")
     @RequestMapping(value = "/news-id/{id}", method = RequestMethod.GET)
-    public ResponseResult<List<Comments>> getNewsById(@ApiParam("动态ID") @PathVariable Integer id){
-        List<Comments> newsByComments = commentService.getNewsByComments(id);
+    public ResponseResult<PageResult> getNewsById(@ApiParam("动态ID") @PathVariable Integer id, Integer pageNum, Integer pageSize){
+        PageResult newsByComments = commentService.getNewsByComments(id, pageNum, pageSize);
         return new ResponseResult<>(newsByComments);
     }
 }

@@ -2,11 +2,9 @@ package com.kk.dao.impl;
 
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
-import com.kk.util.ErrorCode;
-import com.kk.util.LinkData;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import java.util.List;
+
+import static com.kk.util.LinkData.*;
 
 public class UserDaoImpl implements UserDao {
     private static UserDao userDao;
@@ -26,223 +24,98 @@ public class UserDaoImpl implements UserDao {
     }
     @Override
     public List<User> getUserAndFriendsById(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserAndFriendsById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        UserDao aClass = createClass(UserDao.class);
+        List<User> list = aClass.getUserAndFriendsById(id);
+        closeSession();
+        return list;
     }
 
     @Override
     public User getUserByName(String name) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserByName(name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        UserDao aClass = createClass(UserDao.class);
+        User user = aClass.getUserByName(name);
+        closeSession();
+        return user;
     }
 
     @Override
     public User getUserById(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        UserDao aClass = createClass(UserDao.class);
+        User user = aClass.getUserById(id);
+        closeSession();
+        return user;
     }
 
     @Override
     public User getUserId(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserId(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        UserDao aClass = createClass(UserDao.class);
+        User user = aClass.getUserId(id);
+        closeSession();
+        return user;
     }
 
     @Override
     public User getUserByEmailAndPassword(String email, String password) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.getUserByEmailAndPassword(email,password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return null;
+        UserDao aClass = createClass(UserDao.class);
+        User user = aClass.getUserByEmailAndPassword(email,password);
+        closeSession();
+        return user;
     }
 
     @Override
     public int countFriends(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            return userDao.countFriends(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.QUERY_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.countFriends(id);
+        commit();
+        closeSession();
+        return i;
     }
 
     @Override
     public int updatePwd(String email, String password) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            int i = userDao.updatePwd(email, password);
-            openSession.commit();
-            return i;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.INSERT_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.updatePwd(email, password);
+        commit();
+        closeSession();
+        return i;
     }
 
 
 
     @Override
     public int addUser(User user) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            int i = userDao.addUser(user);
-            openSession.commit();
-            return i;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.INSERT_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.addUser(user);
+        commit();
+        closeSession();
+        return i;
     }
 
     @Override
     public int addFriend(Integer user_id, Integer friend_id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            int i = userDao.addFriend(user_id, friend_id);
-            openSession.commit();
-            return i;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.INSERT_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.addFriend(user_id, friend_id);
+        commit();
+        closeSession();
+        return i;
     }
 
     @Override
     public int deleteFriend(Integer user_id, Integer friend_id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            int i = userDao.deleteFriend(user_id, friend_id);
-            openSession.commit();
-            return i;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.DELETE_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.deleteFriend(user_id, friend_id);
+        commit();
+        closeSession();
+        return i;
     }
 
     @Override
     public int deleteUserById(Integer id) {
-        SqlSessionFactory sqlSessionFactory;
-        SqlSession openSession = null;
-        try {
-            sqlSessionFactory = LinkData.getSessionFactory();
-            openSession = sqlSessionFactory.openSession();
-            UserDao userDao = openSession.getMapper(UserDao.class);
-            int i = userDao.deleteUserById(id);
-            openSession.commit();
-            return i;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (openSession != null) {
-                openSession.close();
-            }
-        }
-        return ErrorCode.DELETE_FAIL;
+        UserDao aClass = createClass(UserDao.class);
+        int i = aClass.deleteUserById(id);
+        commit();
+        closeSession();
+        return i;
     }
 
 }
