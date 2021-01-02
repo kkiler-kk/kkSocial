@@ -12,7 +12,7 @@ function isEmpty(data) {
 	return !data || data === '';
 }
 
-function emailVerify(email) {
+function verifyEmail(email) {
 	return emailTemplate.test(email);
 }
 
@@ -32,7 +32,7 @@ export default {
 	test,
 	equals,
 	isEmpty,
-	emailVerify,
+	verifyEmail,
 	lengthIn,
 	lengthOfMin,
 	lengthOfMax
