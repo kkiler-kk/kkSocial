@@ -5,5 +5,9 @@ import com.kk.bean.Comments;
 import java.util.List;
 
 public interface CommentsDao {
-    List<Comments> getByIdComment(Integer id);
+    List<Comments> getByIdComment(Integer id, boolean flag);
+
+    int addComment(Comments comment);
+
+    int updateLike(Integer id, Integer like);
 }

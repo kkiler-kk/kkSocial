@@ -8,7 +8,6 @@
         <result property="content_text" column="content_text" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="comment_num" column="comment_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
@@ -20,7 +19,6 @@
         <result property="content_text" column="content_text" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="comment_num" column="comment_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result property="type" column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
@@ -44,6 +42,9 @@
     <select id="getNewsAndOwn" resultMap="getNewsAndOwn" parameterType="Integer">
         select <include refid="news_table"></include> from `tb_news` where user_id = #{id} order by create_date desc
     </select>
+    <insert id="addNews">
+        insert into `tb_news`(`user_id`, `content_text`,`picture`,`tag`)values(#{id},#{content_text},#{picture},#{tag})
+    </insert>
     <sql id="news_table">
     new_id as 'new_id',
     user_id as 'user_id',
@@ -52,7 +53,6 @@
     picture as 'picture',
     comment_num as 'comment_num',
     share_num as 'share_num',
-    `type` as 'type',`like` as 'like',
-    `tag` as 'tag'
+    `like` as 'like',`tag` as 'tag'
     </sql>
 </mapper>

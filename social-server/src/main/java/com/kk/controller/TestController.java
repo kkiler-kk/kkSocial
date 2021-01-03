@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /* 类注解 */
-@Api(value = "desc of class")
+@Api(value = "测试类",tags = "测试接口")
 @RestController
 public class TestController {
 

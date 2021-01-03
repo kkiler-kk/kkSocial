@@ -22,10 +22,28 @@ public class CommentsDaoImpl implements CommentsDao {
         return commentsDao;
     }
     @Override
-    public List<Comments> getByIdComment(Integer id) {
+    public List<Comments> getByIdComment(Integer id, boolean flag) {
         CommentsDao aClass = createClass(CommentsDao.class);
-        List<Comments> byIdComment = aClass.getByIdComment(id);
+        List<Comments> byIdComment = aClass.getByIdComment(id, flag);
         closeSession();
         return byIdComment;
+    }
+
+    @Override
+    public int addComment(Comments comment) {
+        CommentsDao aClass = createClass(CommentsDao.class);
+        int i = aClass.addComment(comment);
+        commit();
+        closeSession();
+        return i;
+    }
+
+    @Override
+    public int updateLike(Integer id, Integer like) {
+        CommentsDao aClass = createClass(CommentsDao.class);
+        int i = aClass.updateLike(id, like);
+        commit();
+        closeSession();
+        return i;
     }
 }

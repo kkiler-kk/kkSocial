@@ -1,5 +1,6 @@
 package com.kk.controller;
 
+import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
 import com.kk.bean.ResponseResult;
 import com.kk.service.NewsService;
@@ -11,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(value = "动态Controller")
+@Api(value = "动态Controller",tags = "动态接口")
 @RestController
 @RequestMapping(value = "/news")
 public class NewsController {
     @Autowired
     private NewsService newsService;
     @ApiOperation(value = "返回最热动态")
-    @GetMapping(value = "/get-top/{pageNum}/{pageSize}")
-    public ResponseResult<PageResult> getTop(@ApiParam(value = "起点") @PathVariable Integer pageNum, @ApiParam(value = "终点") @PathVariable Integer pageSize){
-        PageResult selectRandom = newsService.getSelectRandom(pageNum,pageSize);
+    @GetMapping(value = "/get-top")
+    public ResponseResult<PageResult> getTop(@ApiParam("分页对象")@RequestBody PageRequest pageRequest){
+        PageResult selectRandom = newsService.getSelectRandom(pageRequest);
         return new ResponseResult<>(selectRandom);
     }
     @ApiOperation(value = "返回好友动态")
     @GetMapping(value = "get-user")
-    public ResponseResult<PageResult> getList(HttpServletRequest request, Integer pageNum, Integer pageSize){
+    public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象")@RequestBody PageRequest pageRequest){
         Integer userId = Integer.parseInt(request.getAttribute("userId").toString());
-        PageResult friends = newsService.getFriends(userId, pageNum, pageSize);
+        PageResult friends = newsService.getFriends(userId, pageRequest);
         return new ResponseResult<>(friends);
     }
 }

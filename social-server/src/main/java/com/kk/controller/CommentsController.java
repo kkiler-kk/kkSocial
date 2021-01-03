@@ -1,27 +1,28 @@
 package com.kk.controller;
 
+import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
 import com.kk.bean.ResponseResult;
 import com.kk.service.CommentService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Api("评论Controller")
+@Api(value = "评论Controller", tags = "评论接口")
 @RestController
 @RequestMapping(value = "comment")
 public class CommentsController {
     @Autowired
     private CommentService commentService;
     @ApiOperation("根据动态id传输评论")
-    @RequestMapping(value = "/news-id/{id}", method = RequestMethod.GET)
-    public ResponseResult<PageResult> getNewsById(@ApiParam("动态ID") @PathVariable Integer id, Integer pageNum, Integer pageSize){
-        PageResult newsByComments = commentService.getNewsByComments(id, pageNum, pageSize);
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "动态ID", dataType = "Integer"),
+            @ApiImplicitParam(name = "pageRequest", value = "分页对象", dataType = "PageRequest"),
+            @ApiImplicitParam(name = "flag", value = "true按热度false按时间", dataType = "boolean")
+    })
+    @RequestMapping(value = "/news-id/{id}/{flag}", method = RequestMethod.GET)
+    public ResponseResult<PageResult> getNewsById(@PathVariable Integer id, @RequestBody PageRequest pageRequest,@PathVariable boolean flag){
+        PageResult newsByComments = commentService.getNewsByComments(id, pageRequest, flag);
         return new ResponseResult<>(newsByComments);
     }
 }

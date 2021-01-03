@@ -53,4 +53,13 @@ public class NewsDaoImpl implements NewsDao {
         closeSession();
         return news;
     }
+
+    @Override
+    public int addNews(News news) {
+        NewsDao aClass = createClass(NewsDao.class);
+        int i = aClass.addNews(news);
+        commit();
+        closeSession();
+        return i;
+    }
 }

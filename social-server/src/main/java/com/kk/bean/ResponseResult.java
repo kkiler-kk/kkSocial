@@ -1,11 +1,18 @@
 package com.kk.bean;
 
 import com.kk.util.ErrorCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "返回数据对象")
 public class ResponseResult<Item> {
+    @ApiModelProperty("是否成功")
     private boolean status;
+    @ApiModelProperty("返回的数据")
     private Item data;
+    @ApiModelProperty("错误信息code")
     private Integer errorCode;
+    @ApiModelProperty("错误信息")
     private String message;
     public ResponseResult(){}
 

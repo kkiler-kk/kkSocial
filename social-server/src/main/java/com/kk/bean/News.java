@@ -13,7 +13,6 @@ public class News extends Parent {
     private String picture; //图片
     private Integer comment_num; //评论人数
     private Integer share_num; //分享人数
-    private Integer type;  //动态类型
     private Integer like; //点赞总数
     private String tag;
     public User getUser() {
@@ -25,7 +24,7 @@ public class News extends Parent {
     }
     public News(){}
 
-    public News(Integer new_id, User user, String create_date, String content_text, String picture, Integer comment_num, Integer share_num, Integer type, Integer like) {
+    public News(Integer new_id, User user, String create_date, String content_text, String picture, Integer comment_num, Integer share_num, Integer like) {
         super(new_id);
         this.user = user;
         this.create_date = create_date;
@@ -33,7 +32,6 @@ public class News extends Parent {
         this.picture = picture;
         this.comment_num = comment_num;
         this.share_num = share_num;
-        this.type = type;
         this.like = like;
     }
 
@@ -45,18 +43,9 @@ public class News extends Parent {
                 ", picture='" + picture + '\'' +
                 ", comment_num=" + comment_num +
                 ", share_num=" + share_num +
-                ", type=" + type +
                 ", like=" + like +
                 ", tag='" + tag + '\'' +
                 '}';
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public String getCreate_date() {
@@ -99,19 +88,19 @@ public class News extends Parent {
         this.share_num = share_num;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public Integer getLike() {
         return like;
     }
 
     public void setLike(Integer like) {
         this.like = like;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

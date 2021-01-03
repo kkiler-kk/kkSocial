@@ -2,14 +2,9 @@ package com.kk.controller;
 
 import static com.kk.util.ErrorCode.*;
 
-import com.alibaba.fastjson.JSON;
-import com.kk.bean.PageResult;
 import com.kk.bean.ResponseResult;
 import com.kk.bean.User;
-import com.kk.service.NewsService;
 import com.kk.service.UserService;
-import com.kk.util.LinkData;
-import com.kk.util.RedisUtil;
 import com.kk.util.StrUtil;
 import com.kk.util.ToolUtil;
 import io.swagger.annotations.Api;
@@ -20,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@Api("用户Controller")
+@Api(value = "用户Controller", tags = "用户接口")
 @RestController
 @RequestMapping(value = "/user")
 @Component

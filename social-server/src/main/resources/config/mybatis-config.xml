@@ -32,5 +32,6 @@
         <mapper resource="mapper/newsMapper.xml"></mapper>
         <mapper resource="mapper/commentMapper.xml"></mapper>
         <mapper resource="mapper/messageMapper.xml"></mapper>
+        <mapper resource="mapper/likeMapper.xml"></mapper>
     </mappers>
 </configuration>

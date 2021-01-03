@@ -13,4 +13,5 @@ public interface NewsDao {
 
     News getNewsById(Integer id);
 
+    int addNews(News news);
 }
