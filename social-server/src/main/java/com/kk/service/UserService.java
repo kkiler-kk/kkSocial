@@ -41,12 +41,8 @@ public class UserService {
         Date data = new Date();
         if (!b) return ErrorCode.TOO_MANY;
         int minute = CodeUtil.getMinute(sendDate, data);
-        if (minute > 30){
-            return ErrorCode.CODE_PAST;
-        }
-        if (!redisUtil.get(user.getEmail()).equals(code)) {
-            return ErrorCode.CODE_INCORRECT;
-        }
+        if (minute > 1) return ErrorCode.CODE_PAST;
+        if (!redisUtil.get(user.getEmail()).equals(code)) return ErrorCode.CODE_INCORRECT;
         int i = userDao.addUser(user);
         redisUtil.delete(user.getEmail());
         return i;
@@ -64,8 +60,9 @@ public class UserService {
         return userDao.getUserByEmailAndPassword(email, null) == null;
     }
     public void sendEmail(String email){
+
         String random = CodeUtil.generateVerCode();
-        redisUtil.set(email, random,1800);
+        redisUtil.set(email, random,60);
         sendDate = new Date();
         mailService.sendHtmlMail(email,"kkSocial--验证码","尊敬的用户,<br>" +
                 "您好:本次验证码为<strong>" + random + "</strong>本验证码三十分钟内有效,请及时输入(请勿泄露此验证码)</br>" +

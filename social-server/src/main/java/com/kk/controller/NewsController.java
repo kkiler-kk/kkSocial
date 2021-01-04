@@ -31,4 +31,5 @@ public class NewsController {
         PageResult friends = newsService.getFriends(userId, pageRequest);
         return new ResponseResult<>(friends);
     }
+
 }
