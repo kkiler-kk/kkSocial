@@ -11,7 +11,7 @@ public class Comments extends Parent {
     private User user; //用户id;
     private String create_date; //创建时间
     private int like;
-
+    private Integer write_id; //父级评论Id
 
 
     public Comments(){}
@@ -56,6 +56,14 @@ public class Comments extends Parent {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getWrite_id() {
+        return write_id;
+    }
+
+    public void setWrite_id(Integer write_id) {
+        this.write_id = write_id;
     }
 
     public String getCreate_date() {

@@ -34,7 +34,8 @@ public final class ErrorCode {
 
     //404找不到
     public static final Integer NOT_FOUND = -404;
-
+    //无法预知的错误
+    public static final Integer UNPREDICTABLE_ERROR = -501;
     //成功
     public static final Integer SUCCESS = 200;
     static {
@@ -51,6 +52,7 @@ public final class ErrorCode {
         ERROR_MAP.put(TOO_MANY, "请求次数过多请稍后重试!!!");
         ERROR_MAP.put(NOT_FOUND, "404找不到!!!");
         ERROR_MAP.put(EXIST_CODE, "已存在!!!");
+        ERROR_MAP.put(UNPREDICTABLE_ERROR, "无法预知的错误!!!");
         ERROR_MAP.put(SUCCESS, "OK");
     }
 }

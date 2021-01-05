@@ -45,7 +45,7 @@ public class UserService {
         if (!redisUtil.get(user.getEmail()).equals(code)) return ErrorCode.CODE_INCORRECT;
         int i = userDao.addUser(user);
         redisUtil.delete(user.getEmail());
-        return i;
+        return i > 0 ? ErrorCode.SUCCESS : ErrorCode.UNPREDICTABLE_ERROR;
     }
     public User getUserByName(String name){
         return userDao.getUserByName(name);
