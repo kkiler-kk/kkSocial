@@ -77,7 +77,7 @@ export default {
 			if (Verifys.isEmpty(email)) setErrorState('email', 'null');
 			else if (!Verifys.verifyEmail(email)) setErrorState('email', 'false');
 			else {
-				await this.axios.get('/api/user/existEmail', {
+				await this.axios.get('/api/user/exist-email', {
 					params: {
 						email
 					}
