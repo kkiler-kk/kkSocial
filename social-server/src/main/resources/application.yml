@@ -2,6 +2,7 @@ file:
     staticAccessPath: /upload/**
 server:
     port: 8800
+
 spring:
     resources:
         chain:
@@ -17,9 +18,9 @@ spring:
             max-file-size: 5MB
             max-request-size: 10MB
     mail:
-        host: smtp.163.com
-        username: kk996icu@163.com
-        password: CSZDRUGOLEKYCOLC
+        host: smtp.qq.com
+        username: kk996icu@qq.com
+        password: rewwyvbraogwcjfh
         default-encoding: UTF-8
     redis:
         jedis:

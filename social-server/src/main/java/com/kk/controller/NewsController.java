@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
 
 @Api(value = "动态Controller",tags = "动态接口")
 @RestController
@@ -19,13 +20,13 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
     @ApiOperation(value = "返回最热动态")
-    @GetMapping(value = "/get-top")
+    @PostMapping(value = "/get-top")
     public ResponseResult<PageResult> getTop(@ApiParam("分页对象")@RequestBody PageRequest pageRequest){
         PageResult selectRandom = newsService.getSelectRandom(pageRequest);
         return new ResponseResult<>(selectRandom);
     }
     @ApiOperation(value = "返回好友动态")
-    @GetMapping(value = "get-user")
+    @PostMapping(value = "get-user")
     public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象")@RequestBody PageRequest pageRequest){
         Integer userId = Integer.parseInt(request.getAttribute("userId").toString());
         PageResult friends = newsService.getFriends(userId, pageRequest);

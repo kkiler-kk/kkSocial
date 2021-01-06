@@ -1,5 +1,6 @@
 package com.kk.controller;
 
+import com.kk.util.FileUtil;
 import com.kk.util.ToolUtil;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class UploadController {
     @PostMapping("/upload")
     @ResponseBody
     public String upload(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletResponse response) throws IOException {
-        String upload = ToolUtil.upload(file, email);
+        String upload = FileUtil.upload(file, email);
         response.sendRedirect("/");
         return upload;
     }

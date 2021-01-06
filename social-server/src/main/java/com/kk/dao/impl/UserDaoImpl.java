@@ -55,11 +55,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByEmailAndPassword(String email, String password) {
+    public Integer getUserEAndP(String email, String password) {
         UserDao aClass = createClass(UserDao.class);
-        User user = aClass.getUserByEmailAndPassword(email,password);
+        Integer count = aClass.getUserEAndP(email,password);
         closeSession();
-        return user;
+        return count;
     }
 
     @Override

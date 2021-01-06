@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
@@ -23,17 +24,18 @@ public class UserService {
     @Autowired
     private IMailService mailService;
 
+    private final UserDao userDao;
     private UserService(){
         userDao = UserDaoImpl.getInstance();
     }
-    private final UserDao userDao;
+
 
     public String login(String email, String password){
-        User result = userDao.getUserByEmailAndPassword(email, password);
-        if(result == null){
+        int result = userDao.getUserEAndP(email, password);
+        if(result == 0){
             return null;
         }
-        String token = TokenUtils.token(result.getId().toString());
+        String token = TokenUtils.token(String.valueOf(result));
         return token;
     }
     public int register(User user, String code){
@@ -45,7 +47,7 @@ public class UserService {
         if (!redisUtil.get(user.getEmail()).equals(code)) return ErrorCode.CODE_INCORRECT;
         int i = userDao.addUser(user);
         redisUtil.delete(user.getEmail());
-        return i;
+        return i > 0 ? ErrorCode.SUCCESS : ErrorCode.UNPREDICTABLE_ERROR;
     }
     public User getUserByName(String name){
         return userDao.getUserByName(name);
@@ -57,10 +59,9 @@ public class UserService {
     }
 
     public boolean existEmail(String email){
-        return userDao.getUserByEmailAndPassword(email, null) == null;
+        return userDao.getUserEAndP(email, null) == null;
     }
     public void sendEmail(String email){
-
         String random = CodeUtil.generateVerCode();
         redisUtil.set(email, random,60);
         sendDate = new Date();

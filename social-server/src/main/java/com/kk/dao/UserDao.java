@@ -22,7 +22,7 @@ public interface UserDao {
 
     int deleteUserById(Integer id);
 
-    User getUserByEmailAndPassword(String email, String password);
+    Integer getUserEAndP(String email, String password);
 
     int countFriends(Integer id);
 

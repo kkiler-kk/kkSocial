@@ -24,13 +24,6 @@
 		select `id`, `name`, `url`
 		from `tb_user` where id = #{id}
 	</select>
-	<resultMap id="getUserByEmailAndPassword" type="com.kk.bean.User">
-		<id property="id" column="id"/>
-		<result property="email" column="email"/>
-		<result property="name" column="name"/>
-		<result property="gender" column="gender"/>
-		<result property="url" column="url" />
-	</resultMap>
 	<resultMap id="getUserByName" type="com.kk.bean.User">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
@@ -41,16 +34,15 @@
 		select `id`, `name`, `url`
 		from `tb_user` where `name` = #{name}
 	</select>
-	<select id="getUserByEmailAndPassword" parameterType="String" resultMap="getUserByEmailAndPassword">
-		select `id`,`email`,`name`,`password`,`gender`,`url` from `tb_user`
+	<select id="getUserEAndP" parameterType="String" resultType="Integer">
+		select `id` from `tb_user`
 		<where>
 			<if test="email != null and email != ''">
 				and `email` = #{email}
 			</if>
-			<if test="password != null and email !=''">
+			<if test="password != null and password !=''">
 				and `password` = #{password}
 			</if>
-
 		</where>
 
 	</select>
