@@ -148,7 +148,7 @@ export default {
 			setErrorState('name', 'true');
 			if (Verifys.isEmpty(name)) setErrorState('name', 'null');
 			else {
-				await this.axios.get('/api/user/existName/' + name)
+				await this.axios.get('/api/user/exist-name/' + name)
 				.then(response => {
 					if (!response.data) {
 						setErrorState('name', 'error');
@@ -172,7 +172,7 @@ export default {
 			if (Verifys.isEmpty(email)) setErrorState('email', 'null');
 			else if (!Verifys.verifyEmail(email)) setErrorState('email', 'false');
 			else {
-				await this.axios.get('/api/user/existEmail', {
+				await this.axios.get('/api/user/exist-email', {
 					params: {
 						email
 					}
@@ -206,7 +206,7 @@ export default {
 			verify.buttonText = '';
 			verify.isLoad = true;
 			
-			await this.axios.get('/api/user/sendEmail', {
+			await this.axios.get('/api/user/send-email', {
 				params: {
 					email
 				}
