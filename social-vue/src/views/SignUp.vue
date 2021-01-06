@@ -9,18 +9,18 @@
 				<label for="img-up-load" :class="[(user.gender ? 'male' : 'female')]" id="avatar">
 					<div class="message">点击上传头像</div>
 				</label>
-				<input 
-					id="img-up-load" 
-					type="file" 
+				<input
+					id="img-up-load"
+					type="file"
 					name="file"
 					accept="image/*"
 					@change="showAvatar"
 					v-show="false"/>
 			</div>
-			
+
 			<div class="switch-box">
-					<span 
-						class="switch" 
+					<span
+						class="switch"
 						:class="[(user.gender ? 'male' : 'remale')]"
 						@click="user.gender = !user.gender">
 						<span>男</span>
@@ -28,21 +28,21 @@
 					</span>
 					<input type="text" name="gender" :value="user.gender ? 1 : 0" v-show="false">
 			</div>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="person-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="text" name="name" placeholder="用户名" v-model="user.name" @blur="verifyName()"/>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="email-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="email" name="email" placeholder="邮箱" v-model="user.email" @blur="verifyEmail()"/>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="code-outline" fill="#2979FF"></eva-icon>
@@ -53,25 +53,25 @@
 					{{verify.buttonText}}
 				</button>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="password" name="password" placeholder="密码" v-model="user.password" @blur="verifyPassword()"/>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="password" placeholder="确认密码" v-model="verify.password" @blur="verifyPassword()"/>
 			</label>
-			
+
 			<ul class="error-list" v-show="errorList.length > 0">
 				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
 			</ul>
-			
+
 			<div class="label">
 				<button type="button" class="submit" @click="send">
 					注册
@@ -186,7 +186,7 @@ export default {
 						setErrorState('email', 'exist');
 						return;
 					}
-					
+
 					if (callback) callback();
 				})
 				.catch(error => {
@@ -197,26 +197,26 @@ export default {
 		},
 		getVerifyCode: async function () {
 			if (this.timer || this.errorState.email !== 'true') return;
-			
+
 			let email = this.user.email;
 			let setErrorState = this.setErrorState;
 			let setTimer = this.setTimer;
 			let verify = this.verify;
-			
+
 			verify.buttonText = '';
 			verify.isLoad = true;
-			
+
 			await this.axios.get('/api/user/send-email', {
 				params: {
 					email
 				}
 			})
-			.then(response => { 
+			.then(response => {
 				if (!response.data || !response.data.status) {
 					setErrorState('code', 'error');
 					return;
 				}
-				setTimer(); 
+				setTimer();
 			})
 			.catch(error => {
 				console.log(error);
@@ -256,7 +256,7 @@ export default {
 			let setErrorState = this.setErrorState;
 			setErrorState('password', 'true');
 			setErrorState('code', 'true');
-			
+
 			let formData = new FormData(this.form);
 			// console.log(...formData);
 			await this.axios.post('/api/user/register', formData, {
@@ -272,7 +272,7 @@ export default {
 					setErrorState('code', 'exist');
 					return;
 				}
-			
+
 				this.$store.commit('setUser', {
 					email: formData.get('email'),
 					password: formData.get('password')

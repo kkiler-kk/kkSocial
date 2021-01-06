@@ -17,8 +17,6 @@ export default {
 
 <style>
 #home {
-	display: grid;
-	place-items: center;
-	height: 100%;
+	padding: 2rem;
 }
 </style>

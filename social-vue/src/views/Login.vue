@@ -8,25 +8,25 @@
 			<div class="avatar">
 				<label class="male" id="avatar"></label>
 			</div>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="email-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="email" name="email" placeholder="邮箱" v-model="user.email" @blur="getAvatar()"/>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="password" name="password" placeholder="密码" v-model="user.password" @blur="verifyPassword()"/>
 			</label>
-			
+
 			<ul class="error-list" v-show="errorList.length > 0">
 				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
 			</ul>
-			
+
 			<div class="label">
 				<button type="button" class="submit" @click="send">
 					登录
@@ -61,7 +61,7 @@ export default {
 		getAvatar: async function () {
 			await this.verifyEmail();
 			if (this.errorState.email !== 'true') return;
-			
+
 			let img = new Image;
 			img.onload = () => {
 				document.getElementById('avatar').innerHTML = '';
