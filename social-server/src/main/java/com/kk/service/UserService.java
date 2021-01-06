@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
@@ -23,10 +24,11 @@ public class UserService {
     @Autowired
     private IMailService mailService;
 
+    private final UserDao userDao;
     private UserService(){
         userDao = UserDaoImpl.getInstance();
     }
-    private final UserDao userDao;
+
 
     public String login(String email, String password){
         int result = userDao.getUserEAndP(email, password);

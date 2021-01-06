@@ -7,7 +7,6 @@ import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
 import com.kk.dao.NewsDao;
 import com.kk.dao.impl.NewsDaoImpl;
-import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.PageUtils;
 import org.springframework.stereotype.Service;
 
