@@ -55,6 +55,7 @@ public class UserController {
     @ApiOperation("注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseResult<String> register(@ModelAttribute User user, @RequestParam("file") MultipartFile file, String code){
+
         String email = user.getEmail(), password = user.getPassword(), name = user.getName();
         if(StrUtil.isEmpty(email,password, name)){
             return new ResponseResult(ILLEGAL_NULL);
@@ -65,7 +66,7 @@ public class UserController {
         }
         user.setUrl(url);
         int register = userService.register(user, code);
-        return new ResponseResult<>(register);
+        return register > 0 ? new ResponseResult<>("OK"): new ResponseResult<>(register);
     }
 
     @ApiOperation("验证邮箱是否存在")

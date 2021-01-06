@@ -23,12 +23,14 @@ public class RandomTest {
     IMailService iMailService;
     @Test
     public void testImail(){
-        iMailService.sendSimpleMail("3258261356@qq.com","kk","test");
+        iMailService.sendSimpleMail(
+                "kk996icu@163.com","kk","test");
     }
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
-
+        Integer userEAndP = userDao.getUserEAndP("3258261356@qq.com", null);
+        System.out.println(userEAndP);
     }
     @Test
     public void testNews(){

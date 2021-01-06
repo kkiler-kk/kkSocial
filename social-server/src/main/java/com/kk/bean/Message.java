@@ -1,5 +1,8 @@
 package com.kk.bean;
 
+/**
+ * 消息类
+ */
 public class Message {
     private Integer msg_id;
     private Integer reception_id; //接收者ID

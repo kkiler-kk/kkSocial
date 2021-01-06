@@ -57,10 +57,9 @@ public class UserService {
     }
 
     public boolean existEmail(String email){
-        return userDao.getUserEAndP(email, null) == 0;
+        return userDao.getUserEAndP(email, null) == null;
     }
     public void sendEmail(String email){
-
         String random = CodeUtil.generateVerCode();
         redisUtil.set(email, random,60);
         sendDate = new Date();

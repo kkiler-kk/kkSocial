@@ -13,9 +13,9 @@ public class StrUtil {
     public static boolean isEmpty(Object... object){
         for (Object o : object) {
             if(o == null || o == ""){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

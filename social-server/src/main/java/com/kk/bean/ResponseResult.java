@@ -23,11 +23,6 @@ public class ResponseResult<Item> {
         this.message = "OK";
     }
     public ResponseResult(Integer errorCode){
-        if(ErrorCode.SUCCESS == errorCode){
-            this.status = true;
-            this.message = "OK";
-            return;
-        }
         this.status = false;
         this.message = ErrorCode.ERROR_MAP.get(errorCode);
     }

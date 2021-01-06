@@ -40,7 +40,7 @@
 			<if test="email != null and email != ''">
 				and `email` = #{email}
 			</if>
-			<if test="password != null and email !=''">
+			<if test="password != null and password !=''">
 				and `password` = #{password}
 			</if>
 		</where>
