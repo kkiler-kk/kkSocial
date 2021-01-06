@@ -14,6 +14,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         Claim verify = TokenUtils.verify(authHeader);
+        if (verify == null) return false;
         request.setAttribute("userId",verify.asString());
         return true;
     }

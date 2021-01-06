@@ -5,11 +5,10 @@ import static com.kk.util.ErrorCode.*;
 import com.kk.bean.ResponseResult;
 import com.kk.bean.User;
 import com.kk.service.UserService;
+import com.kk.util.FileUtil;
 import com.kk.util.StrUtil;
 import com.kk.util.ToolUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +38,13 @@ public class UserController {
         return new ResponseResult<>(userByName);
     }
     @ApiOperation("用户登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "邮箱", dataType = "String"),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String"),
+    })
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseResult<String> login(@ApiParam("邮箱")@RequestParam("email") String email, @ApiParam("密码")@RequestParam("password") String password){
-        if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
+    public ResponseResult<String> login(@RequestParam("email") String email, @RequestParam("password") String password){
+        if(StrUtil.isEmpty(email,password)){
             return new ResponseResult<String>(ILLEGAL_NULL);
         }
         //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
@@ -53,12 +56,12 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseResult<String> register(@ModelAttribute User user, @RequestParam("file") MultipartFile file, String code){
         String email = user.getEmail(), password = user.getPassword(), name = user.getName();
-        if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password) || StrUtil.isEmpty(name)){
+        if(StrUtil.isEmpty(email,password, name)){
             return new ResponseResult(ILLEGAL_NULL);
         }
         String url = "";
         if(file != null ) {
-            url = ToolUtil.upload(file, email);
+            url = FileUtil.upload(file, email);
         }
         user.setUrl(url);
         int register = userService.register(user, code);
@@ -88,19 +91,5 @@ public class UserController {
         if(StrUtil.isEmpty(email)) return new ResponseResult(ILLEGAL_NULL);
         userService.sendEmail(email);
         return new ResponseResult("发送成功");
-    }
-
-    @ApiOperation("修改密码")
-    @RequestMapping(value = "/update-pwd/", method = RequestMethod.POST)
-    public ResponseResult<String> updatePwd(@RequestBody User user){
-        String email = user.getEmail(), password = user.getPassword();
-        if(StrUtil.isEmpty(email) || StrUtil.isEmpty(password)){
-            return new ResponseResult(ILLEGAL_NULL);
-        }
-        int i = userService.updatePwd(email, password);
-        if(i < 0){
-            return new ResponseResult(UPDATE_FAIL, "修改密码失败");
-        }
-        return new ResponseResult<>("修改成功");
     }
 }

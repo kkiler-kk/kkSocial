@@ -10,7 +10,12 @@ public class StrUtil {
         }
         return false;
     }
-    public static boolean isEmpty(String s){
-        return Objects.equals(s, null) || Objects.equals(s, "");
+    public static boolean isEmpty(Object... object){
+        for (Object o : object) {
+            if(o == null || o == ""){
+                return false;
+            }
+        }
+        return true;
     }
 }

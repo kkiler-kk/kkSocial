@@ -17,9 +17,12 @@ public class CodeUtil {
         for (int i = 0; i < nonceChars.length; i++) {
             nonceChars[i] = SYMBOLS.charAt(RANDOM.nextInt(nonceChars.length));
         }
+
         return new String(nonceChars);
     }
-
+    public static int generateVerCode(Integer length){
+        return RANDOM.nextInt(999999999 + length);
+    }
     /**
      *计算两个日期的分钟差
      */

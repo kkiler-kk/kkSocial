@@ -29,11 +29,11 @@ public class UserService {
     private final UserDao userDao;
 
     public String login(String email, String password){
-        User result = userDao.getUserByEmailAndPassword(email, password);
-        if(result == null){
+        int result = userDao.getUserEAndP(email, password);
+        if(result == 0){
             return null;
         }
-        String token = TokenUtils.token(result.getId().toString());
+        String token = TokenUtils.token(String.valueOf(result));
         return token;
     }
     public int register(User user, String code){
@@ -57,7 +57,7 @@ public class UserService {
     }
 
     public boolean existEmail(String email){
-        return userDao.getUserByEmailAndPassword(email, null) == null;
+        return userDao.getUserEAndP(email, null) == 0;
     }
     public void sendEmail(String email){
 

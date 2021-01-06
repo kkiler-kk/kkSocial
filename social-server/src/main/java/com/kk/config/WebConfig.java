@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] strings = {"/user/login","/user/sendEmail","/user/*","/user/existName/*","/user/register/*","/user/existEmail","/hello","/news/get-top/**","/comment/news-id/*","/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"};
+        String[] strings = {"/user/login","/user/sendEmail","/user/*","/user/existName/*","/user/register/*","/user/existEmail","/hello","/news/get-top/**","/comment/news-id/*","/upload/**","/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"};
         InterceptorRegistration registration = registry.addInterceptor(new JwtInterceptor());
         registration.addPathPatterns("/**");
         registration.excludePathPatterns(strings);//放某些路由不需要验证
