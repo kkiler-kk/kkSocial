@@ -1,10 +1,18 @@
 <template>
   <div id="home" class="container">
-		<p>{{this.$store.state.token ? this.$store.state.token : 'THE HOME'}}</p>
+		<News/>
   </div>
 </template>
 
 <script>
+import News from '@/components/News.vue';
+
+export default {
+	name: 'Home',
+	components: {
+		News
+	}
+}
 </script>
 
 <style>

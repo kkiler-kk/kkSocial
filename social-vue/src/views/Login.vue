@@ -40,7 +40,7 @@
 import Verifys from '@/utils/form-verify';
 
 export default {
-	name: "Login",
+	name: 'Login',
 	data: function () {
 		return {
 			form: null,
@@ -52,7 +52,7 @@ export default {
 				email: 'true',
 				password: 'true'
 			}
-		}
+		};
 	},
 	methods: {
 		setErrorState: function (key, value) {
@@ -132,7 +132,12 @@ export default {
 					setErrorState('password', 'exist');
 					return;
 				}
+				this.$store.commit('setLogin', true);
 				this.$store.commit('setToken', response.data.data);
+				this.$store.commit('setUser', {
+					email: formData.get('email'),
+					password: formData.get('password')
+				});
 				this.$router.push('/');
 			})
 			.catch(error => {
@@ -180,6 +185,7 @@ export default {
 		}
 	},
 	mounted: function () {
+		if (this.$store.state.isLogin) this.$router.push('/');
 		this.form = document.getElementById('login');
 		if (this.$store.state.user) {
 			this.user = this.$store.state.user;

@@ -274,8 +274,8 @@ export default {
 				}
 			
 				this.$store.commit('setUser', {
-					email: this.user.email,
-					password: this.user.password
+					email: formData.get('email'),
+					password: formData.get('password')
 				});
 				this.$router.push('/login');
 			})
@@ -355,6 +355,7 @@ export default {
 		}
 	},
 	mounted: function () {
+		if (this.$store.state.isLogin) this.$router.push('/');
 		this.form = document.getElementById('sign-up');
 	}
 }
