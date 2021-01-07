@@ -8,25 +8,25 @@
 			<div class="avatar">
 				<label class="male" id="avatar"></label>
 			</div>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="email-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="email" name="email" placeholder="邮箱" v-model="user.email" @blur="getAvatar()"/>
 			</label>
-			
+
 			<label class="label">
 				<div class="icon">
 					<eva-icon name="lock-outline" fill="#2979FF"></eva-icon>
 				</div>
 				<input type="password" name="password" placeholder="密码" v-model="user.password" @blur="verifyPassword()"/>
 			</label>
-			
+
 			<ul class="error-list" v-show="errorList.length > 0">
 				<li v-for="(item, index) of errorList" :key="'e' + index">{{item}}</li>
 			</ul>
-			
+
 			<div class="label">
 				<button type="button" class="submit" @click="send">
 					登录
@@ -40,7 +40,7 @@
 import Verifys from '@/utils/form-verify';
 
 export default {
-	name: "Login",
+	name: 'Login',
 	data: function () {
 		return {
 			form: null,
@@ -52,7 +52,7 @@ export default {
 				email: 'true',
 				password: 'true'
 			}
-		}
+		};
 	},
 	methods: {
 		setErrorState: function (key, value) {
@@ -61,7 +61,7 @@ export default {
 		getAvatar: async function () {
 			await this.verifyEmail();
 			if (this.errorState.email !== 'true') return;
-			
+
 			let img = new Image;
 			img.onload = () => {
 				document.getElementById('avatar').innerHTML = '';
@@ -132,7 +132,12 @@ export default {
 					setErrorState('password', 'exist');
 					return;
 				}
+				this.$store.commit('setLogin', true);
 				this.$store.commit('setToken', response.data.data);
+				this.$store.commit('setUser', {
+					email: formData.get('email'),
+					password: formData.get('password')
+				});
 				this.$router.push('/');
 			})
 			.catch(error => {
@@ -180,6 +185,7 @@ export default {
 		}
 	},
 	mounted: function () {
+		if (this.$store.state.isLogin) this.$router.push('/');
 		this.form = document.getElementById('login');
 		if (this.$store.state.user) {
 			this.user = this.$store.state.user;

@@ -9,7 +9,6 @@
 
 <script>
 import Header from '@/components/Header.vue';
-// import { EvaIcon } from 'vue-eva-icons';
 
 export default {
 	name: 'App',
@@ -26,8 +25,7 @@ export default {
 		} 
 	},
 	components: {
-		Header,
-		// [EvaIcon.name]: EvaIcon
+		Header
 	}
 }
 </script>
@@ -62,12 +60,13 @@ html, body {
 }
 
 #page {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 3.5rem;
-	bottom: 0;
-	overflow: auto;
+	flex: 1 0 auto;
+}
+
+@media screen and (max-width: 1280px) {
+	.container {
+		width: 100%;
+	}
 }
 
 .load {
