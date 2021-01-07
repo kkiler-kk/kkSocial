@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Api(value = "用户Controller", tags = "用户接口")
 @RestController
 @RequestMapping(value = "/user")
@@ -26,7 +28,13 @@ public class UserController {
 //    @RequestBody:自动将请求的json参数 组装成对象
     @Autowired
     private UserService userService;
-
+    @ApiOperation("请求用户基本信息")
+    @RequestMapping(value = "get-user", method = RequestMethod.POST)
+    public ResponseResult<User> getUser(HttpServletRequest request){
+        Integer userId = Integer.parseInt(String.valueOf(request.getAttribute("userId")));
+        User user = userService.getUser(userId);
+        return new ResponseResult<>(user);
+    }
     @ApiOperation("根据Name查询用户基本信息并返回动态")
     @RequestMapping(value = "/{name}",method = RequestMethod.GET)
     public ResponseResult<User> getUserByName(@ApiParam("查询的用户名") @PathVariable String name){

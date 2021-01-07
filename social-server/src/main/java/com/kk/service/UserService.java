@@ -29,7 +29,9 @@ public class UserService {
         userDao = UserDaoImpl.getInstance();
     }
 
-
+    public User getUser(Integer id){
+        return userDao.getUserId(id);
+    }
     public String login(String email, String password){
         int result = userDao.getUserEAndP(email, password);
         if(result == 0){

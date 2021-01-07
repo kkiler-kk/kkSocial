@@ -27,8 +27,8 @@ public class RandomTest {
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
-        User kk = userDao.getUserByName("kk");
-        System.out.println(kk);
+        User userId = userDao.getUserId(1);
+        System.out.println(userId);
     }
     @Test
     public void testNews(){
