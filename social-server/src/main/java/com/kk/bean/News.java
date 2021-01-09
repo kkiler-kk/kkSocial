@@ -1,20 +1,23 @@
 package com.kk.bean;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.kk.bean.parent.Parent;
+
+import java.util.List;
 
 public class News extends Parent {
 
     private User user; //用户
     private String create_date; //发布时间
     private String content_text; //发布内容
-    @JsonInclude(JsonInclude.Include.NON_NULL) //为null时不返回
+    @JSONField(serialize = false)
     private String picture; //图片
     private Integer comment_num; //评论人数
     private Integer share_num; //分享人数
     private Integer like; //点赞总数
     private String tag;
+    private List<String> imgList;
     public User getUser() {
         return user;
     }
@@ -24,15 +27,11 @@ public class News extends Parent {
     }
     public News(){}
 
-    public News(Integer new_id, User user, String create_date, String content_text, String picture, Integer comment_num, Integer share_num, Integer like) {
-        super(new_id);
-        this.user = user;
-        this.create_date = create_date;
-        this.content_text = content_text;
+    public News(Integer id, String picture, String content_text, String tag) {
+        super(id);
         this.picture = picture;
-        this.comment_num = comment_num;
-        this.share_num = share_num;
-        this.like = like;
+        this.content_text = content_text;
+        this.tag = tag;
     }
 
     @Override
@@ -46,6 +45,14 @@ public class News extends Parent {
                 ", like=" + like +
                 ", tag='" + tag + '\'' +
                 '}';
+    }
+
+    public List<String> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<String> imgList) {
+        this.imgList = imgList;
     }
 
     public String getCreate_date() {

@@ -6,14 +6,14 @@ import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description
@@ -21,7 +21,7 @@ import java.io.IOException;
  * @Date 2020-11-10 22:19
  */
 @Api(value = "上传Controller",tags = "文件接口")
-@Controller
+@RestController
 public class UploadController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadController.class);
 
@@ -31,10 +31,13 @@ public class UploadController {
     }
 
     @PostMapping("/upload")
-    @ResponseBody
     public String upload(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletResponse response) throws IOException {
-        String upload = FileUtil.upload(file, email);
+        String upload = FileUtil.uploadFile(file, email);
         response.sendRedirect("/");
         return upload;
+    }
+    @PostMapping("uploadFile")
+    public String uploadFile(@RequestParam("files") MultipartFile[] files) {
+            return "";
     }
 }

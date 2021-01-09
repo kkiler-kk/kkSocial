@@ -70,7 +70,7 @@ public class UserController {
         }
         String url = "";
         if(file != null ) {
-            url = FileUtil.upload(file, email);
+            url = FileUtil.uploadFile(file, email);
         }
         user.setUrl(url);
         int register = userService.register(user, code);
