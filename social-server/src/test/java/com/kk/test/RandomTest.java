@@ -6,6 +6,7 @@ import com.kk.dao.*;
 import com.kk.dao.impl.*;
 import com.kk.service.IMailService;
 import com.kk.util.TokenUtils;
+import com.kk.util.ToolUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class RandomTest {
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
-        User kk = userDao.getUserByName("kk");
-        System.out.println(kk);
+        User userId = userDao.getUserId(1);
+        System.out.println(userId);
     }
     @Test
     public void testNews(){
@@ -40,7 +41,7 @@ public class RandomTest {
     }
     @Test
     public void testToken(){
-        String token = TokenUtils.token("KK");
+        String token = TokenUtils.token("1");
         System.out.println(token);
         Claim verify = TokenUtils.verify(token);
         String s = verify.asString();

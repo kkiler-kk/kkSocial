@@ -15,12 +15,10 @@ public class Comments extends Parent {
 
 
     public Comments(){}
-    public Comments(Integer id, Integer new_id, String content, User user, String create_date) {
+    public Comments(Integer id, Integer new_id, String content) {
         super(id);
         this.new_id = new_id;
         this.content = content;
-        this.user = user;
-        this.create_date = create_date;
     }
 
     @Override

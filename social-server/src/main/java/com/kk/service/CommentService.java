@@ -24,4 +24,7 @@ public class CommentService {
         List<Comments> byIdComment = commentsDao.getByIdComment(id, flag);
         return PageUtils.getPageResult(new PageInfo<>(byIdComment));
     }
+    public Integer addComments(Comments comment){
+        return commentsDao.addComment(comment);
+    }
 }

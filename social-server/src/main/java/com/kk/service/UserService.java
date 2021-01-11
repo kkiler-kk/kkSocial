@@ -29,10 +29,12 @@ public class UserService {
         userDao = UserDaoImpl.getInstance();
     }
 
-
+    public User getUser(Integer id){
+        return userDao.getUserId(id);
+    }
     public String login(String email, String password){
-        int result = userDao.getUserEAndP(email, password);
-        if(result == 0){
+        Integer result = userDao.getUserEAndP(email, password);
+        if(result == null){
             return null;
         }
         String token = TokenUtils.token(String.valueOf(result));

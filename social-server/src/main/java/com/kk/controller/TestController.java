@@ -1,6 +1,9 @@
 package com.kk.controller;
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
+import com.kk.dao.impl.UserDaoImpl;
+import com.kk.util.TokenUtils;
+import com.kk.util.ToolUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +22,8 @@ public class TestController {
     /* 方法注解 */
     @ApiOperation(value = "desc of method", notes = "")
     @GetMapping(value="/hello")
-    public String hello(@RequestParam("name") String name) {
-        return "Hello" + name;
+    public String hello() {
+        String token = TokenUtils.token("1");
+        return token;
     }
 }

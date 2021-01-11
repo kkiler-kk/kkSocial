@@ -1,9 +1,12 @@
 package com.kk.test;
 
-import com.kk.util.DateUtil;
+import cn.hutool.core.date.DateUtil;
+import com.kk.util.ToolUtil;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -11,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class Test {
     @org.junit.Test
     public void random() {
-        String s = DateUtil.currentDate();
-        System.out.println(s);
+        List<String> strings = ToolUtil.splitList("a.jpg/b.jpg/c.jpg", "/");
+        System.out.println("strings = " + strings);
     }
 }
