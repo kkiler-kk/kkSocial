@@ -27,14 +27,6 @@ export default {
 	name: 'Header',
 	props: {
 		links: Array
-	},
-	methods: {
-		onLink: function(e) {
-			e.target.setAttribute("data-fill", "#2979FF");
-		},
-		outLink: function(e) {
-			e.target.setAttribute("data-fill", "#424242");
-		}
 	}
 }
 </script>
