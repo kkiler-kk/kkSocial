@@ -28,20 +28,19 @@ public class NewsController {
     @ApiOperation(value = "返回好友动态")
     @PostMapping(value = "get-user")
     public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象")@RequestBody PageRequest pageRequest){
-        String token = request.getHeader("token");
-        System.out.println(token);
-        PageResult friends = newsService.getFriends(1, pageRequest);
+        Object userId = request.getAttribute("userId");
+        int i = Integer.parseInt(String.valueOf(userId));
+        System.out.println(i);
+        PageResult friends = newsService.getFriends(i, pageRequest);
         return new ResponseResult<>(friends);
     }
     @ApiOperation(value = "新增动态")
     @PostMapping(value = "add", headers = "content-type=multipart/form-data")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户id", dataType = "Integer"),
-            @ApiImplicitParam(name = "content_text", value = "发布内容", dataType = "String"),
-            @ApiImplicitParam(name = "files", value = "发布的图片",paramType = "formData",allowMultiple=true,required = true,dataType = "file"),
-            @ApiImplicitParam(name = "tag",  value = "标签", dataType = "String")
+            @ApiImplicitParam(name = "news", value = "只需要传入Id(用户id)content_text(发布内容)tag(标签 可选)"),
+            @ApiImplicitParam(name = "files", value = "上传的图片")
     })
-    public ResponseResult<String> addNews(News news, MultipartFile[] files){
+    public ResponseResult<String> addNews(@RequestBody News news,@RequestBody MultipartFile[] files){
         String s = FileUtil.uploadsFile(files, Integer.parseInt(CodeUtil.generateVerCode()));
         System.out.println(s);
         news.setPicture(s);

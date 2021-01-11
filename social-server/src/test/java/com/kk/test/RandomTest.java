@@ -42,6 +42,7 @@ public class RandomTest {
     @Test
     public void testToken(){
         String token = TokenUtils.token("1");
+        System.out.println(token);
         Claim verify = TokenUtils.verify(token);
         String s = verify.asString();
         System.out.println(s);
