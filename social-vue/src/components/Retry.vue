@@ -20,5 +20,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+.retry {
+	> p {
+		text-align: center;
+		line-height: 3rem;
+	}
+	
+	button {
+		line-height: 2rem;
+		padding: 0 2rem;
+		border: solid 1px #414141;
+		border-radius: 3px;
+		background: transparent;
+		
+		&:hover {
+			background-color: #41414121;
+		}
+	}
+}
 </style>

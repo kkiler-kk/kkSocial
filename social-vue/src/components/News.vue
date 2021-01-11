@@ -45,7 +45,7 @@ export default {
 				}
 				this.news = data.data.content;
 				this.setState(1);
-				console.log(data);
+				// console.log(data);
 			})
 			.catch(() => this.setState(-1));
 		}
@@ -71,7 +71,7 @@ export default {
 				};
 			}
 			if (state < 0) return {
-				message: '错误',
+				message: '获取动态出错',
 				buttonText: '重试',
 				clickHandle: this.getNews
 			};
