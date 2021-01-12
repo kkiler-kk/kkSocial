@@ -11,9 +11,9 @@
 					<span>{{item.user ? item.user.name : "name"}}</span>
 					<eva-icon class="right-icon" name="more-vertical-outline" fill="#424242" animation="pulse"></eva-icon>
 				</div>
-				<div class="date">{{item.create_date}}</div>
+				<div class="date">{{formatDate(item.create_date)}}</div>
 				<div class="content">
-					{{item.content_text}}
+					<p>{{item.content_text}}</p>
 				</div>
 				<div class="menu">
 					<div class="item">
@@ -42,12 +42,32 @@ export default {
 	name: 'NewsList',
 	props: {
 		list: Array
+	},
+	methods: {
+		formatDate: function (dateStr) {
+			let date = dateStr.split(' ');
+			let time = date[1];
+			date = date[0].split('-');
+			time = time.split(':');
+			date = new Date(date[0], date[1] - 1, date[2], time[0], time[1]);
+			let now = new Date();
+			let diff = ~~((now - date) / 1000 / 60);
+			if (diff < 60) return diff + ' 分钟';
+			diff = ~~(diff / 60);
+			if (diff < 24) return diff + ' 小时';
+			if (diff == 24) return '昨天';
+			if (diff < 48) return `昨天 ${time[0]}:${time[1]}`;
+			return dateStr;
+		}
 	}
 }
 </script>
 
 <style lang="scss">
 #news-list {
+	display: flex;
+	flex-direction: column-reverse;
+	
 	> li {
 		display: flex;
 		list-style: none;
@@ -73,7 +93,7 @@ export default {
 		}
 		
 		> .message {
-			flex: 1;
+			flex: 1 1 0;
 			
 			> .title {
 				display: flex;
@@ -89,8 +109,11 @@ export default {
 			}
 			
 			> .content {
+				display: flex;
 				padding: 1rem 0;
 				line-height: 2rem;
+				word-break: break-all;
+				hyphens: auto;
 			}
 			
 			> .menu {
