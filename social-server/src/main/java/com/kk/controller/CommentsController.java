@@ -1,14 +1,14 @@
 package com.kk.controller;
 
-import com.kk.bean.Comments;
-import com.kk.bean.PageRequest;
-import com.kk.bean.PageResult;
-import com.kk.bean.ResponseResult;
+import cn.hutool.http.server.HttpServerRequest;
+import com.kk.bean.*;
 import com.kk.service.CommentService;
 import com.kk.util.ErrorCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Api(value = "评论Controller", tags = "评论接口")
 @RestController
@@ -33,10 +33,12 @@ public class CommentsController {
             @ApiImplicitParam(name = "new_id", value = "动态id", dataType = "Integer"),
             @ApiImplicitParam(name = "content", value = "发布内容", dataType = "String")
     })
-
-    @RequestMapping(value = "/add-comment", method = RequestMethod.POST)
-    public ResponseResult<String> addComment(@RequestParam("id") Integer id, @RequestParam("new_id") Integer new_id, @RequestParam("content") String content){
-        Integer integer = commentService.addComments(new Comments(id, new_id, content));
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseResult<String> addComment(HttpServletRequest request, Comments comments){
+        Object userId = request.getAttribute("userId");
+        int i = Integer.parseInt(String.valueOf(userId));
+        comments.setId(i);
+        Integer integer = commentService.addComments(comments);
         return integer > 0 ? new ResponseResult<>("OK") : new ResponseResult<>(ErrorCode.INSERT_FAIL);
     }
 }

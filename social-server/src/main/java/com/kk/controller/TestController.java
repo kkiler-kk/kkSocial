@@ -22,8 +22,8 @@ public class TestController {
     /* 方法注解 */
     @ApiOperation(value = "desc of method", notes = "")
     @GetMapping(value="/hello")
-    public String hello() {
-        String token = TokenUtils.token("1");
+    public String hello(@RequestParam("id") String id) {
+        String token = TokenUtils.token(id);
         return token;
     }
 }
