@@ -65,6 +65,9 @@ export default {
 
 <style lang="scss">
 #news-list {
+	display: flex;
+	flex-direction: column-reverse;
+	
 	> li {
 		display: flex;
 		list-style: none;
