@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-		<Header :links="links"/>
+		<Header :links="this.$store.state.isLogin ? links : touristLinks"/>
 		<div id="page">
 			<router-view/>
 		</div>
@@ -14,12 +14,38 @@ export default {
 	name: 'App',
 	data: function () {
 		return {
-			links: [
+			touristLinks: [
 				{
 					text: 'sign-up',
-					iconData: 'person-add-outline',
+					iconData: 'person-add',
 					url: '/sign-up',
 					title: 'sign-up'
+				}
+			],
+			links: [
+				{
+					text: 'github',
+					iconData: 'github',
+					url: '/',
+					title: 'github'
+				},
+				{
+					text: 'globe',
+					iconData: 'globe',
+					url: '/',
+					title: 'globe'
+				},
+				{
+					text: 'grid',
+					iconData: 'grid',
+					url: '/',
+					title: 'grid'
+				},
+				{
+					text: 'external',
+					iconData: 'external-link-outline',
+					url: '/',
+					title: 'external'
 				}
 			]
 		} 

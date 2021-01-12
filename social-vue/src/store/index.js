@@ -17,7 +17,7 @@ export default new Vuex.Store({
 			state.user = user;
 		},
 		setLogin (state, isLogin) {
-			this.isLogin = isLogin;
+			state.isLogin = isLogin;
 		}
   },
   actions: {

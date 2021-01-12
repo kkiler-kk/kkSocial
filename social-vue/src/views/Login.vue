@@ -139,6 +139,7 @@ export default {
 					password: formData.get('password')
 				});
 				this.$router.push('/');
+				console.log(this.$store.state.isLogin);
 			})
 			.catch(error => {
 				console.log(error);
