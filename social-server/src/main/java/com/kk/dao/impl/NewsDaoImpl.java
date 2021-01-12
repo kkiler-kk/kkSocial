@@ -55,6 +55,14 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
+    public List<String> getTopTag() {
+        NewsDao aClass = createClass(NewsDao.class);
+        List<String> list = aClass.getTopTag();
+        closeSession();
+        return list;
+    }
+
+    @Override
     public int addNews(News news) {
         NewsDao aClass = createClass(NewsDao.class);
         int i = aClass.addNews(news);

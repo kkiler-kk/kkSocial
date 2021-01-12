@@ -13,5 +13,7 @@ public interface NewsDao {
 
     News getNewsById(Integer id);
 
+    List<String> getTopTag();
+
     int addNews(News news);
 }

@@ -29,10 +29,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     @ApiOperation("请求用户基本信息")
-    @RequestMapping(value = "get-user", method = RequestMethod.POST)
+    @PostMapping(value = "get-user")
     public ResponseResult<User> getUser(HttpServletRequest request){
-        Integer userId = Integer.parseInt(String.valueOf(request.getAttribute("userId")));
-        User user = userService.getUser(userId);
+        User user = userService.getUser(1);
         return new ResponseResult<>(user);
     }
     @ApiOperation("根据Name查询用户基本信息并返回动态")

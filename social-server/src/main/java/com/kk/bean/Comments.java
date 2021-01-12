@@ -1,16 +1,25 @@
 package com.kk.bean;
 
 import com.kk.bean.parent.Parent;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 评论类
  */
+@ApiModel("评论类")
 public class Comments extends Parent {
+    @ApiModelProperty("动态Id")
     private Integer new_id; //动态表ID
+    @ApiModelProperty("评论内容")
     private String content; //评论内容
+    @ApiModelProperty("用户Id")
     private User user; //用户id;
+    @ApiModelProperty("发布时间")
     private String create_date; //创建时间
+    @ApiModelProperty("点赞数量")
     private int like;
+    @ApiModelProperty("父级评论Id")
     private Integer write_id; //父级评论Id
 
 

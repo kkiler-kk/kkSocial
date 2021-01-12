@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Api(value = "动态Controller",tags = "动态接口")
 @RestController
@@ -27,12 +28,18 @@ public class NewsController {
     }
     @ApiOperation(value = "返回好友动态")
     @PostMapping(value = "get-user")
-    public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象")@RequestBody PageRequest pageRequest){
-        Object userId = request.getAttribute("userId");
+    public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象") PageRequest pageRequest){
+        Object userId = request.getAttribute("id");
         int i = Integer.parseInt(String.valueOf(userId));
         System.out.println(i);
         PageResult friends = newsService.getFriends(i, pageRequest);
         return new ResponseResult<>(friends);
+    }
+    @ApiOperation("返回最热标签")
+    @GetMapping(value = "get-tag")
+    public ResponseResult<List<String>> getTopTag(){
+        List<String> topTag = newsService.getTopTag();
+        return new ResponseResult<>(topTag);
     }
     @ApiOperation(value = "新增动态")
     @PostMapping(value = "add", headers = "content-type=multipart/form-data")
@@ -47,5 +54,4 @@ public class NewsController {
         Integer add = newsService.add(news);
         return add > 0 ? new ResponseResult<>("OK") : new ResponseResult<>(ErrorCode.INSERT_FAIL);
     }
-//    @RequestParam("id") Integer id, @RequestParam("content_text") String content_text, @RequestParam("files")MultipartFile[] files,@RequestParam("tag")String tag
 }

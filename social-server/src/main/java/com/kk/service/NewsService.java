@@ -45,6 +45,9 @@ public class NewsService {
         int i = newsDao.addNews(news);
         return i;
     }
+    public List<String> getTopTag(){
+        return newsDao.getTopTag();
+    }
     public Integer add(News news){
         System.out.println(news);
         int i = newsDao.addNews(news);

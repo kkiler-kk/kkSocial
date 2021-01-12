@@ -30,6 +30,18 @@
         ORDER BY
 	    `like` desc
     </select>
+    <select id="getTopTag" resultType="String">
+        SELECT DISTINCT
+        `tag`
+        FROM
+        `tb_news`
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(`create_date`)
+        GROUP BY
+        `tag`
+        ORDER BY
+        count(`tag`)  desc
+        LIMIT 10
+    </select>
     <select id="getNewsAndUserById" resultMap="getUserAndNews">
         select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id}) order by create_date
     </select>

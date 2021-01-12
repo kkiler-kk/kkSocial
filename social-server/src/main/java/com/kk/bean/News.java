@@ -3,20 +3,29 @@ package com.kk.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.kk.bean.parent.Parent;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
-
+@ApiModel("动态类")
 public class News extends Parent {
-
+    @ApiModelProperty("发动态的人")
     private User user; //用户
+    @ApiModelProperty("发布时间")
     private String create_date; //发布时间
+    @ApiModelProperty("发布内容")
     private String content_text; //发布内容
     @JSONField(serialize = false)
     private String picture; //图片
+    @ApiModelProperty("评论量")
     private Integer comment_num; //评论人数
+    @ApiModelProperty("分享人生")
     private Integer share_num; //分享人数
+    @ApiModelProperty("点赞总数")
     private Integer like; //点赞总数
+    @ApiModelProperty("标签")
     private String tag;
+    @ApiModelProperty("图片列表")
     private List<String> imgList;
     public User getUser() {
         return user;

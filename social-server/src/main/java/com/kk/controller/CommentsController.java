@@ -22,8 +22,8 @@ public class CommentsController {
             @ApiImplicitParam(name = "pageRequest", value = "分页对象", dataType = "PageRequest"),
             @ApiImplicitParam(name = "flag", value = "true按热度false按时间", dataType = "boolean")
     })
-    @RequestMapping(value = "/news-id/{id}/{flag}", method = RequestMethod.POST)
-    public ResponseResult<PageResult> getNewsById(@PathVariable Integer id, @RequestBody PageRequest pageRequest,@PathVariable boolean flag){
+    @PostMapping(value = "/news-id/{id}/{flag}")
+    public ResponseResult<PageResult> getNewsById(@PathVariable Integer id,@PathVariable boolean flag,@RequestBody PageRequest pageRequest){
         PageResult newsByComments = commentService.getNewsByComments(id, pageRequest, flag);
         return new ResponseResult<>(newsByComments);
     }

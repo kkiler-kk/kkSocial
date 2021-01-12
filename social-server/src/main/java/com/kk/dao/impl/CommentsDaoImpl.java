@@ -22,7 +22,7 @@ public class CommentsDaoImpl implements CommentsDao {
         return commentsDao;
     }
     @Override
-    public List<Comments> getByIdComment(Integer id, boolean flag) {
+    public List<Comments> getByIdComment(Integer id, Boolean flag) {
         CommentsDao aClass = createClass(CommentsDao.class);
         List<Comments> byIdComment = aClass.getByIdComment(id, flag);
         closeSession();
