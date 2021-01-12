@@ -49,15 +49,17 @@ export default {
 			let time = date[1];
 			date = date[0].split('-');
 			time = time.split(':');
-			date = new Date(date[0], date[1] - 1, date[2], time[0], time[1]);
+			let last = new Date(date[0], date[1] - 1, date[2], time[0], time[1]);
 			let now = new Date();
-			let diff = ~~((now - date) / 1000 / 60);
+			let diff = ~~((now - last) / 1000 / 60);
 			if (diff < 60) return diff + ' 分钟';
 			diff = ~~(diff / 60);
 			if (diff < 24) return diff + ' 小时';
 			if (diff == 24) return '昨天';
 			if (diff < 48) return `昨天 ${time[0]}:${time[1]}`;
-			return dateStr;
+			diff = ~~(diff / 24 / 30);
+			if (diff <= date[1]) return `${date[1]}-${date[2]}`;
+			return dateStr.split(' ')[0];
 		}
 	}
 }
