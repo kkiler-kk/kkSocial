@@ -74,19 +74,25 @@ html, body {
 }
 
 #app {
-	display: flex;
-	flex-direction: column;
+	/* display: flex; */
+	/* flex-direction: column; */
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #414141;
 	font-size: 1.2rem;
-	height: 100%;
+	min-height: 100%;
 	background-color: #EEEEEE;
 }
 
 #page {
-	flex: 1 0 auto;
+	position: absolute;
+	top: 3.5rem;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+	/* flex: 1 0 auto; */
 }
 
 @media screen and (max-width: 1280px) {
@@ -105,4 +111,7 @@ html, body {
 }
 
 /* a.router-link-exact-active */
+</style>
+
+<style lang="scss" src="@/assets/css/form-box.scss">
 </style>
