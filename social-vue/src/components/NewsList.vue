@@ -2,7 +2,9 @@
 	<ul id="news-list">
 		<li v-for="(item, index) of list" :key="'n' + index">
 			<div class="left">
-				<div class="avatar"></div>
+				<div class="avatar">
+					<img :src="item.user.url" :alt="item.user.name" v-show="item.user">
+				</div>
 			</div>
 			<div class="message">
 				<div class="title">
