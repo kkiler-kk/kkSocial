@@ -117,7 +117,6 @@ export default {
 			if (! await this.verifyForm()) return;
 			let setErrorState = this.setErrorState;
 			setErrorState('password', 'true');
-			console.count('send');
 			let formData = new FormData(this.form);
 			await this.axios.post('/api/user/login', formData, {
 				headers: {
@@ -138,8 +137,8 @@ export default {
 					email: formData.get('email'),
 					password: formData.get('password')
 				});
+				localStorage.setItem('ktsocial', JSON.stringify(this.$store.state));
 				this.$router.push('/');
-				console.log(this.$store.state.isLogin);
 			})
 			.catch(error => {
 				console.log(error);

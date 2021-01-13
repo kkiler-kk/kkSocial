@@ -24,34 +24,33 @@ export default {
 			],
 			links: [
 				{
-					text: 'github',
-					iconData: 'github',
-					url: '/',
-					title: 'github'
-				},
-				{
-					text: 'globe',
-					iconData: 'globe',
-					url: '/',
-					title: 'globe'
-				},
-				{
-					text: 'grid',
-					iconData: 'grid',
-					url: '/',
-					title: 'grid'
-				},
-				{
 					text: 'external',
 					iconData: 'external-link-outline',
 					url: '/',
-					title: 'external'
+					title: '登出',
+					handle: this.logOut
 				}
 			]
 		} 
 	},
+	methods: {
+		logOut: function () {
+			this.$store.commit('setLogin', false);
+			this.$store.commit('setUser', null);
+			localStorage.removeItem('ktsocial');
+		}
+	},
 	components: {
 		Header
+	},
+	mounted: function () {
+		// localStorage.clear();
+		let cache = JSON.parse(localStorage.getItem('ktsocial'));
+		if (cache) {
+				this.$store.commit('setLogin', cache.isLogin);
+				this.$store.commit('setToken', cache.token);
+				this.$store.commit('setUser', cache.user);
+		}
 	}
 }
 </script>

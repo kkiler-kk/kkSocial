@@ -222,6 +222,7 @@ export default {
 				console.log(error);
 				setErrorState('code', 'error');
 				verify.buttonText = '再次发送';
+				verify.isLoad = false;
 			});
 		},
 		verifyCode: function () {

@@ -10,7 +10,8 @@
 					class="item" 
 					v-for="(link, index) of links" 
 					:title="link.title"
-					:key="'l' + index">
+					:key="'l' + index"
+					@click="exec(link)">
 					<router-link :to="link.url">
 						<eva-icon :name="link.iconData" fill="#424242" animation="pulse">
 						</eva-icon>
@@ -27,6 +28,11 @@ export default {
 	name: 'Header',
 	props: {
 		links: Array
+	},
+	methods: {
+		exec: function (link) {
+			if (link.handle) link.handle();
+		}
 	}
 }
 </script>
