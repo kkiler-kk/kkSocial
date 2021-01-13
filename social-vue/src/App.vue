@@ -87,11 +87,12 @@ html, body {
 
 #page {
 	position: absolute;
-	top: 3.5rem;
+	top: 4rem;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	overflow: auto;
+	z-index: 0;
 	/* flex: 1 0 auto; */
 }
 

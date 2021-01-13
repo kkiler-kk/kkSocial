@@ -33,6 +33,7 @@ export default {
 
 <style lang="scss">
 #header {
+	position: relative;
 	line-height: 3.5rem;
 	font-size: 1.5rem;
 	font-weight: bolder;
