@@ -4,10 +4,9 @@ import com.kk.bean.Comments;
 
 import java.util.List;
 
-public interface CommentsDao {
+public interface CommentsDao extends GiveParent{
     List<Comments> getByIdComment(Integer id, Boolean flag);
 
     int addComment(Comments comment);
 
-    int updateLike(Integer id, Integer like);
 }

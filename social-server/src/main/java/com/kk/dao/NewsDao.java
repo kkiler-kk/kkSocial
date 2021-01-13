@@ -4,7 +4,7 @@ import com.kk.bean.News;
 
 import java.util.List;
 
-public interface NewsDao {
+public interface NewsDao  extends GiveParent{
     List<News> getSelectRandom();
 
     List<News> getNewsAndUserById(Integer id);

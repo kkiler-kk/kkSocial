@@ -35,12 +35,14 @@ public class RandomTest {
     @Test
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
-        List<News> newsByTag = newsDao.getNewsByTag("#Test#");
-        newsByTag.forEach(System.out::println);
+        int i = newsDao.updateLike(new Status(15, true));
     }
     @Test
     public void testComment(){
         CommentsDao commentsDao = CommentsDaoImpl.getInstance();
+        Status status = new Status(1,true);
+        int i = commentsDao.updateLike(status);
+        System.out.println(i);
     }
     @Test
     public void testToken(){
@@ -54,6 +56,8 @@ public class RandomTest {
     @Test
     public void testLike(){
         LikeDao instance = LikeDaoImpl.getInstance();
+        List<Like> userById = instance.getUserById(4);
+        System.out.println("userById = " + userById);
     }
 }
 

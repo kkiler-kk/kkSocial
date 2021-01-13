@@ -41,7 +41,7 @@ public class NewsController {
             @ApiImplicitParam(name = "pageRequest", value = "分页对象")
     })
     @PostMapping(value = "{tag}")
-    public ResponseResult<PageResult> getTag(@PathVariable String tag, PageRequest pageRequest){
+    public ResponseResult<PageResult> getTag(@PathVariable String tag,@RequestBody PageRequest pageRequest){
         if(StrUtil.isEmpty(tag)) return new ResponseResult<>(ErrorCode.ILLEGAL_NULL);
         PageResult newsByTag = newsService.getNewsByTag(tag, pageRequest);
         return new ResponseResult<>(newsByTag);

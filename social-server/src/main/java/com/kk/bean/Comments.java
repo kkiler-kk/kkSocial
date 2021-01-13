@@ -1,6 +1,6 @@
 package com.kk.bean;
 
-import com.kk.bean.parent.Parent;
+import com.kk.bean.parent.Dynamic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -8,36 +8,23 @@ import io.swagger.annotations.ApiModelProperty;
  * 评论类
  */
 @ApiModel("评论类")
-public class Comments extends Parent {
+public class Comments extends Dynamic {
     @ApiModelProperty("动态Id")
     private Integer new_id; //动态表ID
-    @ApiModelProperty("评论内容")
-    private String content; //评论内容
-    @ApiModelProperty("用户Id")
-    private User user; //用户id;
-    @ApiModelProperty("发布时间")
-    private String create_date; //创建时间
-    @ApiModelProperty("点赞数量")
-    private int like;
     @ApiModelProperty("父级评论Id")
     private Integer write_id; //父级评论Id
 
-
     public Comments(){}
     public Comments(Integer id, Integer new_id, String content) {
-        super(id);
+        super(id,content);
         this.new_id = new_id;
-        this.content = content;
     }
 
     @Override
     public String toString() {
         return "Comments{" +
-                "news_id=" + new_id +
-                ", content='" + content + '\'' +
-                ", user=" + user +
-                ", create_date='" + create_date + '\'' +
-                ", like=" + like +
+                "new_id=" + new_id +
+                ", write_id=" + write_id +
                 '}';
     }
 
@@ -49,43 +36,11 @@ public class Comments extends Parent {
         this.new_id = new_id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Integer getWrite_id() {
         return write_id;
     }
 
     public void setWrite_id(Integer write_id) {
         this.write_id = write_id;
-    }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-
-    public int getLike() {
-        return like;
-    }
-
-    public void setLike(int like) {
-        this.like = like;
     }
 }

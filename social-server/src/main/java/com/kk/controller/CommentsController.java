@@ -35,7 +35,7 @@ public class CommentsController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseResult<String> addComment(HttpServletRequest request, Comments comments){
-        Object userId = request.getAttribute("userId");
+        Object userId = request.getAttribute("id");
         int i = Integer.parseInt(String.valueOf(userId));
         comments.setId(i);
         Integer integer = commentService.addComments(comments);

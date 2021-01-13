@@ -7,10 +7,9 @@ public class Status extends Parent {
     private Boolean flag; //点赞 true false
     private Integer user_id; //用户id
     public Status(){}
-    public Status(String type, Boolean flag, Integer user_id) {
-        this.type = type;
+    public Status(Integer id,Boolean flag) {
+        super(id);
         this.flag = flag;
-        this.user_id = user_id;
     }
 
     public String getType() {

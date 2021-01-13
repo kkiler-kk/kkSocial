@@ -1,6 +1,7 @@
 package com.kk.dao.impl;
 
 import com.kk.bean.News;
+import com.kk.bean.Status;
 import com.kk.dao.NewsDao;
 import static com.kk.util.LinkData.*;
 
@@ -82,6 +83,15 @@ public class NewsDaoImpl implements NewsDao {
     public int addNews(News news) {
         NewsDao aClass = createClass(NewsDao.class);
         int i = aClass.addNews(news);
+        commit();
+        closeSession();
+        return i;
+    }
+
+    @Override
+    public int updateLike(Status status) {
+        NewsDao aClass = createClass(NewsDao.class);
+        int i = aClass.updateLike(status);
         commit();
         closeSession();
         return i;
