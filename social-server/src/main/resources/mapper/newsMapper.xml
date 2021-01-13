@@ -28,7 +28,7 @@
         FROM
 	    `tb_news`
         ORDER BY
-	    `like` desc
+	    `like` desc, comment_num desc, share_num desc
     </select>
     <select id="getTopTag" resultType="String">
         SELECT DISTINCT
@@ -42,6 +42,9 @@
         count(`tag`)  desc
         LIMIT 10
     </select>
+    <select id="countNews" parameterType="Integer" resultType="Integer">
+        select count(`user_id`) as count from `tb_news` where user_id = #{user_id}
+    </select>
     <select id="getNewsAndUserById" resultMap="getUserAndNews">
         select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id}) order by create_date
     </select>
@@ -50,6 +53,9 @@
         <include refid="news_table"></include>
         from `tb_news`
         where new_id = #{id}
+    </select>
+    <select id="getNewsByTag" parameterType="String" resultMap="getUserAndNews">
+        select <include refid="news_table"></include> from `tb_news` where tag = #{tag}  ORDER BY `create_date` desc
     </select>
     <select id="getNewsAndOwn" resultMap="getNewsAndOwn" parameterType="Integer">
         select <include refid="news_table"></include> from `tb_news` where user_id = #{id} order by create_date desc

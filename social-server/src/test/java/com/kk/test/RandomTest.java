@@ -30,13 +30,13 @@ public class RandomTest {
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
         User userId = userDao.getUserId(1);
-        System.out.println(userId);
+        System.out.println(userId.getCountNews());
     }
     @Test
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
-        List<String> topTag = newsDao.getTopTag();
-        System.out.println(topTag);
+        List<News> newsByTag = newsDao.getNewsByTag("#Test#");
+        newsByTag.forEach(System.out::println);
     }
     @Test
     public void testComment(){

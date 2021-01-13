@@ -35,6 +35,17 @@ public class NewsController {
         PageResult friends = newsService.getFriends(i, pageRequest);
         return new ResponseResult<>(friends);
     }
+    @ApiOperation(value = "根据tag查找动态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "tag", value = "查找的tag", dataType = "String"),
+            @ApiImplicitParam(name = "pageRequest", value = "分页对象")
+    })
+    @PostMapping(value = "{tag}")
+    public ResponseResult<PageResult> getTag(@PathVariable String tag, PageRequest pageRequest){
+        if(StrUtil.isEmpty(tag)) return new ResponseResult<>(ErrorCode.ILLEGAL_NULL);
+        PageResult newsByTag = newsService.getNewsByTag(tag, pageRequest);
+        return new ResponseResult<>(newsByTag);
+    }
     @ApiOperation("返回最热标签")
     @GetMapping(value = "get-tag")
     public ResponseResult<List<String>> getTopTag(){

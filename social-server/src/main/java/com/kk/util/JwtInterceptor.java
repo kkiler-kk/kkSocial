@@ -13,7 +13,6 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         Claim verify = TokenUtils.verify(authHeader);
-        System.out.println(verify.asString());
         if (verify == null) return false;
         request.setAttribute("id",verify.asString());
         return true;

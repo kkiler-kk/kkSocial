@@ -39,6 +39,14 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
+    public List<News> getNewsByTag(String tag) {
+        NewsDao aClass = createClass(NewsDao.class);
+        List<News> list = aClass.getNewsByTag(tag);
+        closeSession();
+        return list;
+    }
+
+    @Override
     public List<News> getNewsAndOwn(Integer id) {
         NewsDao aClass = createClass(NewsDao.class);
         List<News> list = aClass.getNewsAndOwn(id);
@@ -60,6 +68,14 @@ public class NewsDaoImpl implements NewsDao {
         List<String> list = aClass.getTopTag();
         closeSession();
         return list;
+    }
+
+    @Override
+    public int countNews(Integer user_id) {
+        NewsDao aClass = createClass(NewsDao.class);
+        int i = aClass.countNews(user_id);
+        closeSession();
+        return i;
     }
 
     @Override

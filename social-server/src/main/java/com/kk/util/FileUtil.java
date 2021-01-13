@@ -57,7 +57,7 @@ public class FileUtil {
                 return null;
             }
             String path = null;
-            path = ResourceUtils.getURL("classpath:").getPath() + "static/news";
+            path = ResourceUtils.getURL("classpath:").getPath() + "static/news-user";
             String realPath = path.replace('/', '\\').substring(1, path.length());
             for (int i = 0; i < files.length; i++) {
                 // 源文件名

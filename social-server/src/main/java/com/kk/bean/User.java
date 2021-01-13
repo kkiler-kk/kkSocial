@@ -23,6 +23,11 @@ public class User extends Parent {
     private String url;  //头像路径
     @ApiModelProperty("用户动态")
     private List<News> newsList;
+    @ApiModelProperty("动态总数")
+    private Integer countNews;
+
+
+
     public User(){
 
     }
@@ -33,7 +38,13 @@ public class User extends Parent {
         this.gender = gender;
         this.url = url;
     }
+    public Integer getCountNews() {
+        return countNews;
+    }
 
+    public void setCountNews(Integer countNews) {
+        this.countNews = countNews;
+    }
     public List<News> getNewsList() {
         return newsList;
     }

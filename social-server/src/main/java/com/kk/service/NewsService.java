@@ -28,22 +28,18 @@ public class NewsService {
         ToolUtil.setList(list);
         return PageUtils.getPageResult(new PageInfo<>(list));
     }
-
-    /**
-     * 好友动态
-     * @param id 用户ID
-     * @return
-     */
+    public PageResult getNewsByTag(String tag, PageRequest pageRequest){
+        tag = "#" + tag + "#";
+        int pageNum = pageRequest.getPageNum(), pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        List<News> list = newsDao.getNewsByTag(tag);
+        return PageUtils.getPageResult(new PageInfo<>(list));
+    }
     public PageResult getFriends(Integer id, PageRequest pageRequest){
         int pageNum = pageRequest.getPageNum(), pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
         List<News> newsAndUserById = newsDao.getNewsAndUserById(id);
         return PageUtils.getPageResult(new PageInfo<>(newsAndUserById));
-    }
-    public Integer add(Integer id, String picture, String content_text, String tag){
-        News news = new News(id,picture,content_text,tag);
-        int i = newsDao.addNews(news);
-        return i;
     }
     public List<String> getTopTag(){
         return newsDao.getTopTag();

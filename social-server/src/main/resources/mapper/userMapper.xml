@@ -21,7 +21,7 @@
         </where>
     </select>
 	<select id="getUserId" resultType="com.kk.bean.User" parameterType="Integer">
-		select `id`, `name`, `url`
+		select `id`, `name`, `url`,(select count(`user_id`) from `tb_news` where `user_id` = #{id}) as countNews
 		from `tb_user` where id = #{id}
 	</select>
 	<resultMap id="getUserByName" type="com.kk.bean.User">
@@ -29,6 +29,7 @@
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
+		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.countNews"></collection>
 	</resultMap>
 	<select id="getUserByName" resultMap="getUserByName" parameterType="String">
 		select `id`, `name`, `url`
