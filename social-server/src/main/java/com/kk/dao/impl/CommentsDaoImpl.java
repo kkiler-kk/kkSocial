@@ -1,6 +1,7 @@
 package com.kk.dao.impl;
 
 import com.kk.bean.Comments;
+import com.kk.bean.Status;
 import com.kk.dao.CommentsDao;
 import static com.kk.util.LinkData.*;
 import java.util.List;
@@ -37,11 +38,10 @@ public class CommentsDaoImpl implements CommentsDao {
         closeSession();
         return i;
     }
-
     @Override
-    public int updateLike(Integer id, Integer like) {
+    public int updateLike(Status status) {
         CommentsDao aClass = createClass(CommentsDao.class);
-        int i = aClass.updateLike(id, like);
+        int i = aClass.updateLike(status);
         commit();
         closeSession();
         return i;

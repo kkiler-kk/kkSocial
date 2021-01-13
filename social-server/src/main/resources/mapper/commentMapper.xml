@@ -4,7 +4,7 @@
     <resultMap id="getByIdComment" type="com.kk.bean.Comments">
         <id property="id" column="comment_id"/>
         <result property="new_id" column="new_id"/>
-        <result property="content" column="content"/>
+        <result property="content_text" column="content"/>
         <result property="create_date" column="create_date" />
         <result property="like" column="like"/>
         <collection property="user" column="content_id" select="com.kk.dao.UserDao.getUserId"></collection>
@@ -20,13 +20,13 @@ WHERE
 	<if test="!flag">create_date desc</if>
     </select>
     <insert id="addComment">
-        insert into `tb_comments`(`new_id`,`content`,`content_id`)values(#{new_id},#{content},#{id})
+        insert into `tb_comments`(`new_id`,`content`,`content_id`)values(#{new_id},#{content_text},#{id})
     </insert>
-    <update id="updateLike" parameterType="Integer">
+    <update id="updateLike" parameterType="com.kk.bean.Status">
         update `tb_comments`
          <set>
-            <if test="like == 1">`like` = #{like} + `like`</if>
-            <if test="like == -1">`like` = `like` -1</if>
+            <if test="flag">`like` = `like` + 1</if>
+            <if test="!flag">`like` = `like` - 1</if>
          </set>
          where `comment_id` = #{id}
     </update>
