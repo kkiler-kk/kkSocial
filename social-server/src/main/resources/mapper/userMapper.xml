@@ -29,7 +29,7 @@
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
-		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.countNews"></collection>
+		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.count"></collection>
 	</resultMap>
 	<select id="getUserByName" resultMap="getUserByName" parameterType="String">
 		select `id`, `name`, `url`

@@ -2,14 +2,29 @@ package com.kk.bean;
 
 import com.kk.bean.parent.Parent;
 
-public class Status extends Parent {
+public class Status<T> extends Parent {
     private String type; //消息类型
     private Boolean flag; //点赞 true false
     private Integer user_id; //用户id
+    private T data; //主要对象
     public Status(){}
+    public Status(T data){
+        this.data = data;
+    }
+    public Status(Integer id){
+        super(id);
+    }
     public Status(Integer id,Boolean flag) {
         super(id);
         this.flag = flag;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
     public String getType() {

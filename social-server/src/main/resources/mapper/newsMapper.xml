@@ -42,8 +42,8 @@
         count(`tag`)  desc
         LIMIT 10
     </select>
-    <select id="countNews" parameterType="Integer" resultType="Integer">
-        select count(`user_id`) as count from `tb_news` where user_id = #{user_id}
+    <select id="count" parameterType="Integer" resultType="Integer">
+        select count(`user_id`) as count from `tb_news` where user_id = #{id}
     </select>
     <select id="getNewsAndUserById" resultMap="getUserAndNews">
         select <include refid="news_table"></include> from `tb_news` where user_id in(select f.friend_id  from `tb_user` u left join `tb_friends` f on f.user_id = u.id where u.id = #{id}) order by create_date
@@ -60,8 +60,8 @@
     <select id="getNewsAndOwn" resultMap="getNewsAndOwn" parameterType="Integer">
         select <include refid="news_table"></include> from `tb_news` where user_id = #{id} order by create_date desc
     </select>
-    <insert id="addNews">
-        insert into `tb_news`(`user_id`, `content_text`,`picture`,`tag`)values(#{id},#{content_text},#{picture},#{tag})
+    <insert id="add">
+         insert into `tb_news`(`user_id`, `content_text`,`picture`,`tag`)values(#{data.id},#{data.content_text},#{data.picture},#{data.tag})
     </insert>
     <update id="updateLike" parameterType="com.kk.bean.Status">
         update `tb_news`

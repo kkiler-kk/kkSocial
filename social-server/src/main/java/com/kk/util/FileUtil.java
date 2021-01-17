@@ -22,7 +22,7 @@ public class FileUtil {
 
     public static String uploadFile(MultipartFile file, String email) {
         if (Objects.equals("", email) && file.isEmpty()) {
-            return "";
+            return null;
         }
         try {
             String path = ResourceUtils.getURL("classpath:").getPath() + "static/upload";
@@ -42,12 +42,12 @@ public class FileUtil {
                 return path01;
             } else {
                 System.out.println("上传失败！");
-                return "";
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
     public static String uploadsFile(MultipartFile[] files, Integer id) {

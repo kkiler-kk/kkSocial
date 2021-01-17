@@ -5,18 +5,23 @@ import com.github.pagehelper.PageInfo;
 import com.kk.bean.News;
 import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
+import com.kk.bean.Status;
 import com.kk.dao.NewsDao;
 import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.util.PageUtils;
-import com.kk.util.StrUtil;
+import com.kk.util.RedisUtil;
 import com.kk.util.ToolUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class NewsService {
+
+    @Autowired
+    private RedisUtil redisUtil;
+
     private NewsDao newsDao;
     private NewsService(){
         newsDao = NewsDaoImpl.getInstance();
@@ -41,12 +46,19 @@ public class NewsService {
         List<News> newsAndUserById = newsDao.getNewsAndUserById(id);
         return PageUtils.getPageResult(new PageInfo<>(newsAndUserById));
     }
-    public List<String> getTopTag(){
-        return newsDao.getTopTag();
+    public List<String> getTopTag() {
+        Object top = redisUtil.get("top");
+        if (top == null) {
+            List<String> topTag = newsDao.getTopTag();
+            redisUtil.set("top", topTag, 10800); //三小时刷新一下热搜
+        } else {
+            top = redisUtil.get("top");
+        }
+        return (List<String>) top;
     }
     public Integer add(News news){
         System.out.println(news);
-        int i = newsDao.addNews(news);
+        int i = newsDao.add(new Status<News>(news));
         return i;
     }
 }

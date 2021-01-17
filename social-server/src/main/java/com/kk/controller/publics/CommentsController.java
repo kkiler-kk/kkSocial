@@ -1,18 +1,15 @@
-package com.kk.controller;
+package com.kk.controller.publics;
 
-import cn.hutool.http.server.HttpServerRequest;
 import com.kk.bean.*;
 import com.kk.service.CommentService;
-import com.kk.util.ErrorCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Api(value = "评论Controller", tags = "评论接口")
-@RestController
-@RequestMapping(value = "comment")
+@RestController(value = "CommentsPublic")
+@RequestMapping(value = "public")
 public class CommentsController {
     @Autowired
     private CommentService commentService;
@@ -26,19 +23,5 @@ public class CommentsController {
     public ResponseResult<PageResult> getNewsById(@PathVariable Integer id,@PathVariable boolean flag,@RequestBody PageRequest pageRequest){
         PageResult newsByComments = commentService.getNewsByComments(id, pageRequest, flag);
         return new ResponseResult<>(newsByComments);
-    }
-    @ApiOperation("发布评论")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户id", dataType = "Integer"),
-            @ApiImplicitParam(name = "new_id", value = "动态id", dataType = "Integer"),
-            @ApiImplicitParam(name = "content", value = "发布内容", dataType = "String")
-    })
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseResult<String> addComment(HttpServletRequest request, Comments comments){
-        Object userId = request.getAttribute("id");
-        int i = Integer.parseInt(String.valueOf(userId));
-        comments.setId(i);
-        Integer integer = commentService.addComments(comments);
-        return integer > 0 ? new ResponseResult<>("OK") : new ResponseResult<>(ErrorCode.INSERT_FAIL);
     }
 }

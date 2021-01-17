@@ -29,15 +29,6 @@ public class CommentsDaoImpl implements CommentsDao {
         closeSession();
         return byIdComment;
     }
-
-    @Override
-    public int addComment(Comments comment) {
-        CommentsDao aClass = createClass(CommentsDao.class);
-        int i = aClass.addComment(comment);
-        commit();
-        closeSession();
-        return i;
-    }
     @Override
     public int updateLike(Status status) {
         CommentsDao aClass = createClass(CommentsDao.class);
@@ -45,5 +36,19 @@ public class CommentsDaoImpl implements CommentsDao {
         commit();
         closeSession();
         return i;
+    }
+
+    @Override
+    public int add(Status<?> status) {
+        CommentsDao aClass = createClass(CommentsDao.class);
+        int i = aClass.add(status);
+        commit();
+        closeSession();
+        return i;
+    }
+
+    @Override
+    public int count(Status<?> status) {
+        return 0;
     }
 }

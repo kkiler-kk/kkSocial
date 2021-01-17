@@ -31,6 +31,8 @@ public final class ErrorCode {
     public static final Integer CODE_PAST = -303;
     //请求次数过多
     public static final  Integer TOO_MANY = -304;
+    //用户未登录
+    public static final Integer NOT_LOGIN = -305;
 
     //404找不到
     public static final Integer NOT_FOUND = -404;
@@ -53,6 +55,7 @@ public final class ErrorCode {
         ERROR_MAP.put(NOT_FOUND, "404找不到!!!");
         ERROR_MAP.put(EXIST_CODE, "已存在!!!");
         ERROR_MAP.put(UNPREDICTABLE_ERROR, "无法预知的错误!!!");
+        ERROR_MAP.put(NOT_LOGIN, "用户未登录");
         ERROR_MAP.put(SUCCESS, "OK");
     }
 }

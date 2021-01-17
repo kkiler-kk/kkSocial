@@ -14,6 +14,4 @@ public interface NewsDao  extends GiveParent{
     News getNewsById(Integer id);
 
     List<String> getTopTag();
-    int countNews(Integer user_id);
-    int addNews(News news);
 }

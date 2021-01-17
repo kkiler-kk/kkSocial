@@ -4,6 +4,12 @@ server:
     port: 8800
 
 spring:
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+    security:
+        user:
+            name: admin
+            password: admin
     resources:
         chain:
             strategy:

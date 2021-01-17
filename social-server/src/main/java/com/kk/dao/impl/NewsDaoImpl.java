@@ -72,27 +72,27 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public int countNews(Integer user_id) {
-        NewsDao aClass = createClass(NewsDao.class);
-        int i = aClass.countNews(user_id);
-        closeSession();
-        return i;
-    }
-
-    @Override
-    public int addNews(News news) {
-        NewsDao aClass = createClass(NewsDao.class);
-        int i = aClass.addNews(news);
-        commit();
-        closeSession();
-        return i;
-    }
-
-    @Override
     public int updateLike(Status status) {
         NewsDao aClass = createClass(NewsDao.class);
         int i = aClass.updateLike(status);
         commit();
+        closeSession();
+        return i;
+    }
+
+    @Override
+    public int add(Status<?> status) {
+        NewsDao newsDao = createClass(NewsDao.class);
+        int i = newsDao.add(status);
+        commit();
+        closeSession();
+        return i;
+    }
+
+    @Override
+    public int count(Status<?> status) {
+        NewsDao aClass = createClass(NewsDao.class);
+        int i = aClass.count(status);
         closeSession();
         return i;
     }

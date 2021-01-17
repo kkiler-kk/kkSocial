@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.kk.bean.Comments;
 import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
+import com.kk.bean.Status;
 import com.kk.dao.CommentsDao;
 import com.kk.dao.impl.CommentsDaoImpl;
 import com.kk.util.PageUtils;
@@ -25,6 +26,6 @@ public class CommentService {
         return PageUtils.getPageResult(new PageInfo<>(byIdComment));
     }
     public Integer addComments(Comments comment){
-        return commentsDao.addComment(comment);
+        return commentsDao.add(new Status<>(comment));
     }
 }

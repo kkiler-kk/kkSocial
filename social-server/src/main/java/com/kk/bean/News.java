@@ -22,7 +22,7 @@ public class News extends Dynamic {
 
     public News(){}
 
-    public News(Integer id, String picture, String content_text, String tag) {
+    public News(Integer id, String content_text ,String picture, String tag) {
         super(id,content_text);
         this.picture = picture;
         this.tag = tag;

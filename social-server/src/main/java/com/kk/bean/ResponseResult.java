@@ -24,6 +24,7 @@ public class ResponseResult<Item> {
     }
     public ResponseResult(Integer errorCode){
         this.status = false;
+        this.errorCode = errorCode;
         this.message = ErrorCode.ERROR_MAP.get(errorCode);
     }
     public ResponseResult(Integer errorCode, String message){

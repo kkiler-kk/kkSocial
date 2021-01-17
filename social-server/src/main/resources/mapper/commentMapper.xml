@@ -19,8 +19,8 @@ WHERE
 	<if test="flag">`like` desc</if>
 	<if test="!flag">create_date desc</if>
     </select>
-    <insert id="addComment">
-        insert into `tb_comments`(`new_id`,`content`,`content_id`)values(#{new_id},#{content_text},#{id})
+    <insert id="add">
+        insert into `tb_comments`(`new_id`,`content`,`content_id`)values(#{data.new_id},#{data.content_text},#{data.id})
     </insert>
     <update id="updateLike" parameterType="com.kk.bean.Status">
         update `tb_comments`

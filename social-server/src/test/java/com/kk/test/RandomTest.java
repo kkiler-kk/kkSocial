@@ -1,12 +1,11 @@
 package com.kk.test;
 
-import com.auth0.jwt.interfaces.Claim;
 import com.kk.bean.*;
 import com.kk.dao.*;
 import com.kk.dao.impl.*;
 import com.kk.service.IMailService;
-import com.kk.util.TokenUtils;
-import com.kk.util.ToolUtil;
+import com.kk.util.JwtTokenUtil;
+import io.jsonwebtoken.Claims;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,8 @@ public class RandomTest {
     @Test
     public void testNews(){
         NewsDao newsDao = NewsDaoImpl.getInstance();
-        int i = newsDao.updateLike(new Status(15, true));
+        int count = newsDao.count(new Status<>(1));
+        System.out.println("count = " + count);
     }
     @Test
     public void testComment(){
@@ -46,8 +46,9 @@ public class RandomTest {
     }
     @Test
     public void testToken(){
-        Claim verify = TokenUtils.verify("re");
-        System.out.println(verify);
+        String id = JwtTokenUtil.createToken("2", "123");
+        boolean expiration = JwtTokenUtil.isExpiration(id);
+        System.out.println(expiration);
     }
     @Test
     public void testMessage(){

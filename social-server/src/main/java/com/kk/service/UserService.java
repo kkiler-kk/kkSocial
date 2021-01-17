@@ -37,7 +37,7 @@ public class UserService {
         if(result == null){
             return null;
         }
-        String token = TokenUtils.token(String.valueOf(result));
+        String token = JwtTokenUtil.createToken(String.valueOf(result), "普通用户");
         return token;
     }
     public int register(User user, String code){

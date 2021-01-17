@@ -25,8 +25,10 @@ public class User extends Parent {
     private List<News> newsList;
     @ApiModelProperty("动态总数")
     private Integer countNews;
-
-
+    @ApiModelProperty("粉丝总数")
+    private Integer countFans;
+    @ApiModelProperty("粉丝列表")
+    private List<User> fansList;
 
     public User(){
 
@@ -38,6 +40,23 @@ public class User extends Parent {
         this.gender = gender;
         this.url = url;
     }
+
+    public Integer getCountFans() {
+        return countFans;
+    }
+
+    public void setCountFans(Integer countFans) {
+        this.countFans = countFans;
+    }
+
+    public List<User> getFansList() {
+        return fansList;
+    }
+
+    public void setFansList(List<User> fansList) {
+        this.fansList = fansList;
+    }
+
     public Integer getCountNews() {
         return countNews;
     }

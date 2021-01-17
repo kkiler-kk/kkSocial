@@ -6,7 +6,4 @@ import java.util.List;
 
 public interface CommentsDao extends GiveParent{
     List<Comments> getByIdComment(Integer id, Boolean flag);
-
-    int addComment(Comments comment);
-
 }
