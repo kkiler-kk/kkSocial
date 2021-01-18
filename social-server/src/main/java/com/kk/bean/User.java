@@ -29,6 +29,26 @@ public class User extends Parent {
     private Integer countFans;
     @ApiModelProperty("粉丝列表")
     private List<User> fansList;
+    @ApiModelProperty("关注总数")
+    private Integer countUser;
+    @ApiModelProperty("关注列表")
+    private List<User> userList;
+
+    public Integer getCountUser() {
+        return countUser;
+    }
+
+    public void setCountUser(Integer countUser) {
+        this.countUser = countUser;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public User(){
 

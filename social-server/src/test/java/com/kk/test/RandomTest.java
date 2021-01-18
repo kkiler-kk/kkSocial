@@ -60,17 +60,13 @@ public class RandomTest {
         List<Like> userById = instance.getUserById(4);
         System.out.println("userById = " + userById);
     }
+    @Test
+    public void testFans(){
+        FansDao instance = FansDaoImpl.getInstance();
+        Integer integer = instance.countFans(1);
+        System.out.println(integer);
+    }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

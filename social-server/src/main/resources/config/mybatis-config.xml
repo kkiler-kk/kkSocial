@@ -33,5 +33,6 @@
         <mapper resource="mapper/commentMapper.xml"></mapper>
         <mapper resource="mapper/messageMapper.xml"></mapper>
         <mapper resource="mapper/likeMapper.xml"></mapper>
+        <mapper resource="mapper/fansMapper.xml"></mapper>
     </mappers>
 </configuration>
