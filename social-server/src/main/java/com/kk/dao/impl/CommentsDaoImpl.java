@@ -49,6 +49,9 @@ public class CommentsDaoImpl implements CommentsDao {
 
     @Override
     public int count(Status<?> status) {
-        return 0;
+        CommentsDao aClass = createClass(CommentsDao.class);
+        int count = aClass.count(status);
+        closeSession();
+        return count;
     }
 }

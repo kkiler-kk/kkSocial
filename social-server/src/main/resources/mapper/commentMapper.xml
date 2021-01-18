@@ -9,6 +9,9 @@
         <result property="like" column="like"/>
         <collection property="user" column="content_id" select="com.kk.dao.UserDao.getUserId"></collection>
     </resultMap>
+    <select id="count" resultType="Integer" parameterType="com.kk.bean.Status">
+        select count(`new_id`) as `count` from `tb_comments` where `new_id` = #{id}
+    </select>
     <select id="getByIdComment" resultMap="getByIdComment">
         SELECT
 	    <include refid="comment_table"></include>
