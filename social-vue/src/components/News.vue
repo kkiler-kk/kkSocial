@@ -33,7 +33,7 @@ export default {
 		},
 		getNews: function () {
 			this.setState(0);
-			this.axios.post('/api/news/get-top', {
+			this.axios.post('/api/public/get-top', {
 				pageNum: this.pageNum,
 				pageSize: this.pageSize
 			})

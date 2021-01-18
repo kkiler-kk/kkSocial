@@ -77,7 +77,7 @@ export default {
 			if (Verifys.isEmpty(email)) setErrorState('email', 'null');
 			else if (!Verifys.verifyEmail(email)) setErrorState('email', 'false');
 			else {
-				await this.axios.get('/api/user/exist-email', {
+				await this.axios.get('/api/public/exist-email', {
 					params: {
 						email
 					}
@@ -118,7 +118,7 @@ export default {
 			let setErrorState = this.setErrorState;
 			setErrorState('password', 'true');
 			let formData = new FormData(this.form);
-			await this.axios.post('/api/user/login', formData, {
+			await this.axios.post('/api/public/login', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},

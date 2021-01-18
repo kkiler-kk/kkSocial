@@ -148,7 +148,7 @@ export default {
 			setErrorState('name', 'true');
 			if (Verifys.isEmpty(name)) setErrorState('name', 'null');
 			else {
-				await this.axios.get('/api/user/exist-name/' + name)
+				await this.axios.get('/api/public/exist-name/' + name)
 				.then(response => {
 					if (!response.data) {
 						setErrorState('name', 'error');
@@ -172,7 +172,7 @@ export default {
 			if (Verifys.isEmpty(email)) setErrorState('email', 'null');
 			else if (!Verifys.verifyEmail(email)) setErrorState('email', 'false');
 			else {
-				await this.axios.get('/api/user/exist-email', {
+				await this.axios.get('/api/public/exist-email', {
 					params: {
 						email
 					}
@@ -206,7 +206,7 @@ export default {
 			verify.buttonText = '';
 			verify.isLoad = true;
 
-			await this.axios.get('/api/user/send-email', {
+			await this.axios.get('/api/public/send-email', {
 				params: {
 					email
 				}
@@ -260,7 +260,7 @@ export default {
 
 			let formData = new FormData(this.form);
 			// console.log(...formData);
-			await this.axios.post('/api/user/register', formData, {
+			await this.axios.post('/api/public/register', formData, {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
