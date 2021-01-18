@@ -118,12 +118,13 @@ export default {
 		setTimer: function () {
 			let verify = this.verify;
 			let i = 1;
-			this.timer = window.setInterval(() => {
+			let timer = this.timer;
+			timer = window.setInterval(() => {
 				verify.isLoad = false;
 				verify.buttonText = `已发送 (${60 - i}s)`;
 				if (++i >= 60) {
-					window.clearInterval(this.timer);
-					this.timer = null;
+					window.clearInterval(timer);
+					timer = null;
 					verify.buttonText = '再次发送';
 				}
 			}, 1000);
