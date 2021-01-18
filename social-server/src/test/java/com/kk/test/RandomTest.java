@@ -28,8 +28,10 @@ public class RandomTest {
     @Test
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
-        User userId = userDao.getUserId(1);
-        System.out.println(userId.getCountNews());
+        User byData = userDao.getByData(1);
+        System.out.println("byData.getCountUser() = " + byData.getCountUser());
+        System.out.println("byData.getCountNews() = " + byData.getCountNews());
+        System.out.println("byData.getCountFans() = " + byData.getCountFans());
     }
     @Test
     public void testNews(){
@@ -63,8 +65,10 @@ public class RandomTest {
     @Test
     public void testFans(){
         FansDao instance = FansDaoImpl.getInstance();
-        Integer integer = instance.countFans(1);
-        System.out.println(integer);
+        int count = instance.count(new Status<>(1, true));
+        System.out.println(count);
+        count = instance.count(new Status<>(1, false));
+        System.out.println(count);
     }
 }
 

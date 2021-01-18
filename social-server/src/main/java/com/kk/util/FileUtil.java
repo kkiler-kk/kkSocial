@@ -21,7 +21,7 @@ public class FileUtil {
     }
 
     public static String uploadFile(MultipartFile file, String email) {
-        if (Objects.equals("", email) && file.isEmpty()) {
+        if (Objects.equals("", email) || file.isEmpty()) {
             return null;
         }
         try {

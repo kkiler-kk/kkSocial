@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kk.dao.FansDao">
-    <select id="countUser" parameterType="Integer" resultType="Integer">
-        select count(`user_id`) as count from `tb_fans` where fan_id = #{id}
-    </select>
 
-    <select id="countFans" parameterType="Integer" resultType="Integer">
-        select count(`user_id`) as count from `tb_fans` where user_id = #{id}
+    <select id="count" parameterType="com.kk.bean.Status" resultType="Integer">
+        select count(`user_id`) as `count` from `tb_fans`
+        <where>
+            <if test="flag">
+                user_id = #{id}
+            </if>
+            <if test="!flag">
+                fan_id = #{id}
+            </if>
+        </where>
     </select>
 </mapper>

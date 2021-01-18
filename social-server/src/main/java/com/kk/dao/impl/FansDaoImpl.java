@@ -1,6 +1,8 @@
 package com.kk.dao.impl;
 
 import static com.kk.util.LinkData.*;
+
+import com.kk.bean.Status;
 import com.kk.dao.FansDao;
 
 public class FansDaoImpl implements FansDao {
@@ -10,22 +12,26 @@ public class FansDaoImpl implements FansDao {
     public static FansDao getInstance(){
         return Node.fansDao;
     }
-    static class Node{
-        private static FansDao fansDao = new FansDaoImpl();
-    }
+
     @Override
-    public Integer countUser(Integer id) {
-        FansDao aClass = createClass(FansDao.class);
-        Integer integer = aClass.countUser(id);
-        closeSession();
-        return integer;
+    public int updateLike(Status status) {
+        return 0;
     }
 
     @Override
-    public Integer countFans(Integer id) {
+    public int add(Status<?> status) {
+        return 0;
+    }
+
+    @Override
+    public int count(Status<?> status) {
         FansDao aClass = createClass(FansDao.class);
-        Integer integer = aClass.countFans(id);
+        int count = aClass.count(status);
         closeSession();
-        return integer;
+        return count;
+    }
+
+    static class Node{
+        private static FansDao fansDao = new FansDaoImpl();
     }
 }

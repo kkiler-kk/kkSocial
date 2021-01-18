@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public User getUser(Integer id){
-        return userDao.getUserId(id);
+        return userDao.getByData(id);
     }
     public String login(String email, String password){
         Integer result = userDao.getUserEAndP(email, password);
@@ -42,9 +42,8 @@ public class UserService {
     }
     public int register(User user, String code){
         boolean b = ToolUtil.checkNumber(user.getName(), redisUtil);
-        Date data = new Date();
         if (!b) return ErrorCode.TOO_MANY;
-        int minute = CodeUtil.getMinute(sendDate, data);
+        int minute = CodeUtil.getMinute(sendDate, new Date());
         if (minute > 1) return ErrorCode.CODE_PAST;
         if (!redisUtil.get(user.getEmail()).equals(code)) return ErrorCode.CODE_INCORRECT;
         int i = userDao.addUser(user);

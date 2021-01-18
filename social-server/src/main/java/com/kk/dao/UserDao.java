@@ -12,6 +12,8 @@ public interface UserDao {
 
     User getUserId(Integer id);
 
+    User getByData(Integer id);
+
     List<User> getUserAndFriendsById(Integer id);
 
     int addUser(User user);

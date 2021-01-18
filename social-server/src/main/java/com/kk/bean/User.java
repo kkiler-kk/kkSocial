@@ -34,22 +34,6 @@ public class User extends Parent {
     @ApiModelProperty("关注列表")
     private List<User> userList;
 
-    public Integer getCountUser() {
-        return countUser;
-    }
-
-    public void setCountUser(Integer countUser) {
-        this.countUser = countUser;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
     public User(){
 
     }
@@ -61,35 +45,23 @@ public class User extends Parent {
         this.url = url;
     }
 
-    public Integer getCountFans() {
-        return countFans;
-    }
-
-    public void setCountFans(Integer countFans) {
-        this.countFans = countFans;
-    }
-
-    public List<User> getFansList() {
-        return fansList;
-    }
-
-    public void setFansList(List<User> fansList) {
-        this.fansList = fansList;
-    }
-
-    public Integer getCountNews() {
-        return countNews;
-    }
-
-    public void setCountNews(Integer countNews) {
-        this.countNews = countNews;
-    }
-    public List<News> getNewsList() {
-        return newsList;
-    }
-
-    public void setNewsList(List<News> newsList) {
-        this.newsList = newsList;
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", friendsList=" + friendsList +
+                ", countFriends=" + countFriends +
+                ", url='" + url + '\'' +
+                ", newsList=" + newsList +
+                ", countNews=" + countNews +
+                ", countFans=" + countFans +
+                ", fansList=" + fansList +
+                ", countUser=" + countUser +
+                ", userList=" + userList +
+                '}';
     }
 
     public String getEmail() {
@@ -148,16 +120,51 @@ public class User extends Parent {
         this.url = url;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + super.getId() +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", countFriends=" + countFriends +
-                ", url='" + url + '\'' +
-                '}';
+    public List<News> getNewsList() {
+        return newsList;
+    }
+
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
+    }
+
+    public Integer getCountNews() {
+        return countNews;
+    }
+
+    public void setCountNews(Integer countNews) {
+        this.countNews = countNews;
+    }
+
+    public Integer getCountFans() {
+        return countFans;
+    }
+
+    public void setCountFans(Integer countFans) {
+        this.countFans = countFans;
+    }
+
+    public List<User> getFansList() {
+        return fansList;
+    }
+
+    public void setFansList(List<User> fansList) {
+        this.fansList = fansList;
+    }
+
+    public Integer getCountUser() {
+        return countUser;
+    }
+
+    public void setCountUser(Integer countUser) {
+        this.countUser = countUser;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

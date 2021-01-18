@@ -55,6 +55,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getByData(Integer id) {
+        UserDao aClass = createClass(UserDao.class);
+        User user = aClass.getUserId(id);
+        closeSession();
+        return user;
+    }
+
+    @Override
     public Integer getUserEAndP(String email, String password) {
         UserDao aClass = createClass(UserDao.class);
         Integer count = aClass.getUserEAndP(email,password);
