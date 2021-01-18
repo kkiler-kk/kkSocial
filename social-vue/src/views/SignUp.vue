@@ -121,15 +121,12 @@ export default {
 			this.timer = window.setInterval(() => {
 				verify.isLoad = false;
 				verify.buttonText = `已发送 (${60 - i}s)`;
-				if (++i == 60) {
+				if (++i >= 60) {
 					window.clearInterval(this.timer);
+					this.timer = null;
+					verify.buttonText = '再次发送';
 				}
 			}, 1000);
-			window.setTimeout(() => {
-				window.clearInterval(this.timer);
-				this.timer = null;
-				verify.buttonText = '再次发送';
-			}, 60 * 1000);
 		},
 		showAvatar: function () {
 			let file = new FormData(this.form).get("file");
