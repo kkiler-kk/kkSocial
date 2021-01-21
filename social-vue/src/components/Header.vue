@@ -6,6 +6,9 @@
 			</router-link>
 			
 			<div class="menu">
+				<div class="avatar" v-if="this.$store.state.isLogin" :class="[{'male': info.gender}, {'female': !info.gender}]">
+					<img v-if="info && info.url" :src="basicPath + info.url" :alt="info.name">
+				</div>
 				<div 
 					class="item" 
 					v-for="(link, index) of links" 
@@ -28,9 +31,19 @@ export default {
 	props: {
 		links: Array
 	},
+	data: function () {
+		return {
+			basicPath: this.$store.state.basicPath
+		};
+	},
 	methods: {
 		exec: function (link) {
 			if (link.handle) link.handle();
+		}
+	},
+	computed: {
+		info: function () {
+			return this.$store.state.user;
 		}
 	}
 }
@@ -58,9 +71,32 @@ export default {
 		font-weight: bolder;
 	}
 	
+	.avatar {
+		overflow: hidden;
+		border-radius: 50%;
+		margin-right: 1rem;
+		width: 2.5rem;
+		height: 2.5rem;
+		background-size: cover;
+		
+		img {
+			width: 100%;
+			height: 100%;
+		}
+			
+		&.male {
+			background-image: url('../assets/svg/male_avatar.svg');
+		}
+		
+		&.female {
+			background-image: url('../assets/svg/female_avatar.svg');
+		}
+	}
+	
 	.menu {
 		display: flex;
 		cursor: pointer;
+		align-items: center;
 		
 		> .item {
 			display: block;

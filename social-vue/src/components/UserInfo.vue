@@ -49,7 +49,6 @@ export default {
 	data: function () {
 		return {
 			state: 0,
-			info: null,
 			basicPath: this.$store.state.basicPath
 		};
 	},
@@ -58,6 +57,7 @@ export default {
 			this.state = state;
 		},
 		getInfo: function () {
+			if (this.user) return;
 			this.setState(0);
 			if (!this.isLogin) {
 				this.setState(-2);
@@ -74,8 +74,9 @@ export default {
 					this.setState(-2);
 					return;
 				}
-				this.info = response.data.data;
+				let info = response.data.data;
 				this.setState(1);
+				this.$store.commit('setUser', info);
 			}).catch(() => {
 				this.setState(-1);
 			});
@@ -106,6 +107,9 @@ export default {
 				clickHandle: this.toLogin
 			}
 			return {};
+		},
+		info: function () {
+			return this.$store.state.user;
 		}
 	},
 	mounted: function () {
