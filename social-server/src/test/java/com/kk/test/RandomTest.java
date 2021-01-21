@@ -29,6 +29,7 @@ public class RandomTest {
     public void testUser(){
         UserDao userDao = UserDaoImpl.getInstance();
         User byData = userDao.getByData(1);
+        System.out.println("byData.getName() = " + byData.getName());
         System.out.println("byData.getCountUser() = " + byData.getCountUser());
         System.out.println("byData.getCountNews() = " + byData.getCountNews());
         System.out.println("byData.getCountFans() = " + byData.getCountFans());

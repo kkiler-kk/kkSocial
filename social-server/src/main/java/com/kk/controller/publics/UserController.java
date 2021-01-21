@@ -54,7 +54,7 @@ public class UserController {
             return new ResponseResult(ILLEGAL_NULL);
         }
         String url = null;
-        if(file != null ) url = FileUtil.uploadFile(file, email);
+        url = FileUtil.uploadFile(file, email);
         if(StrUtil.isEmpty(url)){
             if(user.getGender() == 1) url = "/upload/man.png";
             else url = "/upload/woman.png";

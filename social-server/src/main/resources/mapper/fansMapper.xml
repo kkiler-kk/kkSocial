@@ -6,10 +6,10 @@
         select count(`user_id`) as `count` from `tb_fans`
         <where>
             <if test="flag">
-                user_id = #{id}
+               and user_id = #{id}
             </if>
             <if test="!flag">
-                fan_id = #{id}
+                and fan_id = #{id}
             </if>
         </where>
     </select>

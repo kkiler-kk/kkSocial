@@ -11,6 +11,13 @@
         <collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
 		<collection property="countFriends" select="countFriends" column="id"></collection>
     </resultMap>
+	<resultMap id="getUserByName" type="com.kk.bean.User">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
+		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.count"></collection>
+	</resultMap>
 	<resultMap id="getByData" type="com.kk.bean.User">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
@@ -36,13 +43,6 @@
 		select `id`, `name`, `url`,(select count(`user_id`) from `tb_news` where `user_id` = #{id}) as countNews
 		from `tb_user` where id = #{id}
 	</select>
-	<resultMap id="getUserByName" type="com.kk.bean.User">
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="url" column="url"/>
-		<collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
-		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.count"></collection>
-	</resultMap>
 	<select id="getUserByName" resultMap="getUserByName" parameterType="String">
 		select `id`, `name`, `url`
 		from `tb_user` where `name` = #{name}

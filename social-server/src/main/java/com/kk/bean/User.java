@@ -15,6 +15,7 @@ public class User extends Parent {
     private String name;//姓名
     @ApiModelProperty("性别: 0 女 1 男")
     private Integer gender;//性别
+
     @ApiModelProperty("好友列表")
     private List<User> friendsList;//好友列表
     @ApiModelProperty("好友总数")
