@@ -133,11 +133,10 @@ export default {
 				}
 				this.$store.commit('setLogin', true);
 				this.$store.commit('setToken', response.data.data);
-				this.$store.commit('setUser', {
-					email: formData.get('email'),
-					password: formData.get('password')
-				});
-				localStorage.setItem('ktsocial', JSON.stringify(this.$store.state));
+				localStorage.setItem('ktsocial', JSON.stringify({
+					isLogin: this.$store.state.isLogin,
+					token: this.$store.state.token
+				}));
 				this.$router.push('/');
 			})
 			.catch(error => {

@@ -2,8 +2,8 @@
 	<ul id="news-list">
 		<li v-for="(item, index) of list" :key="'n' + index">
 			<div class="left">
-				<div class="avatar">
-					<img :src="'http://localhost:8800' + item.user.url" :alt="item.user.name" v-show="item.user">
+				<div class="avatar" :class="[{'male': item.user.gender}, {'female': !item.user.gender}]">
+					<img v-if="item.user.url !== ''" :src="basicPath + item.user.url" :alt="item.user.name" v-show="item.user">
 				</div>
 			</div>
 			<div class="message">
@@ -42,6 +42,11 @@ export default {
 	name: 'NewsList',
 	props: {
 		list: Array
+	},
+	data: function () {
+		return {
+			basicPath: this.$store.state.basicPath
+		};
 	},
 	methods: {
 		formatDate: function (dateStr) {
@@ -84,9 +89,18 @@ export default {
 				background-color: #42B98388;
 				border-radius: 50%;
 				overflow: hidden;
+				background-size: cover;
 				
 				> img {
 					width: 100%;
+				}
+			
+				&.male {
+					background-image: url('../assets/svg/male_avatar.svg');
+				}
+				
+				&.female {
+					background-image: url('../assets/svg/female_avatar.svg');
 				}
 			}
 		}

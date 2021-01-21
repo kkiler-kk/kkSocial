@@ -22,8 +22,11 @@ export default {
 
 <style lang="scss">
 .retry {
+	text-align: center;
+	background-color: #FFFFFF;
+	padding: 1rem;
+	
 	> p {
-		text-align: center;
 		line-height: 3rem;
 	}
 	

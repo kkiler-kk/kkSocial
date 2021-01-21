@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-		<Header :links="this.$store.state.isLogin ? links : touristLinks"/>
+		<Header :links="isLogin ? links : touristLinks"/>
 		<div id="page">
 			<router-view/>
 		</div>
@@ -38,7 +38,13 @@ export default {
 			this.$store.commit('setLogin', false);
 			this.$store.commit('setUser', null);
 			localStorage.removeItem('ktsocial');
+			location.reload();
 		}
+	},
+	computed: {
+		isLogin: function () {
+			return this.$store.state.isLogin;
+		} 
 	},
 	components: {
 		Header
@@ -49,7 +55,6 @@ export default {
 		if (cache) {
 				this.$store.commit('setLogin', cache.isLogin);
 				this.$store.commit('setToken', cache.token);
-				this.$store.commit('setUser', cache.user);
 		}
 	}
 }

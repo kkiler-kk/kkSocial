@@ -13,5 +13,7 @@ export default {
 <style scoped>
 p {
 	text-align: center;
+	background-color: #FFFFFF;
+	padding: 1rem;
 }
 </style>

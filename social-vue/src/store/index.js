@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
 		token: '',
 		user: null,
-		isLogin: false
+		isLogin: false,
+		basicPath: 'http://localhost:8800'
   },
   mutations: {
 		setToken (state, token) {
