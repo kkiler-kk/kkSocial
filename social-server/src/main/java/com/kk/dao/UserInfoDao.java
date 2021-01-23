@@ -1,5 +1,12 @@
-package com.kk.dao;/**
+package com.kk.dao;
+
+import com.kk.bean.UserInfo;
+
+/**
  * @author kk
  * @Date 2021/1/22
- */public class UserInfoDao {
+ */
+public interface UserInfoDao {
+    UserInfo getFUN(Integer id);
+    UserInfo getUserHome(Integer id);
 }

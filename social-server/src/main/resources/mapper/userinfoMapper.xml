@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kk.dao.UserInfoDao">
+    <select id="getFUN" resultType="com.kk.bean.UserInfo" parameterType="Integer">
+        SELECT
+	( SELECT count( `new_id` ) FROM `tb_news` WHERE user_id = #{id} ) AS count_news,
+	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE fan_id = #{id} ) AS count_fans,
+	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE user_id = #{id} ) AS count_user
+
+FROM
+DUAL
+    </select>
+    <resultMap id="getUserHome" type="com.kk.bean.UserInfo">
+        <result property="count_news" column="count_news" />
+        <result property="count_fans" column="count_fans" />
+        <result property="count_user" column="count_user" />
+        <collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
+    </resultMap>
+    <select id="getUserHome" resultMap="getUserHome" parameterType="Integer">
+            SELECT
+	( SELECT count( `new_id` ) FROM `tb_news` WHERE user_id = #{id} ) AS count_news,
+	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE fan_id = #{id} ) AS count_fans,
+	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE user_id = #{id} ) AS count_user
+FROM
+DUAL
+    </select>
+</mapper>

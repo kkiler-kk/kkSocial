@@ -4,7 +4,7 @@ import com.kk.bean.parent.Parent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.List;
+
 @ApiModel(value = "用户类")
 public class User extends Parent {
     @ApiModelProperty(value = "邮箱")
@@ -15,26 +15,12 @@ public class User extends Parent {
     private String name;//姓名
     @ApiModelProperty("性别: 0 女 1 男")
     private Integer gender;//性别
-
-    @ApiModelProperty("好友列表")
-    private List<User> friendsList;//好友列表
-    @ApiModelProperty("好友总数")
-    private Integer countFriends; //好友总数
+    @ApiModelProperty("个性签名")
+    private String personal_signature;
     @ApiModelProperty("头像路径")
     private String url;  //头像路径
-    @ApiModelProperty("用户动态")
-    private List<News> newsList;
-    @ApiModelProperty("动态总数")
-    private Integer countNews;
-    @ApiModelProperty("粉丝总数")
-    private Integer countFans;
-    @ApiModelProperty("粉丝列表")
-    private List<User> fansList;
-    @ApiModelProperty("关注总数")
-    private Integer countUser;
-    @ApiModelProperty("关注列表")
-    private List<User> userList;
-
+    @ApiModelProperty("用户信息")
+    private UserInfo userInfo;
     public User(){
 
     }
@@ -49,19 +35,9 @@ public class User extends Parent {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", friendsList=" + friendsList +
-                ", countFriends=" + countFriends +
+                "id='" + super.getId() + '\'' +
+                "name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", newsList=" + newsList +
-                ", countNews=" + countNews +
-                ", countFans=" + countFans +
-                ", fansList=" + fansList +
-                ", countUser=" + countUser +
-                ", userList=" + userList +
                 '}';
     }
 
@@ -81,6 +57,14 @@ public class User extends Parent {
         this.password = password;
     }
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     public String getName() {
         return name;
     }
@@ -97,20 +81,12 @@ public class User extends Parent {
         this.gender = gender;
     }
 
-    public List<User> getFriendsList() {
-        return friendsList;
+    public String getPersonal_signature() {
+        return personal_signature;
     }
 
-    public void setFriendsList(List<User> friendsList) {
-        this.friendsList = friendsList;
-    }
-
-    public Integer getCountFriends() {
-        return countFriends;
-    }
-
-    public void setCountFriends(Integer countFriends) {
-        this.countFriends = countFriends;
+    public void setPersonal_signature(String personal_signature) {
+        this.personal_signature = personal_signature;
     }
 
     public String getUrl() {
@@ -119,53 +95,5 @@ public class User extends Parent {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public List<News> getNewsList() {
-        return newsList;
-    }
-
-    public void setNewsList(List<News> newsList) {
-        this.newsList = newsList;
-    }
-
-    public Integer getCountNews() {
-        return countNews;
-    }
-
-    public void setCountNews(Integer countNews) {
-        this.countNews = countNews;
-    }
-
-    public Integer getCountFans() {
-        return countFans;
-    }
-
-    public void setCountFans(Integer countFans) {
-        this.countFans = countFans;
-    }
-
-    public List<User> getFansList() {
-        return fansList;
-    }
-
-    public void setFansList(List<User> fansList) {
-        this.fansList = fansList;
-    }
-
-    public Integer getCountUser() {
-        return countUser;
-    }
-
-    public void setCountUser(Integer countUser) {
-        this.countUser = countUser;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
     }
 }

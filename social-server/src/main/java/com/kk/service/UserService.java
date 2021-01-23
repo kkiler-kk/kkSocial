@@ -2,7 +2,6 @@ package com.kk.service;
 
 import com.kk.bean.User;
 import com.kk.dao.UserDao;
-import com.kk.dao.impl.UserDaoImpl;
 import com.kk.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,11 +22,8 @@ public class UserService {
     private Date sendDate;
     @Autowired
     private IMailService mailService;
-
-    private final UserDao userDao;
-    private UserService(){
-        userDao = UserDaoImpl.getInstance();
-    }
+    @Autowired
+    private UserDao userDao;
 
     public User getUser(Integer id){
         return userDao.getByData(id);

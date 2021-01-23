@@ -7,7 +7,6 @@ import com.kk.bean.PageRequest;
 import com.kk.bean.PageResult;
 import com.kk.bean.Status;
 import com.kk.dao.NewsDao;
-import com.kk.dao.impl.NewsDaoImpl;
 import com.kk.util.PageUtils;
 import com.kk.util.RedisUtil;
 import com.kk.util.ToolUtil;
@@ -21,11 +20,9 @@ public class NewsService {
 
     @Autowired
     private RedisUtil redisUtil;
-
+    @Autowired
     private NewsDao newsDao;
-    private NewsService(){
-        newsDao = NewsDaoImpl.getInstance();
-    }
+
     public PageResult getSelectRandom(PageRequest pageRequest){
         int pageNum = pageRequest.getPageNum(), pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);

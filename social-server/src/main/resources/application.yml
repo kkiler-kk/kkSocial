@@ -2,8 +2,14 @@ file:
     staticAccessPath: /upload/**
 server:
     port: 8800
-
+mybatis:
+    mapper-locations: classpath:mapper/**/*Mapper.xml
 spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/social?useSSL=false&serverTimezone=UTC
+        username: root
+        password: admin
     autoconfigure:
         exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
     security:

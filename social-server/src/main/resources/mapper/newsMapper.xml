@@ -23,12 +23,21 @@
         <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <select id="getSelectRandom" resultMap="getUserAndNews">
-       SELECT
-       <include refid="news_table"></include>
+        SELECT <include refid="news_table"></include> FROM `tb_news` WHERE `like` &lt;= ( SELECT floor( sum( `like` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        )
         FROM
-	    `tb_news`
+        `tb_news`
+        ) and comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        )
+        FROM
+        `tb_news`
+        ) and share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        )
+        FROM
+        `tb_news`
+        )
         ORDER BY
-	    `like` desc, comment_num desc, share_num desc
+        `like` DESC, comment_num desc, share_num desc
     </select>
     <select id="getTopTag" resultType="String">
         SELECT DISTINCT

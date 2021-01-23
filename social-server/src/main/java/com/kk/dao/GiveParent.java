@@ -7,5 +7,5 @@ public interface GiveParent {
 
     int add(Status<?> status);
 
-    int count(Status<?> status);
+    Integer count(Status<?> status);
 }

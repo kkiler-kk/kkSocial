@@ -15,16 +15,14 @@
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
-		<collection property="newsList" column="id" select="com.kk.dao.NewsDao.getNewsAndOwn"></collection>
-		<collection property="countNews" column="id" select="com.kk.dao.NewsDao.count"></collection>
+		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getUserHome"></collection>
 	</resultMap>
 	<resultMap id="getByData" type="com.kk.bean.User">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url" />
-		<collection property="countFans" select="com.kk.dao.FansDao.count" column="{flag = true, id = id}"></collection>
-		<collection property="countNews" select="com.kk.dao.NewsDao.count" column="id"></collection>
-		<collection property="countUser" select="com.kk.dao.FansDao.count" column="{flag = false, id = id}"></collection>
+		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getFUN">
+		</collection>
 	</resultMap>
 	<select id="getByData" resultMap="getByData" parameterType="Integer">
 		select `id`, `name`, `url`
@@ -87,9 +85,7 @@ VALUES
 		delete from `tb_user` where id = #{id}
 	</delete>
 	<insert id="addFriend" parameterType="Integer">
-		
 		insert into `tb_friends`(`user_id`,`friend_id`)values(#{user_id},#{friend_id});
-
 	</insert>
 	<delete id="deleteFriend" parameterType="Integer">
 		delete from `tb_friends` where `user_id` = #{user_id} and `friend_id` = #{friend_id}
