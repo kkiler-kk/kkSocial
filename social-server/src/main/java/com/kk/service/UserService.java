@@ -6,8 +6,6 @@ import com.kk.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 import java.util.Date;
 
 @Component
@@ -26,7 +24,13 @@ public class UserService {
     private UserDao userDao;
 
     public User getUser(Integer id){
-        return userDao.getByData(id);
+        String i = String.valueOf(id);
+        boolean flag = redisUtil.hashKey(i);
+        if(!flag){
+            User byData = userDao.getByData(id);
+            redisUtil.set(i, byData,  30 *  (60 * 60) * 24);
+        }
+        return (User) redisUtil.get(i);
     }
     public String login(String email, String password){
         Integer result = userDao.getUserEAndP(email, password);

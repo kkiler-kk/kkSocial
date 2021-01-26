@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping(value = "get-user")
     public ResponseResult<User> getUser(HttpServletRequest request){
         Object userId = request.getAttribute("id");
-        int i = Integer.parseInt(String.valueOf(userId));
+        Integer i = Integer.parseInt(String.valueOf(userId));
         User user = userService.getUser(i);
         return new ResponseResult<>(user);
     }

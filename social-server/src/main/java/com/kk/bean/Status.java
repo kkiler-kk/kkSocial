@@ -2,7 +2,9 @@ package com.kk.bean;
 
 import com.kk.bean.parent.Parent;
 
-public class Status<T> extends Parent {
+import java.io.Serializable;
+
+public class Status<T> extends Parent implements Serializable {
     private String type; //消息类型
     private Boolean flag; //点赞 true false
     private Integer user_id; //用户id

@@ -43,8 +43,3 @@ public class RandomTest {
         System.out.println(newsAndOwn.size());
     }
 }
-
-
-
-
-

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 @Component
-public class RedisUtil {
+public class RedisUtil<V> {
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
@@ -57,13 +57,15 @@ public class RedisUtil {
      * @Version 1.0
      */
     public Object get(String key){
-        if(redisTemplate.hasKey(key)){
+        if(hashKey(key)){
             return redisTemplate.opsForValue().get(key);
         }else{
             return null;
         }
     }
-
+    public boolean hashKey(String key){
+        return redisTemplate.hasKey(key);
+    }
     /*
      * @ClassName RedisClient
      * @Desc TODO   获取失效时间（-2：失效 / -1：没有时间限制）
@@ -77,5 +79,4 @@ public class RedisUtil {
             return Long.parseLong(-2+"");
         }
     }
-
 }

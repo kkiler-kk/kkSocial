@@ -61,7 +61,7 @@ public class UserController {
         }
         user.setUrl(url);
         int register = userService.register(user, code);
-        return register > 0 ? new ResponseResult<>("OK"): new ResponseResult<>(register);
+        return new ResponseResult<>(register);
     }
 
     @ApiOperation("验证邮箱是否存在")

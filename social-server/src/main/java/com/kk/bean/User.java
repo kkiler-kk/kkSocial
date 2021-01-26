@@ -4,9 +4,11 @@ import com.kk.bean.parent.Parent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 
 @ApiModel(value = "用户类")
-public class User extends Parent {
+public class User extends Parent implements Serializable {
     @ApiModelProperty(value = "邮箱")
     private String email;//邮箱
     @ApiModelProperty(value = "密码")

@@ -20,6 +20,7 @@ public class NewsService {
 
     @Autowired
     private RedisUtil redisUtil;
+
     @Autowired
     private NewsDao newsDao;
 
@@ -28,7 +29,8 @@ public class NewsService {
         PageHelper.startPage(pageNum, pageSize);
         List<News> list = newsDao.getSelectRandom();
         ToolUtil.setList(list);
-        return PageUtils.getPageResult(new PageInfo<>(list));
+        PageResult pageResult = PageUtils.getPageResult(new PageInfo<>(list));
+        return pageResult;
     }
     public PageResult getNewsByTag(String tag, PageRequest pageRequest){
         tag = "#" + tag + "#";
@@ -44,13 +46,12 @@ public class NewsService {
         return PageUtils.getPageResult(new PageInfo<>(newsAndUserById));
     }
     public List<String> getTopTag() {
-        Object top = redisUtil.get("top");
-        if (top == null) {
+        boolean flag = redisUtil.hashKey("top");
+        if (!flag) {
             List<String> topTag = newsDao.getTopTag();
             redisUtil.set("top", topTag, 10800); //三小时刷新一下热搜
-        } else {
-            top = redisUtil.get("top");
         }
+        Object top = redisUtil.get("top");
         return (List<String>) top;
     }
     public Integer add(News news){

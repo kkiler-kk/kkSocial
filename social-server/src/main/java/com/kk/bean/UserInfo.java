@@ -3,6 +3,7 @@ package com.kk.bean;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * @Date 2021/1/22
  */
 @ApiModel(value = "用户信息类")
-public class UserInfo {
+public class UserInfo implements Serializable {
     @ApiModelProperty("好友列表")
     private List<User> friendsList;//好友列表
     @ApiModelProperty("好友总数")

@@ -17,7 +17,7 @@ public class JwtTokenUtil {
     // 签名主题
     public static final String SUBJECT = "kk";
     // 过期时间
-    public static final long EXPIRITION = 1000 * 24 * 60 * 60 * 7;
+    public static final long EXPIRITION = 60 * 60 * 24 * 7 * 30;
     // 应用密钥
     public static final String APPSECRET_KEY = "kk_secret";
     // 角色权限声明
@@ -44,14 +44,9 @@ public class JwtTokenUtil {
     /**
      * 校验Token
      */
-    public static Claims checkJWT(String token) {
-        try {
-            final Claims claims = Jwts.parser().setSigningKey(APPSECRET_KEY).parseClaimsJws(token).getBody();
-            return claims;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static Claims checkJWT(String token)throws Exception {
+        final Claims claims = Jwts.parser().setSigningKey(APPSECRET_KEY).parseClaimsJws(token).getBody();
+        return claims;
     }
 
     /**
