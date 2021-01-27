@@ -15,6 +15,7 @@
 				<div class="content">
 					<p>{{item.content_text}}</p>
 				</div>
+				<ImageBox v-if="item.imgList.length > 0" :list="item.imgList"/>
 				<div class="menu">
 					<div class="item">
 						<eva-icon name="flip-2-outline" fill="#848484" animation="pulse"></eva-icon>
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import ImageBox from '@/components/ImageBox.vue';
+
 export default {
 	name: 'NewsList',
 	props: {
@@ -66,6 +69,9 @@ export default {
 			if (now.getFullYear() == date[0]) return `${date[1]}-${date[2]}`;
 			return dateStr.split(' ')[0];
 		}
+	},
+	components: {
+		ImageBox
 	}
 }
 </script>
@@ -77,6 +83,7 @@ export default {
 		list-style: none;
 		background-color: #FFFFFF;
 		padding: 1rem;
+		padding-right: 2rem;
 		margin-bottom: 1rem;
 		
 		> .left {
@@ -127,6 +134,10 @@ export default {
 				line-height: 2rem;
 				word-break: break-all;
 				hyphens: auto;
+			}
+			
+			> .imgbox {
+				margin-bottom: 1rem;
 			}
 			
 			> .menu {

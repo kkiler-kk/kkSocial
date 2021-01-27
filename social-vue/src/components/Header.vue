@@ -6,8 +6,8 @@
 			</router-link>
 			
 			<div class="menu">
-				<div class="avatar" v-if="this.$store.state.isLogin" :class="[{'male': info.gender}, {'female': !info.gender}]">
-					<img v-if="info && info.url" :src="basicPath + info.url" :alt="info.name">
+				<div class="avatar male" v-if="this.$store.state.isLogin">
+					<img v-if="user && user.url" :src="basicPath + user.url" :alt="user.name">
 				</div>
 				<div 
 					class="item" 
@@ -42,7 +42,7 @@ export default {
 		}
 	},
 	computed: {
-		info: function () {
+		user: function () {
 			return this.$store.state.user;
 		}
 	}
