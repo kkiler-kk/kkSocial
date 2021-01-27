@@ -1,27 +1,27 @@
 <template>
 	<div class="user-info">
 		<components v-show="state < 1" :is="getState" v-bind="getStateProps"></components>
-		<div v-show="state > 0" class="content" v-if="info">
+		<div v-show="state > 0" class="content" v-if="user">
 			<div class="background"></div>
 			<div class="title">
-				<div class="avatar" :class="[{'male': info.gender}, {'female': !info.gender}]">
-					<img v-if="info.url !== ''" :src="basicPath + info.url" :alt="info.name">
+				<div class="avatar male">
+					<img v-if="user.url !== ''" :src="basicPath + user.url" :alt="user.name">
 				</div>
 				<div class="name">
-					{{info.name}}
+					{{user.name}}
 				</div>
 			</div>
 			<div class="menu">
 				<router-link class="item" to="/">
-					<div class="num">{{info.countUser}}</div>
+					<div class="num">{{user.userInfo.count_user}}</div>
 					<div class="message">关注</div>
 				</router-link>
 				<router-link class="item" to="/">
-					<div class="num">{{info.countFans}}</div>
+					<div class="num">{{user.userInfo.count_fans}}</div>
 					<div class="message">粉丝</div>
 				</router-link>
 				<router-link class="item" to="/">
-					<div class="num">{{info.countNews}}</div>
+					<div class="num">{{user.userInfo.count_news}}</div>
 					<div class="message">动态</div>
 				</router-link>
 			</div>
@@ -74,9 +74,9 @@ export default {
 					this.setState(-2);
 					return;
 				}
-				let info = response.data.data;
+				let user = response.data.data;
 				this.setState(1);
-				this.$store.commit('setUser', info);
+				this.$store.commit('setUser', user);
 			}).catch(() => {
 				this.setState(-1);
 			});
@@ -108,7 +108,7 @@ export default {
 			}
 			return {};
 		},
-		info: function () {
+		user: function () {
 			return this.$store.state.user;
 		}
 	},
@@ -168,7 +168,7 @@ export default {
 		> .menu {
 			display: flex;
 			cursor: pointer;
-			padding: 1rem;
+			padding: 1rem 2rem;
 			
 			> .item {
 				flex: 2;
