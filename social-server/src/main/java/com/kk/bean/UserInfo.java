@@ -15,7 +15,7 @@ public class UserInfo implements Serializable {
     @ApiModelProperty("好友列表")
     private List<User> friendsList;//好友列表
     @ApiModelProperty("好友总数")
-    private Integer countFriends; //好友总数
+    private Integer count_friends; //好友总数
     @ApiModelProperty("用户动态")
     private List<News> newsList;
     @ApiModelProperty("动态总数")
@@ -33,7 +33,7 @@ public class UserInfo implements Serializable {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "countFriends=" + countFriends +
+                "countFriends=" + count_friends +
                 ", count_news=" + count_news +
                 ", count_fans=" + count_fans +
                 ", count_user=" + count_user +
@@ -48,12 +48,12 @@ public class UserInfo implements Serializable {
         this.friendsList = friendsList;
     }
 
-    public Integer getCountFriends() {
-        return countFriends;
+    public Integer getCount_friends() {
+        return count_friends;
     }
 
-    public void setCountFriends(Integer countFriends) {
-        this.countFriends = countFriends;
+    public void setCount_friends(Integer count_friends) {
+        this.count_friends = count_friends;
     }
 
     public List<News> getNewsList() {

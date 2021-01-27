@@ -27,11 +27,11 @@
         )
         FROM
         `tb_news`
-        ) and comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        ) or comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
         )
         FROM
         `tb_news`
-        ) and share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        ) or share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
         )
         FROM
         `tb_news`

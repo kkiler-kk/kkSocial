@@ -18,10 +18,29 @@ DUAL
     </resultMap>
     <select id="getUserHome" resultMap="getUserHome" parameterType="Integer">
             SELECT
+            #{id} as `id`,
 	( SELECT count( `new_id` ) FROM `tb_news` WHERE user_id = #{id} ) AS count_news,
 	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE fan_id = #{id} ) AS count_fans,
 	( SELECT count( `fans_id` ) FROM `tb_fans` WHERE user_id = #{id} ) AS count_user
 FROM
 DUAL
+    </select>
+    <resultMap id="getFriendsCount" type="com.kk.bean.UserInfo">
+        <result property="count_friends" column="count_friends"/>
+        <collection property="friendsList" column="id" select="getFriends"></collection>
+    </resultMap>
+    <select id="getFriendsCount" parameterType="Integer" resultMap="getFriendsCount">
+
+SELECT
+    #{id} as `id`,
+	count(u.id ) as count_friends
+FROM
+	`tb_user` u
+	LEFT JOIN `tb_friends` f ON f.user_id = u.id
+WHERE
+	u.id = #{id}
+    </select>
+    <select id="getFriends" parameterType="Integer" resultType="com.kk.bean.User">
+        SELECT * FROM `tb_user` WHERE id IN( SELECT f.friend_id FROM `tb_user` u LEFT JOIN `tb_friends` f ON f.user_id = u.id WHERE u.id = #{id})
     </select>
 </mapper>

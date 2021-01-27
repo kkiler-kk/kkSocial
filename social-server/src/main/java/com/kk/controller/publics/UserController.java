@@ -40,7 +40,6 @@ public class UserController {
         if(StrUtil.isEmpty(email,password)){
             return new ResponseResult<String>(ILLEGAL_NULL);
         }
-        //if(!StrUtil.isValidEmail(email)) throw new SecurityException("email no standard")
         String token = userService.login(email, password);
         if(token == null) return new ResponseResult<>(ILLEGAL_PARAMETER);
         return new ResponseResult<>(token);
@@ -48,7 +47,6 @@ public class UserController {
     @ApiOperation("注册")
     @PostMapping(value = "/register")
     public ResponseResult<String> register(@ModelAttribute User user, @RequestParam("file") MultipartFile file, String code){
-
         String email = user.getEmail(), password = user.getPassword(), name = user.getName();
         if(StrUtil.isEmpty(email,password, name)){
             return new ResponseResult(ILLEGAL_NULL);

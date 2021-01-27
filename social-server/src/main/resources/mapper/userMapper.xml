@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kk.dao.UserDao">
-
     <resultMap id="getUserById" type="com.kk.bean.User">
         <id property="id" column="id"/>
         <result property="email" column="email"/>
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
 		<result property="url" column="url" />
-        <collection property="friendsList" select="getUserAndFriendsById" column="id"></collection>
-		<collection property="countFriends" select="countFriends" column="id"></collection>
+		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getFriendsCount"></collection>
     </resultMap>
 	<resultMap id="getUserByName" type="com.kk.bean.User">
 		<id property="id" column="id"/>
@@ -57,18 +55,6 @@
 		</where>
 
 	</select>
-	<select id="countFriends" resultType="Integer" parameterType="Integer">
-		SELECT
-	count( f.friend_id )
-FROM
-	`tb_user` u
-	LEFT JOIN `tb_friends` f ON f.user_id = u.id
-WHERE
-	u.id = #{id}
-	</select>
-    <select id="getUserAndFriendsById" parameterType="Integer" resultType="com.kk.bean.User">
-        SELECT * FROM `tb_user` WHERE id IN( SELECT f.friend_id FROM `tb_user` u LEFT JOIN `tb_friends` f ON f.user_id = u.id WHERE u.id = #{id})
-    </select>
     <insert id="addUser" parameterType="com.kk.bean.User">
         INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url` )
 VALUES

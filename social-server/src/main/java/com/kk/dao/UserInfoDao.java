@@ -1,6 +1,9 @@
 package com.kk.dao;
 
+import com.kk.bean.User;
 import com.kk.bean.UserInfo;
+
+import java.util.List;
 
 /**
  * @author kk
@@ -9,4 +12,6 @@ import com.kk.bean.UserInfo;
 public interface UserInfoDao {
     UserInfo getFUN(Integer id);
     UserInfo getUserHome(Integer id);
+    List<User> getFriends(Integer id);
+    UserInfo getFriendsCount(Integer id);
 }

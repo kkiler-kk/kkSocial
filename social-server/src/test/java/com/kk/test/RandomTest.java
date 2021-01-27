@@ -33,13 +33,12 @@ public class RandomTest {
     }
     @Test
     public void testUserInfo(){
-        UserInfo userHome = userInfoDao.getUserHome(2);
+        UserInfo userHome = userInfoDao.getUserHome(1);
         System.out.println(userHome);
         System.out.println(userHome.getNewsList());
     }
     @Test
     public void testNews(){
         List<News> newsAndOwn = newsDao.getNewsAndOwn(2);
-        System.out.println(newsAndOwn.size());
     }
 }

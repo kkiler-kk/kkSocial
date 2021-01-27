@@ -5,10 +5,10 @@
     <select id="count" parameterType="com.kk.bean.Status" resultType="Integer">
         select count(`user_id`) as `count` from `tb_fans`
         <where>
-            <if test="flag">
+            <if test="flag == 1">
                and user_id = #{id}
             </if>
-            <if test="!flag">
+            <if test="flag == -1">
                 and fan_id = #{id}
             </if>
         </where>
