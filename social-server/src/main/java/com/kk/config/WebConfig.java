@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] strings = {"/swagger-resources/**", "/webjars/**", "/v2/**","/swagger-ui.html/**","/public/**","/hello","/upload/**","/news/**"};
+        String[] strings = {"/swagger-resources/**", "/webjars/**", "/v2/**","/swagger-ui.html/**","/public/**","/hello","/upload/**","/news-user/**"};
 //        InterceptorRegistration registration = registry.addInterceptor(new JwtInterceptor());
 //        registration.addPathPatterns("/**"); //拦截所有路由
 //        registration.excludePathPatterns(strings);//放某些路由不需要验证,
