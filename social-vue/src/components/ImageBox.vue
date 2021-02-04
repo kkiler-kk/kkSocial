@@ -31,9 +31,9 @@
 				</div>
 			</div>
 			<div class="img">
-				<div class="left" v-if="now > 0" @click="now -= 1"></div>
+				<div class="left" v-if="now > 0" @click="now -= 1, rotateState = 0"></div>
 				<img :class="'r' + rotateState" :src="basicPath + list[now]" alt="动态图片" @click="closeBox()"/>
-				<div class="right" v-if="now < list.length - 1" @click="now += 1"></div>
+				<div class="right" v-if="now < list.length - 1" @click="now += 1, rotateState = 0"></div>
 			</div>
 			<div class="index" v-if="list.length > 1">
 				<div 
