@@ -35,7 +35,7 @@
 				<img :class="'r' + rotateState" :src="basicPath + list[now]" alt="动态图片" @click="closeBox()"/>
 				<div class="right" v-if="now < list.length - 1" @click="now += 1"></div>
 			</div>
-			<div class="index">
+			<div class="index" v-if="list.length > 1">
 				<div 
 					class="img" 
 					v-for="(url, index) of list" 
@@ -108,7 +108,12 @@ export default {
 		
 		&.one {
 			grid-template-columns: 14rem;
-			grid-template-rows: 7rem;
+			grid-template-rows: 10rem;
+			
+			> .img {
+				width: 14rem;
+				height: 10rem;
+			}
 		}
 	}
 	
