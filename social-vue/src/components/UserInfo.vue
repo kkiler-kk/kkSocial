@@ -161,14 +161,14 @@ export default {
 		> .title {
 			display: flex;
 			align-items: center;
-			padding: 0 2rem;
-			transform: translateY(-1rem);
+			padding: 0 1rem;
+			margin-top: -1.5rem;
 		}
 		
 		> .menu {
 			display: flex;
 			cursor: pointer;
-			padding: 1rem 2rem;
+			padding: 1rem;
 			
 			> .item {
 				flex: 2;

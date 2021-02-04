@@ -1,5 +1,9 @@
 <template>
 	<div id="news">
+		<div class="title">
+			<span class="text">热门</span>
+			<eva-icon name="settings-2" fill="#424242"></eva-icon>
+		</div>
 		<components :is="getState" v-bind="getStateProps"></components>
 	</div>
 </template>
@@ -89,5 +93,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+#news {
+	> .title {
+		display: flex;
+		line-height: 3rem;
+		background-color: #FFFFFF;
+		margin-bottom: 0.5rem;
+		padding: 0 2rem 0 1rem;
+		font-weight: bolder;
+		justify-content: space-between;
+		
+		i {
+			display: grid;
+			place-items: center;
+		}
+	}
+}
 </style>

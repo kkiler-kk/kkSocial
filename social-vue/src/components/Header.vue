@@ -5,6 +5,12 @@
 				SOCIAL
 			</router-link>
 			
+			<div class="search">
+				<input type="text" placeholder="搜索"/>
+				<eva-icon class="icon" name="search" fill="#424242">
+				</eva-icon>
+			</div>
+			
 			<div class="menu">
 				<div class="avatar male" v-if="this.$store.state.isLogin">
 					<img v-if="user && user.url" :src="basicPath + user.url" :alt="user.name">
@@ -71,10 +77,34 @@ export default {
 		font-weight: bolder;
 	}
 	
+	.search {
+		position: relative;
+		align-items: center;
+		
+		> input {
+			flex: 2;
+			width: 24rem;
+			border: none;
+			border-bottom: solid 1px #414141;
+			outline: none;
+			line-height: 1.5rem;
+		}
+		
+		> .icon {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			display: grid;
+			place-items: center;
+			transform: scale(0.8);
+		}
+	}
+	
 	.avatar {
 		overflow: hidden;
 		border-radius: 50%;
-		margin-right: 1rem;
+		// margin-right: 0.5rem;
 		width: 2.5rem;
 		height: 2.5rem;
 		background-size: cover;
