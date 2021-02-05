@@ -24,7 +24,31 @@ export default {
 			],
 			links: [
 				{
-					text: 'external',
+					text: '历史',
+					iconData: 'pricetags',
+					url: '/',
+					title: '历史'
+				},
+				{
+					text: '通知',
+					iconData: 'email',
+					url: '/',
+					title: '通知'
+				},
+				{
+					text: '信息',
+					iconData: 'message-circle',
+					url: '/',
+					title: '信息'
+				},
+				{
+					text: '列表',
+					iconData: 'list',
+					url: '/',
+					title: '列表'
+				},
+				{
+					text: '登出',
 					iconData: 'external-link-outline',
 					url: '/',
 					title: '登出',

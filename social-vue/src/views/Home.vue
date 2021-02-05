@@ -2,6 +2,7 @@
   <div id="home" class="container">
 		<UserInfo :isSlef="true"/>
 		<News/>
+		<UserInfo :isSlef="true"/>
   </div>
 </template>
 
@@ -22,15 +23,20 @@ export default {
 #home {
 	display: flex;
 	align-items: flex-start;
-	padding: 2rem;
+	padding: 0.5rem 2rem;
 	
 	> div:nth-child(1) {
-		width: 20rem;
+		width: 16rem;
 		margin-right: 1rem;
 	}
 	
 	> div:nth-child(2) {
 		flex: 1;
+		margin-right: 1rem;
+	}
+	
+	> div:nth-child(3) {
+		width: 16rem;
 	}
 }
 </style>
