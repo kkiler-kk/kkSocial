@@ -79,6 +79,7 @@ export default {
 		if (cache) {
 				this.$store.commit('setLogin', cache.isLogin);
 				this.$store.commit('setToken', cache.token);
+				this.$store.commit('setUser', cache.user);
 		}
 	}
 }

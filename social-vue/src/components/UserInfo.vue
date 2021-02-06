@@ -57,7 +57,10 @@ export default {
 			this.state = state;
 		},
 		getInfo: function () {
-			if (this.user) return;
+			if (this.user) {
+				this.setState(1);
+				return;
+			}
 			this.setState(0);
 			if (!this.isLogin) {
 				this.setState(-2);
@@ -77,6 +80,11 @@ export default {
 				let user = response.data.data;
 				this.setState(1);
 				this.$store.commit('setUser', user);
+				localStorage.setItem('ktsocial', JSON.stringify({
+					isLogin: this.$store.state.isLogin,
+					token: this.$store.state.token,
+					user: this.$store.state.user
+				}));
 			}).catch(() => {
 				this.setState(-1);
 			});
