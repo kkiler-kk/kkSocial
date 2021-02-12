@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kk.dao.CommentsDao">
-    <resultMap id="getByIdComment" type="com.kk.bean.Comments">
+<mapper namespace="org.kk.dao.CommentsDao">
+    <resultMap id="getByIdComment" type="org.kk.bean.Comments">
         <id property="id" column="comment_id"/>
         <result property="new_id" column="new_id"/>
         <result property="content_text" column="content"/>
         <result property="create_date" column="create_date" />
         <result property="like" column="like"/>
-        <collection property="user" column="content_id" select="com.kk.dao.UserDao.getUserId"></collection>
+        <collection property="user" column="content_id" select="org.kk.dao.UserDao.getUserId"></collection>
     </resultMap>
-    <select id="count" resultType="Integer" parameterType="com.kk.bean.Status">
+    <select id="count" resultType="Integer" parameterType="org.kk.bean.Status">
         select count(`new_id`) as `count` from `tb_comments` where `new_id` = #{id}
     </select>
     <select id="getByIdComment" resultMap="getByIdComment">
@@ -25,7 +25,7 @@ WHERE
     <insert id="add">
         insert into `tb_comments`(`new_id`,`content`,`content_id`)values(#{data.new_id},#{data.content_text},#{data.id})
     </insert>
-    <update id="updateLike" parameterType="com.kk.bean.Status">
+    <update id="updateLike" parameterType="org.kk.bean.Status">
         update `tb_comments`
          <set>
             <if test="flag">`like` = `like` + 1</if>

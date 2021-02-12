@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kk.dao.MessageDao">
-    <resultMap id="getMessage" type="com.kk.bean.MessageType">
+<mapper namespace="org.kk.dao.MessageDao">
+    <resultMap id="getMessage" type="org.kk.bean.MessageType">
         <id property="id" column="message_id"/>
         <result property="user_id" column="user_id"/>
         <result property="content" column="content"/>
-        <collection property="friend" column="friend_id" select="com.kk.dao.UserDao.getUserId"></collection>
+        <collection property="friend" column="friend_id" select="org.kk.dao.UserDao.getUserId"></collection>
     </resultMap>
     <select id="getUserById" resultMap="getMessage" parameterType="Integer">
         select <include refid="message_table"></include> from `tb_message` where `user_id` = #{id}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kk.dao.FansDao">
+<mapper namespace="org.kk.dao.FansDao">
 
-    <select id="count" parameterType="com.kk.bean.Status" resultType="Integer">
+    <select id="count" parameterType="org.kk.bean.Status" resultType="Integer">
         select count(`user_id`) as `count` from `tb_fans`
         <where>
             <if test="flag == 1">

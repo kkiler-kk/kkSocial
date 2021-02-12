@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kk.dao.NewsDao">
-    <resultMap id="getUserAndNews" type="com.kk.bean.News">
+<mapper namespace="org.kk.dao.NewsDao">
+    <resultMap id="getUserAndNews" type="org.kk.bean.News">
         <id property="id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
         <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -10,9 +10,9 @@
         <result property="share_num" column="share_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="like" column="like" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <collection property="user" column="user_id" select="com.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="com.kk.bean.User"></collection>
+        <collection property="user" column="user_id" select="org.kk.dao.UserDao.getUserId" jdbcType="INTEGER" javaType="org.kk.bean.User"></collection>
     </resultMap>
-    <resultMap id="getNewsAndOwn" type="com.kk.bean.News">
+    <resultMap id="getNewsAndOwn" type="org.kk.bean.News">
         <id property="id" column="new_id" jdbcType="VARCHAR" javaType="java.lang.Integer"/>
         <result property="create_date" column="create_date" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="picture" column="picture" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -72,7 +72,7 @@
     <insert id="add">
          insert into `tb_news`(`user_id`, `content_text`,`picture`,`tag`)values(#{data.id},#{data.content_text},#{data.picture},#{data.tag})
     </insert>
-    <update id="updateLike" parameterType="com.kk.bean.Status">
+    <update id="updateLike" parameterType="org.kk.bean.Status">
         update `tb_news`
          <set>
              <if test="flag">`like` = `like` + 1</if>

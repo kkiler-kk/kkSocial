@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kk.dao.UserDao">
-    <resultMap id="getUserById" type="com.kk.bean.User">
+<mapper namespace="org.kk.dao.UserDao">
+    <resultMap id="getUserById" type="org.kk.bean.User">
         <id property="id" column="id"/>
         <result property="email" column="email"/>
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
 		<result property="url" column="url" />
-		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getFriendsCount"></collection>
+		<collection property="userInfo" column="id" select="org.kk.dao.UserInfoDao.getFriendsCount"></collection>
     </resultMap>
-	<resultMap id="getUserByName" type="com.kk.bean.User">
+	<resultMap id="getUserByName" type="org.kk.bean.User">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
-		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getUserHome"></collection>
+		<collection property="userInfo" column="id" select="org.kk.dao.UserInfoDao.getUserHome"></collection>
 	</resultMap>
-	<resultMap id="getByData" type="com.kk.bean.User">
+	<resultMap id="getByData" type="org.kk.bean.User">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url" />
-		<collection property="userInfo" column="id" select="com.kk.dao.UserInfoDao.getFUN">
+		<collection property="userInfo" column="id" select="org.kk.dao.UserInfoDao.getFUN">
 		</collection>
 	</resultMap>
 	<select id="getByData" resultMap="getByData" parameterType="Integer">
@@ -35,7 +35,7 @@
             </if>
         </where>
     </select>
-	<select id="getUserId" resultType="com.kk.bean.User" parameterType="Integer">
+	<select id="getUserId" resultType="org.kk.bean.User" parameterType="Integer">
 		select `id`, `name`, `url`,(select count(`user_id`) from `tb_news` where `user_id` = #{id}) as countNews
 		from `tb_user` where id = #{id}
 	</select>
@@ -50,12 +50,21 @@
 				and `email` = #{email}
 			</if>
 			<if test="password != null and password !=''">
-				and `password` = #{password}
+				and `password` = md5(#{password})
 			</if>
 		</where>
 
 	</select>
-    <insert id="addUser" parameterType="com.kk.bean.User">
+	<select id="isAttention" resultType="Integer" >
+		SELECT
+	count( `user_id` )
+FROM
+	`tb_fans`
+WHERE
+	user_id = ( SELECT `id` FROM `tb_user` WHERE `name` = #{name} )
+	AND fan_id = #{id};
+	</select>
+    <insert id="addUser" parameterType="org.kk.bean.User">
         INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url` )
 VALUES
 	(
