@@ -27,11 +27,11 @@
         )
         FROM
         `tb_news`
-        ) or comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        ) and comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
         )
         FROM
         `tb_news`
-        ) or share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
+        ) and share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
         )
         FROM
         `tb_news`
@@ -68,6 +68,10 @@
     </select>
     <select id="getNewsAndOwn" resultMap="getNewsAndOwn" parameterType="Integer">
         select <include refid="news_table"></include> from `tb_news` where user_id = #{id} order by create_date desc
+    </select>
+    <select id="getSearch" resultType="String">
+
+select tag from `tb_news` WHERE TO_DAYS(create_date) = TO_DAYS(NOW()) and `like` = (select max(`like`) from `tb_news`) GROUP BY `tag`
     </select>
     <insert id="add">
          insert into `tb_news`(`user_id`, `content_text`,`picture`,`tag`)values(#{data.id},#{data.content_text},#{data.picture},#{data.tag})

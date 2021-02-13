@@ -30,7 +30,6 @@ public class NewsService {
         List<News> list = newsDao.getSelectRandom();
         ToolUtil.setList(list);
         PageResult pageResult = PageUtils.getPageResult(new PageInfo<>(list));
-        pageResult.getContent().forEach(System.out::println);
         return pageResult;
     }
     public PageResult getNewsByTag(String tag, PageRequest pageRequest){
@@ -50,10 +49,21 @@ public class NewsService {
         boolean flag = redisUtil.hashKey("top");
         if (flag) {
             List<String> topTag = newsDao.getTopTag();
+            System.out.println("topTag = " + topTag);
             redisUtil.set("top", topTag, 10800); //三小时刷新一下热搜
         }
         Object top = redisUtil.get("top");
+        System.out.println("top = " + top);
         return (List<String>) top;
+    }
+    public String getTopSearch(){
+        boolean flag = redisUtil.hashKey("topSearch");
+        if(flag){
+            String search = newsDao.getSearch().split(" ")[0].replaceAll("#", " ").strip();
+            redisUtil.set("topSearch", search , 10800);
+        }
+        Object topSearch = redisUtil.get("topSearch");
+        return (String) topSearch;
     }
     public Integer add(News news){
         System.out.println(news);

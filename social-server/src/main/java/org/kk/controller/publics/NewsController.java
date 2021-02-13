@@ -42,4 +42,10 @@ public class NewsController {
         List<String> topTag = newsService.getTopTag();
         return new ResponseResult<>(topTag);
     }
+    @ApiOperation("返回用户搜索最热top")
+    @GetMapping(value = "get-search")
+    public ResponseResult<String> getSearch(){
+        String topSearcher = newsService.getTopSearch();
+        return new ResponseResult<>(topSearcher);
+    }
 }

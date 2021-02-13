@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -45,9 +46,11 @@ public class RandomTest {
     }
     @Test
     public void testNews(){
-        List<News> selectRandom = newsDao.getSelectRandom();
-        String s = JSONArray.toJSONString(selectRandom);
-        System.out.println(s);
+        String search = newsDao.getSearch();
+        System.out.println(search);
+        String[] s = search.split(" ");
+        System.out.println(Arrays.toString(s));
+        System.out.println(s[0].replaceAll("#", " ").strip());
     }
     @Test
     public void testJwt() throws Exception {

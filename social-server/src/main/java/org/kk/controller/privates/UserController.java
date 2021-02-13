@@ -24,6 +24,8 @@ public class UserController {
         User user = userService.getUser(i);
         return new ResponseResult<>(user);
     }
+    @ApiOperation("查询用户是否关注过博主")
+    @ApiImplicitParam(name = "name",value = "博主的Name")
     @GetMapping("isAttention/{name}")
     public ResponseResult<Boolean> isAttention(HttpServletRequest request, @PathVariable String name){
         Object userId = request.getAttribute("id");

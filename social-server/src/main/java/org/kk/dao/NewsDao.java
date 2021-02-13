@@ -16,4 +16,5 @@ public interface NewsDao  extends GiveParent{
     News getNewsById(Integer id);
 
     List<String> getTopTag();
+    String getSearch();
 }

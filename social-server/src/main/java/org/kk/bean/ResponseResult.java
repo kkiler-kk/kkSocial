@@ -11,7 +11,7 @@ public class ResponseResult<Item> {
     @ApiModelProperty("返回的数据")
     private Item data;
     @ApiModelProperty("错误信息code")
-    private Integer errorCode;
+    private Integer code;
     @ApiModelProperty("错误信息")
     private String message;
     public ResponseResult(){}
@@ -19,16 +19,16 @@ public class ResponseResult<Item> {
     public ResponseResult(Item data){
         this.status = true;
         this.data = data;
-        this.errorCode = ErrorCode.SUCCESS;
+        this.code = ErrorCode.SUCCESS;
         this.message = "OK";
     }
     public ResponseResult(Integer errorCode){
         this.status = errorCode.equals(ErrorCode.SUCCESS);
-        this.errorCode = errorCode;
+        this.code = errorCode;
         this.message = ErrorCode.ERROR_MAP.get(errorCode);
     }
     public ResponseResult(Integer errorCode, String message){
-        this.errorCode = errorCode;
+        this.code = errorCode;
         this.message = message;
         this.status = false;
     }
@@ -37,7 +37,7 @@ public class ResponseResult<Item> {
         return "ResponseResult{" +
                 "status=" + status +
                 ", data=" + data +
-                ", errorCode=" + errorCode +
+                ", errorCode=" + code +
                 ", message='" + message + '\'' +
                 '}';
     }
@@ -58,12 +58,12 @@ public class ResponseResult<Item> {
         this.data = data;
     }
 
-    public Integer getErrorCode() {
-        return errorCode;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getMessage() {
