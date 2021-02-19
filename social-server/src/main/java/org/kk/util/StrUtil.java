@@ -1,5 +1,6 @@
 package org.kk.util;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ public final class StrUtil {
         }
         return false;
     }
+
     public static boolean isEmpty(Object... object){
         for (Object o : object) {
             if(o == null || Objects.equals(o, "")){
@@ -18,5 +20,11 @@ public final class StrUtil {
             }
         }
         return false;
+    }
+    public static void updateList(List<String> list){
+        Integer i = 0;
+        for (String s : list) {
+            list.set(i++,s.split(" ")[0].replaceAll("#", " ").strip());
+        }
     }
 }

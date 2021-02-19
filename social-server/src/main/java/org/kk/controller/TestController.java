@@ -18,6 +18,7 @@ public class TestController {
     @GetMapping(value="/hello")
     public String hello(@RequestParam("id") String id) throws UnsupportedEncodingException {
         String token = JwtTokenUtil.createToken(id);
+
         return token;
     }
 }

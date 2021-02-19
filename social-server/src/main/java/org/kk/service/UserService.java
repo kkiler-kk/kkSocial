@@ -29,7 +29,7 @@ public class UserService {
         String i = String.valueOf(id);
         boolean flag = redisUtil.hashKey(i);
         System.out.println(flag);
-        if(flag){
+        if(!flag){
             User byData = userDao.getByData(id);
             redisUtil.set(i, byData,  30 *  (60 * 60) * 24);
         }

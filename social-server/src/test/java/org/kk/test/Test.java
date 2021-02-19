@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,16 @@ import java.util.List;
 public class Test {
     @org.junit.Test
     public void random(){
-        String[] strs = {"1","2","3"};
-        List<String> strings1 = Arrays.asList(strs);
-        List<String> strings2 = List.of(strs);
-        strs[0] = "4";
-        System.out.println(strings1);
-        System.out.println(strings2);
+        List<String> list = new ArrayList<>();
+        list.add("#Hea#");
+        list.add("#waea#");
+        test(list);
+        System.out.println(list);
+    }
+    public void test(List<String> list){
+        Integer i = 0;
+        for (String s : list) {
+            list.set(i++,s.split(" ")[0].replaceAll("#", " ").strip());
+        }
     }
 }

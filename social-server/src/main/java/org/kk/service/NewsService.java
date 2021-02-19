@@ -9,6 +9,7 @@ import org.kk.bean.Status;
 import org.kk.dao.NewsDao;
 import org.kk.util.PageUtils;
 import org.kk.util.RedisUtil;
+import org.kk.util.StrUtil;
 import org.kk.util.ToolUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,22 +48,30 @@ public class NewsService {
     }
     public List<String> getTopTag() {
         boolean flag = redisUtil.hashKey("top");
-        if (flag) {
+        if (!flag) {
             List<String> topTag = newsDao.getTopTag();
-            System.out.println("topTag = " + topTag);
-            redisUtil.set("top", topTag, 10800); //三小时刷新一下热搜
+            redisUtil.set("top", topTag, 172800); //三小时刷新一下热搜
         }
         Object top = redisUtil.get("top");
-        System.out.println("top = " + top);
         return (List<String>) top;
     }
-    public String getTopSearch(){
+    public List<String> getTopSearch(){
         boolean flag = redisUtil.hashKey("topSearch");
-        if(flag){
-            String search = newsDao.getSearch().split(" ")[0].replaceAll("#", " ").strip();
-            redisUtil.set("topSearch", search , 10800);
+        if (!flag) {
+            List<String> topTag = newsDao.getTopSearch();
+            StrUtil.updateList(topTag);
+            redisUtil.set("topSearch", topTag, 86400); //三小时刷新一下热搜
         }
-        Object topSearch = redisUtil.get("topSearch");
+        Object top = redisUtil.get("topSearch");
+        return (List<String>) top;
+    }
+    public String getSearch(){
+        boolean flag = redisUtil.hashKey("search");
+        if(!flag){
+            String search = newsDao.getSearch().split(" ")[0].replaceAll("#", " ").strip();
+            redisUtil.set("search", search , 10800);
+        }
+        Object topSearch = redisUtil.get("search");
         return (String) topSearch;
     }
     public Integer add(News news){

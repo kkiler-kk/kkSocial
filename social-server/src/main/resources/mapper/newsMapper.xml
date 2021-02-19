@@ -40,16 +40,15 @@
         `like` DESC, comment_num desc, share_num desc
     </select>
     <select id="getTopTag" resultType="String">
-        SELECT DISTINCT
-        `tag`
-        FROM
-        `tb_news`
-        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(`create_date`)
-        GROUP BY
-        `tag`
-        ORDER BY
-        count(`tag`)  desc
-        LIMIT 7
+        SELECT DISTINCT `tag` FROM `tb_news`
+        where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(`create_date`)
+        GROUP BY `tag` ORDER BYcount(`tag`)  desc LIMIT 7
+    </select>
+    <select id="getTopSearch" resultType="String">
+        SELECT DISTINCT `tag` FROM `tb_news`
+        WHERE to_days( date_format( from_UNIXTIME( `create_date` ), '%Y-%m-%d' )) = to_days(now())
+	    OR to_days(now()) = 1 + to_days( `create_date` )
+        GROUP BY `tag` ORDER BY count(`like`) desc limit 10
     </select>
     <select id="count" parameterType="Integer" resultType="Integer">
         select count(`user_id`) as count from `tb_news` where user_id = #{id}
