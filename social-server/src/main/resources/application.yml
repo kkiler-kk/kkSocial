@@ -26,7 +26,7 @@ spring:
     mail:
         host: smtp.qq.com
         username: kk996icu@qq.com
-        password: rewwyvbraogwcjfh
+        password: kslzgwyvaowwdbaj
         default-encoding: UTF-8
     redis:
         lettuce:

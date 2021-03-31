@@ -13,7 +13,8 @@
 
  Date: 23/01/2021 11:30:46
 */
-
+create database social;
+use social;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

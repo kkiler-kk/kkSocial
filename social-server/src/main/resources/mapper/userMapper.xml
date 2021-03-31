@@ -71,7 +71,7 @@ VALUES
 		#{id},
 		#{email},
 		#{name},
-	    #{password},
+	    md5(#{password}),
 	    #{gender},
 	    #{url}
 	)
