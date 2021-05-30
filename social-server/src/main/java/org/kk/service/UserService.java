@@ -65,8 +65,10 @@ public class UserService {
         if (StrUtil.isEmpty(result)) {
             result = userDao.existName(name);
             result = result == 1 ? ErrorCode.EXIST_CODE : ErrorCode.SUCCESS;
-            map.put(name, result);
-            redisUtil.hmset("existName", map);
+            if(result.equals(ErrorCode.SUCCESS)){  //只存入用户存在的信息 解决了bug 但是不存在的用户还是要去数据库查 多此一举
+                map.put(name, result);
+                redisUtil.hmset("existName", map);
+            }
             return result;
         }
         return result;
