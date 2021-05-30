@@ -43,13 +43,13 @@ public class NewsController {
         return new ResponseResult<>(topTag);
     }
     @ApiOperation("返回用户搜索最热top")
-    @GetMapping(value = "get-search")
+    @GetMapping(value = "/get-search")
     public ResponseResult<String> getSearch(){
         String topSearcher = newsService.getSearch();
         return new ResponseResult<>(topSearcher);
     }
     @ApiOperation("返回热搜")
-    @GetMapping(value = "top-search")
+    @GetMapping(value = "/top-search")
     public ResponseResult<List<String>> getTopSearch(){
         List<String> topSearch = newsService.getTopSearch();
         return new ResponseResult<>(topSearch);

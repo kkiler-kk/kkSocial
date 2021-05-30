@@ -55,6 +55,9 @@
 		</where>
 
 	</select>
+	<select id="existName" resultType="Integer">
+		select count(`id`) from `tb_user` where `name` = #{name}
+	</select>
 	<select id="isAttention" resultType="Integer" >
 		SELECT
 	count( `user_id` )

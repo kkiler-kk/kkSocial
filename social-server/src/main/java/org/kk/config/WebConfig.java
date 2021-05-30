@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
+    @SuppressWarnings("all")
     private JwtInterceptor jwtInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

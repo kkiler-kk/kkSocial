@@ -22,7 +22,8 @@ public final class ErrorCode {
     public static final Integer CODE_INCORRECT = -203;
     //已经存在了
     public static final Integer EXIST_CODE = -204;
-
+    //用户不存在
+    public static final Integer USER_NOTHINGNESS = -205;
     //token过期了
     public static final Integer TOKEN_PAST = -301;
     //token找不到
@@ -56,6 +57,7 @@ public final class ErrorCode {
         ERROR_MAP.put(EXIST_CODE, "已存在!!!");
         ERROR_MAP.put(UNPREDICTABLE_ERROR, "无法预知的错误!!!");
         ERROR_MAP.put(NOT_LOGIN, "用户未登录");
+        ERROR_MAP.put(USER_NOTHINGNESS, "用户不存在!!!");
         ERROR_MAP.put(SUCCESS, "OK");
     }
 }

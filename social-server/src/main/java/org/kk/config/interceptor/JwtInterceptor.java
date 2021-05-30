@@ -20,6 +20,7 @@ public class JwtInterceptor implements  HandlerInterceptor  {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         String authHeader = request.getHeader("Authorization");
         try {
+            response.setHeader("Content-type", "text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             if (StrUtil.isEmpty(authHeader)) {
                 String s = JSON.toJSONString(new ResponseResult<>(ErrorCode.NOT_LOGIN));

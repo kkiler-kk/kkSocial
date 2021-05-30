@@ -27,6 +27,6 @@ public interface UserDao {
     Integer getUserEAndP(String email, String password);
 
     int countFriends(Integer id);
-
+    Integer existName(String name);
     int updatePwd(String email, String password);
 }

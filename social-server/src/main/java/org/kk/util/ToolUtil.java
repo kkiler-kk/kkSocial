@@ -10,15 +10,14 @@ public final class ToolUtil {
     private ToolUtil(){}
     public static final boolean checkNumber(String name, RedisUtil redisUtil) {
         Integer count = 5; //count 限定调用次数可以从数据库中取数据也可以在代码中规定
-        Integer limitTime = 60; //过期时间
-        Integer redisCount = null;
+        Integer limitTime = (60 * 5); //过期时间
         Object o = redisUtil.get(name);
         if (o != null) {
-            redisCount = (Integer) o;
+            Integer redisCount = (Integer) o;
             if(redisCount >= count){
                 return false;
             }else{
-                redisUtil.set(name,redisCount + 1,limitTime);
+                redisUtil.incr(name,redisCount + 1);
                 return true;
             }
         }else{

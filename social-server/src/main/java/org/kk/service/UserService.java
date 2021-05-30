@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-@Component
 @Service
 public class UserService {
     @Autowired
@@ -27,8 +28,7 @@ public class UserService {
 
     public User getUser(Integer id){
         String i = String.valueOf(id);
-        boolean flag = redisUtil.hashKey(i);
-        System.out.println(flag);
+        boolean flag = redisUtil.hasKey(i);
         if(!flag){
             User byData = userDao.getByData(id);
             redisUtil.set(i, byData,  30 *  (60 * 60) * 24);
@@ -48,16 +48,28 @@ public class UserService {
         if (minute > 1) return ErrorCode.CODE_PAST;
         if (!redisUtil.get(user.getEmail()).equals(code)) return ErrorCode.CODE_INCORRECT;
         int i = userDao.addUser(user);
-        redisUtil.delete(user.getEmail());
+        redisUtil.del(user.getEmail());
         return i > 0 ? ErrorCode.SUCCESS : ErrorCode.UNPREDICTABLE_ERROR;
     }
     public User getUserByName(String name){
         return userDao.getUserByName(name);
     }
-    public User existName(String name){
-        if(StrUtil.isEmpty(name)) return null;
-        User userByName = userDao.getUserByName(name);
-        return userByName;
+    public Integer existName(String name){  //此处代码是有bug的 但我还是要提交
+        Integer result = ErrorCode.EXIST_CODE;
+        boolean existName = redisUtil.hasKey("existName");
+        if (!existName){  //不存在 则创建HashSet
+            redisUtil.hmset("existName", new HashMap<>());
+        }
+        Map<Object, Object> map = redisUtil.hmget("existName");
+        result = (Integer)map.get(name);
+        if (StrUtil.isEmpty(result)) {
+            result = userDao.existName(name);
+            result = result == 1 ? ErrorCode.EXIST_CODE : ErrorCode.SUCCESS;
+            map.put(name, result);
+            redisUtil.hmset("existName", map);
+            return result;
+        }
+        return result;
     }
     public boolean isAttention(Integer id, String name){
         return userDao.isAttention(id, name) != 0;

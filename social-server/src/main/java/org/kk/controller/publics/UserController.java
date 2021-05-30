@@ -41,7 +41,7 @@ public class UserController {
             return new ResponseResult<String>(ErrorCode.ILLEGAL_NULL);
         }
         String token = userService.login(email, password);
-        if(token == null) return new ResponseResult<>(ErrorCode.ILLEGAL_PARAMETER);
+        if(StrUtil.isEmpty(token)) return new ResponseResult<>(ErrorCode.USER_NOTHINGNESS);
         return new ResponseResult<>(token);
     }
     @ApiOperation("注册")
@@ -51,8 +51,7 @@ public class UserController {
         if(StrUtil.isEmpty(email,password, name)){
             return new ResponseResult(ErrorCode.ILLEGAL_NULL);
         }
-        String url = null;
-        url = FileUtil.uploadFile(file, email);
+        String url = FileUtil.uploadFile(file, email);
         if(StrUtil.isEmpty(url)){
             if(user.getGender() == 1) url = "/upload/man.png";
             else url = "/upload/woman.png";
@@ -75,8 +74,8 @@ public class UserController {
         if(StrUtil.isEmpty(name)){
             return new ResponseResult<>(ErrorCode.ILLEGAL_NULL);
         }
-        User userByName = userService.existName(name);
-        return userByName == null ? new ResponseResult<>("name可用") : new ResponseResult<>(ErrorCode.EXIST_CODE);
+        Integer result = userService.existName(name);
+        return new ResponseResult<>(result);
     }
 
     @ApiOperation("发送邮件")

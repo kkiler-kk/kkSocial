@@ -24,6 +24,7 @@ import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@SuppressWarnings("all")
 public class RandomTest {
     @Autowired
     IMailService iMailService;
@@ -35,7 +36,7 @@ public class RandomTest {
     NewsDao newsDao;
     @Test
     public void testUser(){
-        Integer kk = userDao.isAttention(1, "KK");
+        Integer kk = userDao.existName("KK");
         System.out.println(kk);
     }
     @Test
@@ -47,9 +48,7 @@ public class RandomTest {
     @Test
     public void testNews(){
         String search = newsDao.getSearch();
-        System.out.println(search);
         String[] s = search.split(" ");
-        System.out.println(Arrays.toString(s));
         System.out.println(s[0].replaceAll("#", " ").strip());
     }
     @Test

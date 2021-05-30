@@ -23,26 +23,12 @@
         <result property="tag" column="tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <select id="getSelectRandom" resultMap="getUserAndNews">
-        SELECT <include refid="news_table"></include> FROM `tb_news` WHERE `like` &lt;= ( SELECT floor( sum( `like` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
-        )
-        FROM
-        `tb_news`
-        ) and comment_num &lt;= ( SELECT floor( sum( `comment_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
-        )
-        FROM
-        `tb_news`
-        ) and share_num &lt;= ( SELECT floor( sum( `share_num` ) /( SELECT count( `new_id` ) FROM `tb_news` ) / 2
-        )
-        FROM
-        `tb_news`
-        )
-        ORDER BY
-        `like` DESC, comment_num desc, share_num desc
+        select <include refid="news_table"></include> from `tb_news` order by `like` desc, comment_num, share_num desc
     </select>
     <select id="getTopTag" resultType="String">
         SELECT DISTINCT `tag` FROM `tb_news`
         where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(`create_date`)
-        GROUP BY `tag` ORDER BYcount(`tag`)  desc LIMIT 7
+        GROUP BY `tag` ORDER BY count(`tag`)  desc LIMIT 7
     </select>
     <select id="getTopSearch" resultType="String">
         SELECT DISTINCT `tag` FROM `tb_news`
