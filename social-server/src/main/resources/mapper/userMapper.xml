@@ -71,7 +71,7 @@ WHERE
 	AND fan_id = #{id};
 	</select>
     <insert id="addUser" parameterType="org.kk.bean.User">
-        INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url` )
+        INSERT INTO `tb_user` ( `id`, `email`, `name`, `password`, `gender`,`url`, `create_date`)
 VALUES
 	(
 		#{id},
@@ -79,7 +79,8 @@ VALUES
 		#{name},
 	    md5(#{password}),
 	    #{gender},
-	    #{url}
+	    #{url},
+	 	#{create_date}
 	)
     </insert>
 	<delete id="deleteUserById" parameterType="Integer">

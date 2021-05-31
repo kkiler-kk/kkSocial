@@ -1,8 +1,12 @@
 package org.kk.bean;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.unit.DataUnit;
 import org.kk.util.ErrorCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.kk.util.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ApiModel(value = "返回数据对象")
 public class ResponseResult<Item> {
@@ -14,6 +18,8 @@ public class ResponseResult<Item> {
     private Integer code;
     @ApiModelProperty("错误信息")
     private String message;
+    @ApiModelProperty("日期")
+    private String date;
     public ResponseResult(){}
 
     public ResponseResult(Item data){
@@ -21,24 +27,28 @@ public class ResponseResult<Item> {
         this.data = data;
         this.code = ErrorCode.SUCCESS;
         this.message = "OK";
+        this.date = DateUtil.now();
     }
     public ResponseResult(Integer errorCode){
         this.status = errorCode.equals(ErrorCode.SUCCESS);
         this.code = errorCode;
         this.message = ErrorCode.ERROR_MAP.get(errorCode);
+        this.date = DateUtil.now();
     }
     public ResponseResult(Integer errorCode, String message){
         this.code = errorCode;
         this.message = message;
         this.status = false;
     }
+
     @Override
     public String toString() {
         return "ResponseResult{" +
                 "status=" + status +
                 ", data=" + data +
-                ", errorCode=" + code +
+                ", code=" + code +
                 ", message='" + message + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 

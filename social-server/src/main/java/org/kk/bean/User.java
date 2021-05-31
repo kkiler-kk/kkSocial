@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 @ApiModel(value = "用户类")
@@ -23,24 +24,36 @@ public class User extends Parent implements Serializable {
     private String url;  //头像路径
     @ApiModelProperty("用户信息")
     private UserInfo userInfo;
+    @ApiModelProperty("用户创建时间")
+    private String create_date;
     public User(){
 
     }
-    public User( String email, String password, String name, Integer gender,String url) {
+    public User( String email, String password, String name, Integer gender,String url, String date) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
         this.url = url;
+        this.create_date = date;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + super.getId() + '\'' +
-                "name='" + name + '\'' +
-                ", url='" + url + '\'' +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", create_date=" + create_date +
+                ", id=" + id +
                 '}';
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
     }
 
     public String getEmail() {

@@ -1,5 +1,6 @@
 package org.kk.controller.publics;
 
+import cn.hutool.core.date.DateUtil;
 import org.kk.bean.ResponseResult;
 import org.kk.bean.User;
 import org.kk.service.UserService;
@@ -57,6 +58,7 @@ public class UserController {
             else url = "/upload/woman.png";
         }
         user.setUrl(url);
+        user.setCreate_date(DateUtil.today());
         int register = userService.register(user, code);
         return new ResponseResult<>(register);
     }

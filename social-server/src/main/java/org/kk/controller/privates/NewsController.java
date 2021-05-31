@@ -43,7 +43,7 @@ public class NewsController {
 
     @ApiOperation(value = "返回好友动态")
     @PostMapping(value = "get-news")
-    public ResponseResult<PageResult> getList(HttpServletRequest request, @ApiParam("分页对象") PageRequest pageRequest){
+    public ResponseResult<PageResult> getList(HttpServletRequest request, @RequestBody @ApiParam("分页对象") PageRequest pageRequest){
         Object userId = request.getAttribute("id");
         int i = Integer.parseInt(String.valueOf(userId));
         PageResult friends = newsService.getFriends(i, pageRequest);

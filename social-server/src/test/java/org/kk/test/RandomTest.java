@@ -1,5 +1,6 @@
 package org.kk.test;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.auth0.jwt.interfaces.Claim;
@@ -36,8 +37,9 @@ public class RandomTest {
     NewsDao newsDao;
     @Test
     public void testUser(){
-        List<User> all = userDao.getAll();
-        all.forEach(System.out::println);
+        User user = new User("test", "test", "test", 0, "test", DateUtil.today());
+        int i = userDao.addUser(user);
+        System.out.println(i);
     }
     @Test
     public void testUserInfo(){
