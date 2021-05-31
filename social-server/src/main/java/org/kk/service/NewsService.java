@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("NewsService")
 public class NewsService {
 
     @Autowired

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @author kk
  * @Date 2021/1/25
  */
-@Service
+@Service("UserInfoService")
 public class UserInfoService {
 
     @Autowired

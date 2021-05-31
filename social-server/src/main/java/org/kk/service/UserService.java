@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Service("UserService")
 public class UserService {
     @Autowired
     private RedisUtil redisUtil;
@@ -56,10 +56,6 @@ public class UserService {
     }
     public Integer existName(String name){  //此处代码是有bug的 但我还是要提交
         Integer result = ErrorCode.EXIST_CODE;
-        boolean existName = redisUtil.hasKey("existName");
-        if (!existName){  //不存在 则创建HashSet
-            redisUtil.hmset("existName", new HashMap<>());
-        }
         Map<Object, Object> map = redisUtil.hmget("existName");
         result = (Integer)map.get(name);
         if (StrUtil.isEmpty(result)) {

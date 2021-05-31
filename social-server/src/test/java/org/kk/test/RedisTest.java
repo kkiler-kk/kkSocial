@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -17,24 +18,12 @@ public class RedisTest {
     private RedisUtil redisUtil;
     @Test
     public void testGet(){
-        Map<Object, Object> kk = redisUtil.hmget("KK");
-        kk.put("CRY", 20);
-        System.out.println(kk);
-    }
-    @Test
-    public void get(){
-        Map<Object, Object> kk = redisUtil.hmget("KK");
+        Object kk = redisUtil.lGetIndex("kk", 0);
         System.out.println(kk);
     }
     @Test
     public void testSet(){
-        var map = new HashMap<Object, Object>();
-        map.put("name", "KK");
-        map.put("age", 18);
-        map.put("address", "宁波");
-        boolean kk = redisUtil.hmset("KK", map);
-        System.out.println(kk);
-        Map<Object, Object> kk1 = redisUtil.hmget("KK");
-        System.out.println(kk1);
+        redisUtil.lSet("kk", "CRY");
+        redisUtil.lSet("kk", "KK");
     }
 }

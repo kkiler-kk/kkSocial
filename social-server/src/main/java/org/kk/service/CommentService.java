@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("CommentService")
 public class CommentService {
     @Autowired
     private CommentsDao commentsDao;

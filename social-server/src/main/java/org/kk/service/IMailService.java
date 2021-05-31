@@ -15,7 +15,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 
-@Service
+@Service("IMailService")
 @Component
 public class IMailService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

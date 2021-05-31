@@ -17,7 +17,7 @@ public final class ToolUtil {
             if(redisCount >= count){
                 return false;
             }else{
-                redisUtil.incr(name,redisCount + 1);
+                redisUtil.incr(name, 1);
                 return true;
             }
         }else{

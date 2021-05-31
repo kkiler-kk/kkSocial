@@ -36,8 +36,8 @@ public class RandomTest {
     NewsDao newsDao;
     @Test
     public void testUser(){
-        Integer kk = userDao.existName("KK");
-        System.out.println(kk);
+        List<User> all = userDao.getAll();
+        all.forEach(System.out::println);
     }
     @Test
     public void testUserInfo(){
